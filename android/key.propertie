@@ -1,0 +1,4 @@
+storePassword=2021PassingBy
+keyPassword=2021PassingBy
+keyAlias=postbird
+storeFile= C:/Users/USER/Documents/postbird/android/app/postbird-keystore.jks
