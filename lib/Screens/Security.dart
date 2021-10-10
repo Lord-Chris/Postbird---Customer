@@ -17,9 +17,9 @@ class _ChangePasswordState extends State<ChangePassword> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      id = preferences.getString("id");
+      id = preferences.getString("id")!;
       var t = preferences.getString("token");
-      token = 'Bearer '+t;
+      token = 'Bearer '+t!;
     });
     print('ID: ' + id);
     print('token: ' + token);

@@ -121,7 +121,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
   Future<List<Message>> fetchUserBankDetails() async {
     var webAddress = "https://ridezmyway.com/apiall/getdoc.php?bkf=" + id;
     var response = await http.get(
-      Uri.encodeFull(webAddress),
+      Uri.parse(webAddress),
     );
     var res = jsonDecode(response.body);
 
@@ -144,12 +144,12 @@ class _HomMapScreenState extends State<HomMapScreen> {
   }
 
   void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
-    LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
+    LatLng latlng = LatLng(newLocalData.latitude!, newLocalData.longitude!);
     this.setState(() {
       marker = Marker(
           markerId: MarkerId("home"),
           position: latlng,
-          rotation: newLocalData.heading,
+          rotation: newLocalData.heading!,
           draggable: false,
           zIndex: 2,
           flat: true,
@@ -157,7 +157,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
           icon: BitmapDescriptor.fromBytes(imageData));
       circle = Circle(
           circleId: CircleId("car"),
-          radius: newLocalData.accuracy,
+          radius: newLocalData.accuracy!,
           zIndex: 1,
           strokeColor: Colors.blue,
           center: latlng,
@@ -197,8 +197,8 @@ class _HomMapScreenState extends State<HomMapScreen> {
     myLocation = LatLng(mylat, mylog);
     _markers.add(Marker(
         markerId: MarkerId("my location"),
-        position: LatLng(myLocation?.latitude, myLocation?.longitude),
-        icon: _mylocation,
+        position: LatLng(myLocation!.latitude, myLocation!.longitude),
+        icon: _mylocation!,
         infoWindow: InfoWindow(
           title: "Pick Up Location",
         ),
@@ -208,17 +208,17 @@ class _HomMapScreenState extends State<HomMapScreen> {
   setPolylines() async {
     polylineCoordinates.clear();
     _polylines.clear();
-    List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
-        Constatnts.API_KEY,
-        _fromPlaceDetail?.lat,
-        _fromPlaceDetail?.lng,
-        _toPlaceDetail?.lat,
-        _toPlaceDetail?.lng);
-    if (result.isNotEmpty) {
-      result.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    }
+    // List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
+    //     Constatnts.API_KEY,
+    //     _fromPlaceDetail?.lat,
+    //     _fromPlaceDetail?.lng,
+    //     _toPlaceDetail?.lat,
+    //     _toPlaceDetail?.lng);
+    // if (result.isNotEmpty) {
+    //   result.forEach((PointLatLng point) {
+    //     polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+    //   });
+    // }
     setState(() {
       // create a Polyline instance
 
@@ -252,7 +252,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
           Marker(
             markerId: MarkerId(_fromplaceDetail.placeId),
             position: LatLng(_fromplaceDetail.lat, _fromplaceDetail.lng),
-            icon: _mylocation,
+            icon: _mylocation!,
             infoWindow: InfoWindow(
               title: "pick up",
               snippet: _fromplaceDetail.formattedAddress,
@@ -303,7 +303,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
                       markers: _markers,
                       polylines: _polylines,
                       initialCameraPosition:
-                          CameraPosition(target: myLocation, zoom: 15),
+                          CameraPosition(target: myLocation!, zoom: 15),
                       onMapCreated: (GoogleMapController controller) {
                         controller.setMapStyle(_mapStyle);
                         _controller.complete(controller);
@@ -719,17 +719,17 @@ class _HomMapScreenState extends State<HomMapScreen> {
     sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
-      name = sharedPreferences!.getString("name");
-      email = sharedPreferences!.getString("email");
-      phone = sharedPreferences!.getString("phone");
-      type = sharedPreferences!.getString("type");
-      carmodel = sharedPreferences!.getString("carmodel");
-      carnumber = sharedPreferences!.getString("carnumber");
-      carcolor = sharedPreferences!.getString("carcolor");
-      profilepic = sharedPreferences!.getString("profilepic");
-      dvype = sharedPreferences!.getString("dvype");
-      dvstatus = sharedPreferences!.getString("dvstatus");
-      id = sharedPreferences!.getString("id");
+      name = sharedPreferences!.getString("name")!;
+      email = sharedPreferences!.getString("email")!;
+      phone = sharedPreferences!.getString("phone")!;
+      type = sharedPreferences!.getString("type")!;
+      carmodel = sharedPreferences!.getString("carmodel")!;
+      carnumber = sharedPreferences!.getString("carnumber")!;
+      carcolor = sharedPreferences!.getString("carcolor")!;
+      profilepic = sharedPreferences!.getString("profilepic")!;
+      dvype = sharedPreferences!.getString("dvype")!;
+      dvstatus = sharedPreferences!.getString("dvstatus")!;
+      id = sharedPreferences!.getString("id")!;
     });
     //  print(email);
 
@@ -749,26 +749,26 @@ class _HomMapScreenState extends State<HomMapScreen> {
   signOut() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      preferences.setInt("value", null);
-      preferences.setString("phone", null);
-      preferences.setString("name", null);
-      preferences.setString("email", null);
-      preferences.setString("wallet_balance", null);
-      preferences.setString("type", null);
-      preferences.setString("ref", null);
-      preferences.setString("carmodel", null);
-      preferences.setString("carnumber", null);
-      preferences.setString("carcolor", null);
-      preferences.setString("city", null);
-      preferences.setString("driverimage", null);
-      preferences.setString("profilepic", null);
-      preferences.setString("id", null);
+      preferences.remove("value");
+      preferences.remove("phone");
+      preferences.remove("name");
+      preferences.remove("email");
+      preferences.remove("wallet_balance");
+      preferences.remove("type");
+      preferences.remove("ref");
+      preferences.remove("carmodel");
+      preferences.remove("carnumber");
+      preferences.remove("carcolor");
+      preferences.remove("city");
+      preferences.remove("driverimage");
+      preferences.remove("profilepic");
+      preferences.remove("id");
       // preferences.setInt("value", null);
       // preferences.setString("phone", null);
       // preferences.setString("name", null);
       // preferences.setString("email", null);
       // preferences.setString("id", null);
-      preferences.commit();
+      // preferences.commit();
       _loginStatus = LoginStatus.notSignIn;
     });
   }
@@ -815,7 +815,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
   _getAddressFromLatLng() async {
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
-          _currentPosition?.latitude, _currentPosition?.longitude);
+          _currentPosition!.latitude, _currentPosition!.longitude);
 
       Placemark place = placemarks[0];
 

@@ -19,7 +19,7 @@ class _InProgressActivityTwoState extends State<InProgressActivityTwo> {
     // print("ongoing");
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
-        id = preferences.getString("id");
+        id = preferences.getString("id")!;
       });
       print('ID: ' + id);
 

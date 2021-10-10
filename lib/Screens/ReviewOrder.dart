@@ -69,7 +69,7 @@ class _ReviewOrderState extends State<ReviewOrder> {
     var ad = Strings.BASE_URL + 'metricpack';
     var from = widget.fromPlaceDetail.toString();
     var to = widget.toPlaceDetail.toString();
-    var response = await http.post(Uri.encodeFull(ad),
+    var response = await http.post(Uri.parse(ad),
         headers: {"accept": "application/json"},
         body: {"from": from, "to": to});
 
@@ -110,8 +110,8 @@ class _ReviewOrderState extends State<ReviewOrder> {
     sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
-      name = sharedPreferences!.getString("name");
-      id = sharedPreferences!.getString("id");
+      name = sharedPreferences!.getString("name")!;
+      id = sharedPreferences!.getString("id")!;
     });
     //  print(email);
     print(id);

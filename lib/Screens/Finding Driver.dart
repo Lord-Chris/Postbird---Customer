@@ -90,7 +90,7 @@ class _FindingDriverState extends State<FindingDriver> {
     var from = widget.fromPlaceDetail.toString();
     var to = widget.toPlaceDetail.toString();
     print(widget.userid);
-    var response = await http.post(Uri.encodeFull(ad), headers: {
+    var response = await http.post(Uri.parse(ad), headers: {
       "accept": "application/json"
     }, body: {
       "sname": widget.name,

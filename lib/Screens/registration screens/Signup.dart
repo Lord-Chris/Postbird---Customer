@@ -51,7 +51,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future save() async {
-    final response = await http.post(Strings.BASE_URL + 'register', headers: {
+    final response = await http.post(Uri.parse(Strings.BASE_URL + 'register'), headers: {
       'Accept': 'application/json'
     }, body: {
       "name": fullname,

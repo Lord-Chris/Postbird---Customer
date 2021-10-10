@@ -18,7 +18,7 @@ class _CompleteActivityState extends State<CompleteActivity> {
 getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      id = preferences.getString("id");
+      id = preferences.getString("id")!;
     });
     print('ID: ' + id);
 
@@ -33,7 +33,7 @@ getPref() async {
   // print("ongoing");
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      id = preferences.getString("id");
+      id = preferences.getString("id")!;
     });
     print('ID: ' + id);
 

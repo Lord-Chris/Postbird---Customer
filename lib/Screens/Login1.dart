@@ -132,7 +132,7 @@ class _Login1State extends State<Login1> {
       preferences.setString("name", fullname);
       preferences.setString("email", email);
       preferences.setString("id", userid);
-      preferences.setString("pwd", password);
+      preferences.setString("pwd", password!);
       preferences.setString('token', token);
     });
   }

@@ -58,7 +58,7 @@ class _CreateAccount3State extends State<CreateAccount3> {
     });
     String phone = widget.phon;
     // SERVER LOGIN API URL
-    final response = await http.post(Strings.BASE_URL + 'checknum', headers: {
+    final response = await http.post(Uri.parse(Strings.BASE_URL + 'checknum'), headers: {
       // "Authorization": "Bearer " + token,
       'Accept': 'application/json'
     }, body: {
@@ -82,7 +82,7 @@ class _CreateAccount3State extends State<CreateAccount3> {
     String otp = textEditingController.text;
     String phone = widget.phon;
     // SERVER LOGIN API URL
-    final response = await http.post(Strings.BASE_URL + 'verify', headers: {
+    final response = await http.post(Uri.parse(Strings.BASE_URL + 'verify'), headers: {
       // "Authorization": "Bearer " + token,
       'Accept': 'application/json'
     }, body: {
@@ -209,7 +209,7 @@ class _CreateAccount3State extends State<CreateAccount3> {
                       keyboardType: TextInputType.number,
                       animationType: AnimationType.fade,
                       validator: (v) {
-                        if (v.length < 3) {
+                        if (v!.length < 3) {
                           return "I'm from validator";
                         } else {
                           return null;

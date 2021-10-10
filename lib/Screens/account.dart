@@ -24,8 +24,8 @@ class _AccountState extends State<Account> {
   getProfileDetails() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      email = preferences.getString("email");
-      password = preferences.getString("pwd");
+      email = preferences.getString("email")!;
+      password = preferences.getString("pwd")!;
     });
 
     final response = 
@@ -52,11 +52,11 @@ class _AccountState extends State<Account> {
   signOut() async {
     SharedPreferences prefer = await SharedPreferences.getInstance();
     setState(() {
-      prefer.setString("email", null);
-      prefer.setString("id", null);
-      prefer.setString("mobile", null);
-      id = prefer.getString("id");
-      password = prefer.getString('pwd');
+      prefer.remove("email");
+      prefer.remove("id");
+      prefer.remove("mobile");
+      id = prefer.getString("id")!;
+      password = prefer.getString('pwd')!;
     });
 
     Navigator.pushReplacement(

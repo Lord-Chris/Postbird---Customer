@@ -17,7 +17,7 @@ class GoogleMapServices {
 
     print('Autocomplete(sessionToken): $sessionToken $url');
 
-    final http.Response response = await http.get(url);
+    final http.Response response = await http.get(Uri.parse(url));
     final responseData = json.decode(response.body);
     final predictions = responseData['predictions'];
 
@@ -38,7 +38,7 @@ class GoogleMapServices {
         '$baseUrl?key=${Constatnts.API_KEY}&place_id=$placeId&language=en&sessiontoken=$token';
 
     print('Place Detail(sessionToken): $sessionToken');
-    final http.Response response = await http.get(url);
+    final http.Response response = await http.get(Uri.parse(url));
     final responseData = json.decode(response.body);
     final result = responseData['result'];
 

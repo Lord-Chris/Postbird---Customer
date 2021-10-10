@@ -47,7 +47,7 @@ class _CreateAccount2State extends State<CreateAccount2> {
     String phone = phoneno;
     String phoneba = '+234' + phone;
     // print(phoneba);
-    final response = await http.post(Strings.BASE_URL + 'checknum',
+    final response = await http.post(Uri.parse(Strings.BASE_URL + 'checknum'),
         headers: {'Accept': 'application/json'},
         body: {"mobile": phoneba.toString()});
     final data = jsonDecode(response.body);

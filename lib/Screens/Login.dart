@@ -32,9 +32,9 @@ class _LoginState extends State<Login> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      id = preferences.getString("id");
-      email = preferences.getString("email");
-      fullname = preferences.getString("name");
+      id = preferences.getString("id")!;
+      email = preferences.getString("email")!;
+      fullname = preferences.getString("name")!;
     });
     //print('email: ' + email);
    // print('ID: ' + id);

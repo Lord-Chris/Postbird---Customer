@@ -21,13 +21,13 @@ class _InboxState extends State<Inbox> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      id = preferences.getString("id");
-      email = preferences.getString("email");
-      fullname = preferences.getString("name");
-      password = preferences.getString('pwd');
+      id = preferences.getString("id")!;
+      email = preferences.getString("email")!;
+      fullname = preferences.getString("name")!;
+      password = preferences.getString('pwd')!;
       var t = preferences.getString("token");
-      token = 'Bearer '+t;
-      userRef = preferences.getString("userRef");
+      token = 'Bearer '+t!;
+      userRef = preferences.getString("userRef")!;
     });
     print('email: ' + email);
     print('ID: ' + id);

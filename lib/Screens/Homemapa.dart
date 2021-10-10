@@ -125,8 +125,8 @@ class _HomMapScreenaState extends State<HomMapScreena> {
     myLocation = LatLng(37.382782, 127.1189054);
     _markers.add(Marker(
         markerId: MarkerId("my location"),
-        position: LatLng(myLocation?.latitude, myLocation?.longitude),
-        icon: _mylocation,
+        position: LatLng(myLocation!.latitude, myLocation!.longitude),
+        icon: _mylocation!,
         infoWindow: InfoWindow(
           title: "Pick Up Location",
         ),
@@ -147,17 +147,17 @@ class _HomMapScreenaState extends State<HomMapScreena> {
   setPolylines() async {
     polylineCoordinates.clear();
     _polylines.clear();
-    List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
-        Constatnts.API_KEY,
-        _fromPlaceDetail?.lat,
-        _fromPlaceDetail?.lng,
-        _toPlaceDetail?.lat,
-        _toPlaceDetail?.lng);
-    if (result.isNotEmpty) {
-      result.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    }
+    // PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+    //     Constatnts.API_KEY,
+    //     _fromPlaceDetail!.lat,
+    //     _fromPlaceDetail?.lng,
+    //     _toPlaceDetail?.lat,
+    //     _toPlaceDetail?.lng);
+    // if (result.isNotEmpty) {
+    //   result.forEach((PointLatLng point) {
+    //     polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+    //   });
+    // }
     setState(() {
       Polyline polyline = Polyline(
           polylineId: PolylineId('poly'),
@@ -180,7 +180,7 @@ class _HomMapScreenaState extends State<HomMapScreena> {
       getLatLngBounds(LatLng(_fromplaceDetail.lat, _fromplaceDetail.lng),
           LatLng(_toPlaceDetail.lat, _toPlaceDetail.lng));
       GoogleMapController controller = await _controller.future;
-      CameraUpdate u2 = CameraUpdate.newLatLngBounds(bound, 50);
+      CameraUpdate u2 = CameraUpdate.newLatLngBounds(bound!, 50);
       controller.animateCamera(u2).then((void v) {
         check(u2, controller);
       });
@@ -195,10 +195,10 @@ class _HomMapScreenaState extends State<HomMapScreena> {
           Marker(
             markerId: MarkerId(_fromplaceDetail.placeId),
             position: LatLng(_fromplaceDetail.lat, _fromplaceDetail.lng),
-            icon: _mylocation,
+            icon: _mylocation!,
             infoWindow: InfoWindow(
               title: "pick up",
-              snippet: _fromplaceDetail?.formattedAddress,
+              snippet: _fromplaceDetail.formattedAddress,
             ),
           ),
         );
@@ -207,12 +207,12 @@ class _HomMapScreenaState extends State<HomMapScreena> {
       if (_toLocationController.text != null && _toPlaceDetail != null) {
         _markers.add(
           Marker(
-            markerId: MarkerId(_toPlaceDetail?.placeId),
-            position: LatLng(_toPlaceDetail?.lat, _toPlaceDetail?.lng),
-            icon: _mydestination,
+            markerId: MarkerId(_toPlaceDetail.placeId),
+            position: LatLng(_toPlaceDetail.lat, _toPlaceDetail.lng),
+            icon: _mydestination!,
             infoWindow: InfoWindow(
               title: "destination",
-              snippet: _toPlaceDetail?.formattedAddress,
+              snippet: _toPlaceDetail.formattedAddress,
             ),
           ),
         );
@@ -289,7 +289,7 @@ class _HomMapScreenaState extends State<HomMapScreena> {
                       markers: _markers,
                       polylines: _polylines,
                       initialCameraPosition:
-                          CameraPosition(target: myLocation, zoom: 15),
+                          CameraPosition(target: myLocation!, zoom: 15),
                       onMapCreated: (GoogleMapController controller) {
                         controller.setMapStyle(_mapStyle);
                         _controller.complete(controller);

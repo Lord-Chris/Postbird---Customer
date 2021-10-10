@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      value = preferences.getInt("value");
+      value = preferences.getInt("value")!;
     });
 
     print(value);

@@ -52,12 +52,12 @@ class _HomePageState extends State<HomePage> {
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      id = preferences.getString("id");
-      email = preferences.getString("email");
-      fullname = preferences.getString("name");
-      password = preferences.getString('pwd');
+      id = preferences.getString("id")!;
+      email = preferences.getString("email")!;
+      fullname = preferences.getString("name")!;
+      password = preferences.getString('pwd')!;
       var t = preferences.getString("token");
-      token = 'Bearer '+t;
+      token = 'Bearer '+t!;
     });
     print('email: ' + email);
     print('ID: ' + id);
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
   purchasecredit() async {
     var ad = Strings.BASE_URL + 'fundcusr';
     var credit = rateConroller.text;
-    var response = await http.post(Uri.encodeFull(ad), headers: {
+    var response = await http.post(Uri.parse(ad), headers: {
       "accept": "application/json"
     }, body: {
       "user_id": id,
@@ -149,8 +149,8 @@ class _HomePageState extends State<HomePage> {
   getProfileDetails() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      email = preferences.getString("email");
-      password = preferences.getString("pwd");
+      email = preferences.getString("email")!;
+      password = preferences.getString("pwd")!;
     });
 
     final response = 
@@ -212,7 +212,7 @@ fetchActivity() async{
   // print("ongoing");
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      id = preferences.getString("id");
+      id = preferences.getString("id")!;
     });
     print('ID: ' + id);
 
@@ -456,7 +456,7 @@ fetchActivity() async{
   ratesystem() async {
     var webAddress = Strings.BASE_URL + 'ratesystem/' + amount;
     var response = await http.post(
-      Uri.encodeFull(webAddress),
+      Uri.parse(webAddress),
       headers: {"Authorization": "Bearer ", 'accept': 'application/json'},
       //  body: {
       //   "trans_id": usertransid,
@@ -871,8 +871,8 @@ class _NavBarState extends State<NavBar> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       var t = preferences.getString("token");
-      token = 'Bearer '+t;
-      userRef = preferences.getString("userRef");
+      token = 'Bearer '+t!;
+      userRef = preferences.getString("userRef")!;
     });
     print('token: ' + token);
     // print('user: ' + userRef);
