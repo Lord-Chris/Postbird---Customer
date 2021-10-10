@@ -33,7 +33,7 @@ class ReviewOrder extends StatefulWidget {
   final packsize;
 
   const ReviewOrder({
-    Key key,
+    Key? key,
     this.name,
     this.fromPlaceDetail,
     this.toPlaceDetail,
@@ -92,7 +92,7 @@ class _ReviewOrderState extends State<ReviewOrder> {
     // }
   }
 
-  SharedPreferences sharedPreferences;
+  SharedPreferences? sharedPreferences;
 
   String name = "",
       phone = "",
@@ -110,8 +110,8 @@ class _ReviewOrderState extends State<ReviewOrder> {
     sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
-      name = sharedPreferences.getString("name");
-      id = sharedPreferences.getString("id");
+      name = sharedPreferences!.getString("name");
+      id = sharedPreferences!.getString("id");
     });
     //  print(email);
     print(id);

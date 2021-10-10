@@ -2,7 +2,7 @@ class Place {
   final String description;
   final String placeId;
 
-  Place({this.description, this.placeId});
+  Place({required this.description, required this.placeId});
 
   Place.fromJson(Map<String, dynamic> json)
       : this.description = json['description'],
@@ -28,15 +28,15 @@ class PlaceDetail {
   final double lng;
 
   PlaceDetail({
-    this.placeId,
-    this.formattedAddress,
-    this.formattedPhoneNumber,
-    this.name,
-    this.rating,
-    this.vicinity,
+    required this.placeId,
+    required this.formattedAddress,
+    required this.formattedPhoneNumber,
+    required this.name,
+    required this.rating,
+    required this.vicinity,
     this.website = '',
-    this.lat,
-    this.lng,
+    required this.lat,
+    required this.lng,
   });
 
   PlaceDetail.fromJson(Map<String, dynamic> json)

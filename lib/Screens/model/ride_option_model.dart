@@ -9,10 +9,10 @@ class RideOptionModel {
   final String imageUrl;
 
   RideOptionModel(
-      {@required this.id,
-      this.index,
-      @required this.price,
-      @required this.estimatedTime,
-      @required this.rideType,
-      @required this.imageUrl});
+      {required this.id,
+      required this.index,
+      required this.price,
+      required this.estimatedTime,
+      required this.rideType,
+      required this.imageUrl});
 }

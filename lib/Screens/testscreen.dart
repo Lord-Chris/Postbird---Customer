@@ -397,7 +397,7 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey[300],
+                        color: Colors.grey[300]!,
                         blurRadius: 15.0, // soften the shadow
                         spreadRadius: 5.0, //extend the shadow
                         offset: Offset(

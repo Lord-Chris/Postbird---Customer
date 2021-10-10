@@ -246,7 +246,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: emptyCurrentPassword,
-                                      onSaved: (e) => currentPassword = e,
+                                      onSaved: (e) => currentPassword = e!,
                                       onChanged: (String text) {
                                         setState(() {
                                            currentPassword = text;
@@ -331,7 +331,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: emptyPassword,
-                                      onSaved: (e) => newPassword = e,
+                                      onSaved: (e) => newPassword = e!,
                                       onChanged: (String text) {
                                         setState(() {
                                            newPassword = text;
@@ -416,7 +416,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: emptyConfirmPassword,
-                                      onSaved: (e) => confirmPassword = e,
+                                      onSaved: (e) => confirmPassword = e!,
                                       onChanged: (String text) {
                                         setState(() {
                                            confirmPassword = text;

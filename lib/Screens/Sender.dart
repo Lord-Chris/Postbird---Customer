@@ -14,7 +14,7 @@ class Sender extends StatefulWidget {
   final fromPlaceDetail;
   final toPlaceDetail;
   const Sender({
-    Key key,
+    Key? key,
     this.name,
     this.date,
     this.tolt,
@@ -459,11 +459,11 @@ class _SenderState extends State<Sender> {
                             width: screenWidth,
                             child: TextFormField(
                               validator: (e) {
-                                if (e.isEmpty) {
+                                if (e!.isEmpty) {
                                   return "Please Enter your email No";
                                 }
                               },
-                              onSaved: (e) => sendernumber = e,
+                              onSaved: (e) => sendernumber = e!,
                               onChanged: (String text) {
                                 setState(() {
                                   sendernumber = text;
@@ -828,11 +828,11 @@ class _SenderState extends State<Sender> {
                   ),
                   TextFormField(
                     validator: (e) {
-                      if (e.isEmpty) {
+                      if (e!.isEmpty) {
                         return "Please Note";
                       }
                     },
-                    onSaved: (e) => notess = e,
+                    onSaved: (e) => notess = e!,
                     onChanged: (String text) {
                       setState(() {
                         notess = text;
@@ -893,9 +893,9 @@ class _SenderState extends State<Sender> {
                           activeColor: Colors.orangeAccent,
                           checkColor: Colors.white,
                           value: checkBoxValue,
-                          onChanged: (bool value) {
+                          onChanged: (value) {
                             setState(() {
-                              checkBoxValue = value;
+                              checkBoxValue = value!;
                             });
                             print(checkBoxValue);
                           })

@@ -6,7 +6,7 @@ import 'package:postbird/Screens/ShipmentStart.dart';
 class Guidepage extends StatefulWidget {
   final name;
   final ids;
-  const Guidepage({Key key, this.name, this.ids}) : super(key: key);
+  const Guidepage({Key? key, this.name, this.ids}) : super(key: key);
 
   @override
   _GuidepageState createState() => _GuidepageState();

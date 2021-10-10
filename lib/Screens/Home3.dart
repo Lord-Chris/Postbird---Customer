@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
 
   check() {
     final form = _key.currentState;
-    if (form.validate()) {
+    if (form!.validate()) {
       form.save();
       if (int.parse(amount) < 500) {
         Toast.show('Can not purchase below \₦ 500', context,
@@ -391,11 +391,11 @@ fetchActivity() async{
                                     }),
                                 TextFormField(
                                   validator: (e) {
-                                    if (e.isEmpty) {
+                                    if (e!.isEmpty) {
                                       return "Please Enter Amount";
                                     }
                                   },
-                                  onSaved: (e) => amount = e,
+                                  onSaved: (e) => amount = e!,
                                   onChanged: (String text) {
                                     ratesystem();
                                     setState(() {
@@ -669,7 +669,7 @@ fetchActivity() async{
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey[200],
+                      color: Colors.grey[200]!,
                       blurRadius: 15.0, // soften the shadow
                       spreadRadius: 5.0, //extend the shadow
                       offset: Offset(

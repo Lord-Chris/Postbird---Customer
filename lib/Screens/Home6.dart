@@ -418,7 +418,7 @@ class _HomePage2State extends State<HomePage2> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey[200],
+                        color: Colors.grey[200]!,
                         blurRadius: 15.0, // soften the shadow
                         spreadRadius: 5.0, //extend the shadow
                         offset: Offset(
@@ -532,7 +532,7 @@ class _HomePage2State extends State<HomePage2> {
 class Navbar2 extends StatefulWidget {
   final name;
   final ids;
-  const Navbar2({Key key, this.name, this.ids}) : super(key: key);
+  const Navbar2({Key? key, this.name, this.ids}) : super(key: key);
   // const AddfundPage({Key key, this.amount, this.wallty}) : super(key: key);
 
   @override

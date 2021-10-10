@@ -4,7 +4,7 @@ import 'package:postbird/Screens/SelectDate.dart';
 class ShipmentStart extends StatefulWidget {
   final name;
   final ids;
-  const ShipmentStart({Key key, this.name, this.ids}) : super(key: key);
+  const ShipmentStart({Key? key, this.name, this.ids}) : super(key: key);
   @override
   _ShipmentStartState createState() => _ShipmentStartState();
 }

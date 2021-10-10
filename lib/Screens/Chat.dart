@@ -143,7 +143,7 @@ class _ChatState extends State<Chat> {
     super.initState();
   }
   Widget build(BuildContext context) {
-    final u = ModalRoute.of(context).settings.arguments;   
+    final u = ModalRoute.of(context)?.settings.arguments as List;   
     users = u; 
     print(u);
     print("users"+" "); print(users);

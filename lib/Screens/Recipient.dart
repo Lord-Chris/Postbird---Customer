@@ -22,7 +22,7 @@ class Recipient extends StatefulWidget {
   final fragile;
   final packsize;
   const Recipient({
-    Key key,
+    Key? key,
     this.name,
     this.fromPlaceDetail,
     this.toPlaceDetail,
@@ -269,11 +269,11 @@ class _RecipientState extends State<Recipient> {
                     SizedBox(height: 10),
                     TextFormField(
                        validator: (e) {
-                                if (e.isEmpty) {
+                                if (e!.isEmpty) {
                                   return "Please Enter Name";
                                 }
                               },
-                              onSaved: (e) => recname = e,
+                              onSaved: (e) => recname = e!,
                               onChanged: (String text) {
                                 setState(() {
                                   recname = text;
@@ -380,11 +380,11 @@ class _RecipientState extends State<Recipient> {
                     SizedBox(height: 10),
                     TextFormField(
                        validator: (e) {
-                                if (e.isEmpty) {
+                                if (e!.isEmpty) {
                                   return "Please Enter Phone No";
                                 }
                               },
-                              onSaved: (e) => zipcode = e,
+                              onSaved: (e) => zipcode = e!,
                               onChanged: (String text) {
                                 setState(() {
                                   zipcode = text;
@@ -486,11 +486,11 @@ class _RecipientState extends State<Recipient> {
                           child: Container(
                             child: TextFormField(
                               validator: (e) {
-                                if (e.isEmpty) {
+                                if (e!.isEmpty) {
                                   return "Please Enter Phone No";
                                 }
                               },
-                              onSaved: (e) => recnumber = e,
+                              onSaved: (e) => recnumber = e!,
                               onChanged: (String text) {
                                 setState(() {
                                   recnumber = text;
@@ -542,11 +542,11 @@ class _RecipientState extends State<Recipient> {
                     ),
                     TextFormField(
                       validator: (e) {
-                                if (e.isEmpty) {
+                                if (e!.isEmpty) {
                                   return "Please Enter Phone No";
                                 }
                               },
-                              onSaved: (e) => packagename = e,
+                              onSaved: (e) => packagename = e!,
                               onChanged: (String text) {
                                 setState(() {
                                   packagename = text;
@@ -623,11 +623,11 @@ class _RecipientState extends State<Recipient> {
                       width: screenWidth,
                       child: TextFormField(
                         validator: (e) {
-                                if (e.isEmpty) {
+                                if (e!.isEmpty) {
                                   return "Please Enter Note";
                                 }
                               },
-                              onSaved: (e) => recnote = e,
+                              onSaved: (e) => recnote = e!,
                               onChanged: (String text) {
                                 setState(() {
                                   recnote = text;

@@ -18,9 +18,9 @@ class _ActivityState extends State<Activity> {
   bool inProgressIsSelected = true;
   bool completeIsSelected = false;
 
-String email, password;
-String id;
-String surl2;
+String? email, password;
+String? id;
+String? surl2;
 List activites = [];
 // var sd = "";
 
@@ -29,10 +29,10 @@ List activites = [];
     setState(() {
       id = preferences.getString("id");
     });
-    print('ID: ' + id);
+    print('ID: ' + id!);
 
     var surl = Strings.SECBASE_URL;
-    var surl2 = surl + id;
+    var surl2 = surl + id!;
     print(surl2);
     print(id);
   }
@@ -43,10 +43,10 @@ Future fetchActivity() async{
     setState(() {
       id = preferences.getString("id");
     });
-    print('ID: ' + id);
+    print('ID: ' + id!);
 
     var surl = Strings.SECBASE_URL;
-    var surl2 = surl + id;
+    var surl2 = surl + id!;
     print(surl2);
     print(id);
 

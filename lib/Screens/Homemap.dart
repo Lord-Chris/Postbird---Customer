@@ -30,22 +30,22 @@ class HomMapScreen extends StatefulWidget {
   // static final routeName = "book--page";
   final name;
   final ids;
-  const HomMapScreen({Key key, this.name, this.ids}) : super(key: key);
+  const HomMapScreen({Key? key, this.name, this.ids}) : super(key: key);
   @override
   _HomMapScreenState createState() => _HomMapScreenState();
 }
 
 class _HomMapScreenState extends State<HomMapScreen> {
-  Position _currentPosition;
-  String _currentAddress;
-  LatLng myLocation;
-  LatLng myLocationa;
+  Position? _currentPosition;
+  String? _currentAddress;
+  LatLng? myLocation;
+  LatLng? myLocationa;
   double mylat = 37.4219983;
   double mylog = -122.084;
   Set<Marker> _markers = {};
-  String _mapStyle;
-  BitmapDescriptor _taxilocation;
-  BitmapDescriptor _mylocation;
+  String? _mapStyle;
+  BitmapDescriptor? _taxilocation;
+  BitmapDescriptor? _mylocation;
   Completer<GoogleMapController> _controller = Completer();
 
   bool isMapCreated = false;
@@ -57,18 +57,18 @@ class _HomMapScreenState extends State<HomMapScreen> {
   var uuid = Uuid();
   var sessionToken;
   var googleMapServices;
-  PlaceDetail _fromPlaceDetail;
-  PlaceDetail _toPlaceDetail;
+  PlaceDetail? _fromPlaceDetail;
+  PlaceDetail? _toPlaceDetail;
   Set<Polyline> _polylines = {};
   List<LatLng> polylineCoordinates = [];
   PolylinePoints polylinePoints = PolylinePoints();
   bool _hasGottenCordinates = false;
   // RefreshController _refreshController =
   //     RefreshController(initialRefresh: false);
-  StreamSubscription _locationSubscription;
+  StreamSubscription? _locationSubscription;
   // Location _locationTracker = Location();
-  Marker marker;
-  Circle circle;
+  Marker? marker;
+  Circle? circle;
 // final GMapViewHelper _gMapViewHelper = GMapViewHelper();
 
 //   void _onMapCreated(GoogleMapController controller) {
@@ -116,7 +116,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
         imageUrl: "assets/images/luxury.png"),
   ];
 
-  UserCardModel _selectedalvalue;
+  UserCardModel? _selectedalvalue;
 
   Future<List<Message>> fetchUserBankDetails() async {
     var webAddress = "https://ridezmyway.com/apiall/getdoc.php?bkf=" + id;
@@ -197,7 +197,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
     myLocation = LatLng(mylat, mylog);
     _markers.add(Marker(
         markerId: MarkerId("my location"),
-        position: LatLng(myLocation.latitude, myLocation.longitude),
+        position: LatLng(myLocation?.latitude, myLocation?.longitude),
         icon: _mylocation,
         infoWindow: InfoWindow(
           title: "Pick Up Location",
@@ -208,12 +208,12 @@ class _HomMapScreenState extends State<HomMapScreen> {
   setPolylines() async {
     polylineCoordinates.clear();
     _polylines.clear();
-    List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
+    List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
         Constatnts.API_KEY,
-        _fromPlaceDetail.lat,
-        _fromPlaceDetail.lng,
-        _toPlaceDetail.lat,
-        _toPlaceDetail.lng);
+        _fromPlaceDetail?.lat,
+        _fromPlaceDetail?.lng,
+        _toPlaceDetail?.lat,
+        _toPlaceDetail?.lng);
     if (result.isNotEmpty) {
       result.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
@@ -407,19 +407,19 @@ class _HomMapScreenState extends State<HomMapScreen> {
                   itemBuilder: (context, suggetion) {
                     return ListTile( 
                       title: Text(
-                        suggetion.description,
+                        'suggetion!.description',
                         style: TextStyle(fontSize: 12),
                       ),
                     );
                   },
                   onSuggestionSelected: (suggetion) async {
-                    _fromLocationController.text = suggetion.description;
+                    _fromLocationController.text = 'suggetion.description';
                     _fromPlaceDetail = await googleMapServices.getPlaceDetail(
-                      suggetion.placeId,
+                      'suggetion.placeId',
                       sessionToken,
                     );
 
-                    _moveCamera(_fromPlaceDetail, _toPlaceDetail);
+                    _moveCamera(_fromPlaceDetail!, _toPlaceDetail!);
                     sessionToken = null;
                   },
                 ),
@@ -457,18 +457,18 @@ class _HomMapScreenState extends State<HomMapScreen> {
                   itemBuilder: (context, suggetion) {
                     return ListTile(
                       title: Text(
-                        suggetion.description,
+                        'suggetion.description',
                         style: TextStyle(fontSize: 12),
                       ),
                     );
                   },
                   onSuggestionSelected: (suggetion) async {
-                    _toLocationController.text = suggetion.description;
+                    _toLocationController.text = 'suggetion.description';
                     _toPlaceDetail = await googleMapServices.getPlaceDetail(
-                      suggetion.placeId,
+                      'suggetion.placeId',
                       sessionToken,
                     );
-                    _moveCamera(_fromPlaceDetail, _toPlaceDetail);
+                    _moveCamera(_fromPlaceDetail!, _toPlaceDetail!);
                     sessionToken = null;
                   },
                 ),
@@ -487,15 +487,15 @@ class _HomMapScreenState extends State<HomMapScreen> {
                       // },
                       var senter = _fromLocationController.text;
                       var denter = _toLocationController.text;
-                      var frmlat = _fromPlaceDetail.lat;
-                      var frmlng = _fromPlaceDetail.lng;
-                      var tolat = _toPlaceDetail.lat;
-                      var tolng = _toPlaceDetail.lng;
+                      var frmlat = _fromPlaceDetail?.lat;
+                      var frmlng = _fromPlaceDetail?.lng;
+                      var tolat = _toPlaceDetail?.lat;
+                      var tolng = _toPlaceDetail?.lng;
                       print(senter);
-                      print(_fromPlaceDetail.lat);
-                      print(_fromPlaceDetail.lng);
-                      print(_toPlaceDetail.lat);
-                      print(_toPlaceDetail.lng);
+                      print(_fromPlaceDetail?.lat);
+                      print(_fromPlaceDetail?.lng);
+                      print(_toPlaceDetail?.lat);
+                      print(_toPlaceDetail?.lng);
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
                       return SelectDate(name: name,
@@ -657,15 +657,15 @@ class _HomMapScreenState extends State<HomMapScreen> {
                        
                       var senter = _fromLocationController.text;
                       var denter = _toLocationController.text;
-                      var frmlat = _fromPlaceDetail.lat;
-                      var frmlng = _fromPlaceDetail.lng;
-                      var tolat = _toPlaceDetail.lat;
-                      var tolng = _toPlaceDetail.lng;
+                      var frmlat = _fromPlaceDetail?.lat;
+                      var frmlng = _fromPlaceDetail?.lng;
+                      var tolat = _toPlaceDetail?.lat;
+                      var tolng = _toPlaceDetail?.lng;
                       print(senter);
-                      print(_fromPlaceDetail.lat);
-                      print(_fromPlaceDetail.lng);
-                      print(_toPlaceDetail.lat);
-                      print(_toPlaceDetail.lng);
+                      print(_fromPlaceDetail?.lat);
+                      print(_fromPlaceDetail?.lng);
+                      print(_toPlaceDetail?.lat);
+                      print(_toPlaceDetail?.lng);
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
                       return SelectDate(name: name,
@@ -701,7 +701,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
     );
   }
 
-  SharedPreferences sharedPreferences;
+  SharedPreferences? sharedPreferences;
 
   String name = "",
       phone = "",
@@ -719,17 +719,17 @@ class _HomMapScreenState extends State<HomMapScreen> {
     sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
-      name = sharedPreferences.getString("name");
-      email = sharedPreferences.getString("email");
-      phone = sharedPreferences.getString("phone");
-      type = sharedPreferences.getString("type");
-      carmodel = sharedPreferences.getString("carmodel");
-      carnumber = sharedPreferences.getString("carnumber");
-      carcolor = sharedPreferences.getString("carcolor");
-      profilepic = sharedPreferences.getString("profilepic");
-      dvype = sharedPreferences.getString("dvype");
-      dvstatus = sharedPreferences.getString("dvstatus");
-      id = sharedPreferences.getString("id");
+      name = sharedPreferences!.getString("name");
+      email = sharedPreferences!.getString("email");
+      phone = sharedPreferences!.getString("phone");
+      type = sharedPreferences!.getString("type");
+      carmodel = sharedPreferences!.getString("carmodel");
+      carnumber = sharedPreferences!.getString("carnumber");
+      carcolor = sharedPreferences!.getString("carcolor");
+      profilepic = sharedPreferences!.getString("profilepic");
+      dvype = sharedPreferences!.getString("dvype");
+      dvstatus = sharedPreferences!.getString("dvstatus");
+      id = sharedPreferences!.getString("id");
     });
     //  print(email);
 
@@ -815,7 +815,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
   _getAddressFromLatLng() async {
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
-          _currentPosition.latitude, _currentPosition.longitude);
+          _currentPosition?.latitude, _currentPosition?.longitude);
 
       Placemark place = placemarks[0];
 

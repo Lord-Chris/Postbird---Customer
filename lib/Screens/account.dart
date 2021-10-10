@@ -17,7 +17,7 @@ class Account extends StatefulWidget {
 }
 
 String email = "", avatar = "", fullname = "", id = "", password = "", name = "", profilePic="default.png";
-List<List> info;
+List<List>? info;
 
  
 class _AccountState extends State<Account> {

@@ -11,7 +11,7 @@ import '../strings.dart';
 class CreateAccount3 extends StatefulWidget {
   final phon;
   const CreateAccount3({
-    Key key,
+    Key? key,
     this.phon,
   }) : super(key: key);
 
@@ -24,13 +24,13 @@ class _CreateAccount3State extends State<CreateAccount3> {
   var onTapRecognizer;
   TextEditingController textEditingController = TextEditingController()
     ..text = "";
-  StreamController<ErrorAnimationType> errorController;
+  StreamController<ErrorAnimationType>? errorController;
 
   bool hasError = false;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
   bool visible = false;
-  Timer _timer;
+  Timer? _timer;
   int _start = 60;
 
   void startTimer() {

@@ -33,7 +33,7 @@ class FindingDriver extends StatefulWidget {
   final packsize;
   final userid;
   const FindingDriver({
-    Key key,
+    Key? key,
     this.name,
     this.fromPlaceDetail,
     this.toPlaceDetail,
@@ -64,7 +64,7 @@ class FindingDriver extends StatefulWidget {
 }
 
 class _FindingDriverState extends State<FindingDriver> {
-  Timer _timer;
+  Timer? _timer;
   int _start = 60;
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
@@ -367,7 +367,7 @@ class _FindingDriverState extends State<FindingDriver> {
                                         bottomRight: Radius.circular(8),
                                       ),
                                       border: Border.all(
-                                        color: Colors.grey[400],
+                                        color: Colors.grey[400]!,
                                       )))),
                           Positioned(
                               top: 16,

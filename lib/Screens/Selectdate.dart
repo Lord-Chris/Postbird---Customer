@@ -18,7 +18,7 @@ class SelectDate extends StatefulWidget {
   final tolt;
   final tolg;
   const SelectDate(
-      {Key key,
+      {Key? key,
       this.name,
       this.fromPlaceDetail,
       this.toPlaceDetail,

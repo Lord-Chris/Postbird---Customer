@@ -19,18 +19,18 @@ class HomMapScreena extends StatefulWidget {
   static final routeName = "book-taxi-page";
   final name;
   final ids;
-  const HomMapScreena({Key key, this.name, this.ids}) : super(key: key);
+  const HomMapScreena({Key? key, this.name, this.ids}) : super(key: key);
   @override
   _HomMapScreenaState createState() => _HomMapScreenaState();
 }
 
 class _HomMapScreenaState extends State<HomMapScreena> {
-  LatLng myLocation;
+  LatLng? myLocation;
   Set<Marker> _markers = {};
-  String _mapStyle;
-  BitmapDescriptor _taxilocation;
-  BitmapDescriptor _mylocation;
-  BitmapDescriptor _mydestination;
+  String? _mapStyle;
+  BitmapDescriptor? _taxilocation;
+  BitmapDescriptor? _mylocation;
+  BitmapDescriptor? _mydestination;
   Completer<GoogleMapController> _controller = Completer();
   bool isMapCreated = false;
   final Key _mapKey = UniqueKey();
@@ -42,13 +42,13 @@ class _HomMapScreenaState extends State<HomMapScreena> {
   var uuid = Uuid();
   var sessionToken;
   var googleMapServices;
-  PlaceDetail _fromPlaceDetail;
-  PlaceDetail _toPlaceDetail;
+  PlaceDetail? _fromPlaceDetail;
+  PlaceDetail? _toPlaceDetail;
   Set<Polyline> _polylines = {};
   List<LatLng> polylineCoordinates = [];
   PolylinePoints polylinePoints = PolylinePoints();
   bool _hasGottenCordinates = false;
-  LatLngBounds bound;
+  LatLngBounds? bound;
 
   List<UserCardModel> _cards = [
     UserCardModel(
@@ -89,7 +89,7 @@ class _HomMapScreenaState extends State<HomMapScreena> {
         imageUrl: "assets/images/luxury.png"),
   ];
 
-  UserCardModel _selectedalvalue;
+  UserCardModel? _selectedalvalue;
   @override
   void dispose() {
     super.dispose();
@@ -125,7 +125,7 @@ class _HomMapScreenaState extends State<HomMapScreena> {
     myLocation = LatLng(37.382782, 127.1189054);
     _markers.add(Marker(
         markerId: MarkerId("my location"),
-        position: LatLng(myLocation.latitude, myLocation.longitude),
+        position: LatLng(myLocation?.latitude, myLocation?.longitude),
         icon: _mylocation,
         infoWindow: InfoWindow(
           title: "Pick Up Location",
@@ -147,12 +147,12 @@ class _HomMapScreenaState extends State<HomMapScreena> {
   setPolylines() async {
     polylineCoordinates.clear();
     _polylines.clear();
-    List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
+    List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
         Constatnts.API_KEY,
-        _fromPlaceDetail.lat,
-        _fromPlaceDetail.lng,
-        _toPlaceDetail.lat,
-        _toPlaceDetail.lng);
+        _fromPlaceDetail?.lat,
+        _fromPlaceDetail?.lng,
+        _toPlaceDetail?.lat,
+        _toPlaceDetail?.lng);
     if (result.isNotEmpty) {
       result.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
@@ -176,7 +176,7 @@ class _HomMapScreenaState extends State<HomMapScreena> {
         _markers.clear();
       });
     }
-    if (_toLocationController.text != null && _toPlaceDetail != null) {
+    if (_toLocationController.text.isEmpty ) {
       getLatLngBounds(LatLng(_fromplaceDetail.lat, _fromplaceDetail.lng),
           LatLng(_toPlaceDetail.lat, _toPlaceDetail.lng));
       GoogleMapController controller = await _controller.future;
@@ -185,7 +185,7 @@ class _HomMapScreenaState extends State<HomMapScreena> {
         check(u2, controller);
       });
       // controller.animateCamera(CameraUpdate.newLatLng(
-      //   LatLng(_toPlaceDetail.lat, _toPlaceDetail.lng),
+      //   LatLng(_toPlaceDetail?.lat, _toPlaceDetail?.lng),
       // ));
     }
 
@@ -198,7 +198,7 @@ class _HomMapScreenaState extends State<HomMapScreena> {
             icon: _mylocation,
             infoWindow: InfoWindow(
               title: "pick up",
-              snippet: _fromplaceDetail.formattedAddress,
+              snippet: _fromplaceDetail?.formattedAddress,
             ),
           ),
         );
@@ -207,12 +207,12 @@ class _HomMapScreenaState extends State<HomMapScreena> {
       if (_toLocationController.text != null && _toPlaceDetail != null) {
         _markers.add(
           Marker(
-            markerId: MarkerId(_toPlaceDetail.placeId),
-            position: LatLng(_toPlaceDetail.lat, _toPlaceDetail.lng),
+            markerId: MarkerId(_toPlaceDetail?.placeId),
+            position: LatLng(_toPlaceDetail?.lat, _toPlaceDetail?.lng),
             icon: _mydestination,
             infoWindow: InfoWindow(
               title: "destination",
-              snippet: _toPlaceDetail.formattedAddress,
+              snippet: _toPlaceDetail?.formattedAddress,
             ),
           ),
         );
@@ -384,19 +384,19 @@ class _HomMapScreenaState extends State<HomMapScreena> {
                   itemBuilder: (context, suggetion) {
                     return ListTile(
                       title: Text(
-                        suggetion.description,
+                        'suggetion.description',
                         style: TextStyle(fontSize: 12),
                       ),
                     );
                   },
                   onSuggestionSelected: (suggetion) async {
-                    _fromLocationController.text = suggetion.description;
+                    _fromLocationController.text = 'suggetion.description';
                     _fromPlaceDetail = await googleMapServices.getPlaceDetail(
-                      suggetion.placeId,
+                      'suggetion.placeId',
                       sessionToken,
                     );
 
-                    //    _moveCamera(_fromPlaceDetail, _toPlaceDetail);
+                    //    _moveCamera(_fromPlaceDetail?, _toPlaceDetail?);
                     sessionToken = null;
                   },
                 ),
@@ -434,18 +434,18 @@ class _HomMapScreenaState extends State<HomMapScreena> {
                   itemBuilder: (context, suggetion) {
                     return ListTile(
                       title: Text(
-                        suggetion.description,
+                        'suggetion.description',
                         style: TextStyle(fontSize: 12),
                       ),
                     );
                   },
                   onSuggestionSelected: (suggetion) async {
-                    _toLocationController.text = suggetion.description;
+                    _toLocationController.text = 'suggetion.description';
                     _toPlaceDetail = await googleMapServices.getPlaceDetail(
-                      suggetion.placeId,
+                      'suggetion.placeId',
                       sessionToken,
                     );
-                    _moveCamera(_fromPlaceDetail, _toPlaceDetail);
+                    _moveCamera(_fromPlaceDetail!, _toPlaceDetail!);
                     sessionToken = null;
                   },
                 ),
@@ -622,8 +622,8 @@ class _HomMapScreenaState extends State<HomMapScreena> {
                       // Navigator.of(context)
                       //     .push(new MaterialPageRoute(builder: (context) {
                       //   return TaxiMovementPage(
-                      //     fromPlaceDetail: _fromPlaceDetail,
-                      //     toPlaceDetail: _toPlaceDetail,
+                      //     fromPlaceDetail: _fromPlaceDetail?,
+                      //     toPlaceDetail: _toPlaceDetail?,
                       //     polylines: _polylines,
                       //     polylineCoordinates: polylineCoordinates,
                       //   );

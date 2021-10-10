@@ -6,7 +6,7 @@ import 'package:postbird/Screens/utils/constants.dart';
 class GoogleMapServices {
   final String sessionToken;
 
-  GoogleMapServices({this.sessionToken});
+  GoogleMapServices({required this.sessionToken});
 
   Future<List> getSuggestions(String query) async {
     final String baseUrl =

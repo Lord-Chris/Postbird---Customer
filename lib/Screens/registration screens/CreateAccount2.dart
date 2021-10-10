@@ -36,7 +36,7 @@ class _CreateAccount2State extends State<CreateAccount2> {
 
   check() {
     final form = _key.currentState;
-    if (form.validate()) {
+    if (form!.validate()) {
       form.save();
       save();
     } else
@@ -195,11 +195,11 @@ class _CreateAccount2State extends State<CreateAccount2> {
                       child: Container(
                         child: TextFormField(
                           validator: (e) {
-                            if (e.isEmpty) {
+                            if (e!.isEmpty) {
                               return "Please Enter a Valid Phone No";
                             }
                           },
-                          onSaved: (e) => phoneno = e,
+                          onSaved: (e) => phoneno = e!,
                           onChanged: (String text) {
                             setState(() {
                               phoneno = text;

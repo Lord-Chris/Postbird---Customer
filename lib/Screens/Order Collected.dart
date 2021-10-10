@@ -210,6 +210,7 @@ class _OrderCollectedState extends State<OrderCollected> {
                             left: screenWidth*0.6,
                               child: FloatingActionButton(
                                 backgroundColor: Colors.orange,
+                                onPressed: () {  },
                                 child: Icon(
                                   Icons.phone,
                                   color: Colors.white,
@@ -246,7 +247,7 @@ class _OrderCollectedState extends State<OrderCollected> {
                                 ),
                                 color : Colors.white,
                                 border : Border.all(
-                                  color:  Colors.grey[300],
+                                  color:  Colors.grey[300]!,
                                   width: 1,
                                 ),
                               ),
@@ -329,7 +330,7 @@ class _OrderCollectedState extends State<OrderCollected> {
                                 ),
                                 color : Colors.white,
                                 border : Border.all(
-                                  color: Colors.grey[300],
+                                  color: Colors.grey[300]!,
                                   width: 1,
                                 ),
                               ),
@@ -413,6 +414,7 @@ class _OrderCollectedState extends State<OrderCollected> {
                                   color : Colors.orange,
                                 ),
                                 child: FlatButton(
+                                  onPressed: () {  },
                                   child: GestureDetector(
                                     onTap: (){
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => NavBar()));

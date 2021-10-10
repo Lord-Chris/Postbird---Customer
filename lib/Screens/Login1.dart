@@ -33,13 +33,13 @@ class _Login1State extends State<Login1> {
     });
   }
 
-  String email, password;
+  String? email, password;
 
   final _key = new GlobalKey<FormState>();
 
   check() {
     final form = _key.currentState;
-    if (form.validate()) {
+    if (form!.validate()) {
       form.save();
       login();
     } else
@@ -48,7 +48,7 @@ class _Login1State extends State<Login1> {
 
   Future login() async {
    // print("ongoing");
-    print(email+"          "+password);
+    print(email!+"          "+password!);
     final response =
         await http.post(Uri.parse(Strings.BASE_URL + 'login'), body: {
       "email": email,
@@ -201,7 +201,7 @@ class _Login1State extends State<Login1> {
                     ),
                     TextFormField(
                       validator: (e) {
-                        if (e.isEmpty) {
+                        if (e!.isEmpty) {
                           return "Please Enter your email No";
                         }
                       },
@@ -257,7 +257,7 @@ class _Login1State extends State<Login1> {
                     ),
                     TextFormField(
                       validator: (e) {
-                        if (e.isEmpty) {
+                        if (e!.isEmpty) {
                           return "Please Enter your Phone No";
                         }
                       },
@@ -273,10 +273,15 @@ class _Login1State extends State<Login1> {
                         suffixIcon: GestureDetector(
                           onTap: () {
                             setState(() {
-                              if (obsureText = false) return obsureText = true;
+if (obsureText = false) {
+                          obsureText = true;
+                          return;
+                        }
 
-                              if (obsureText = true) return obsureText = false;
-                            });
+                        if (obsureText = true) {
+                          obsureText = false;
+                          return;
+                        }                            });
                           },
                           child: obsureText
                               ? Icon(

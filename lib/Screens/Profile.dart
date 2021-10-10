@@ -16,11 +16,11 @@ class ChangeAvatarRequest extends Profile {}
 class OpenImagePicker extends Profile {
   final ImageSource imageSource;
 
-  OpenImagePicker({this.imageSource});
+  OpenImagePicker({required this.imageSource});
 }
 class _ProfileState extends State<Profile> {
  
-  String name, email, phone, address, password, profilePic="default.png";
+  String? name, email, phone, address, password, profilePic="default.png";
   // File _image;
 
   updateProfile() async{
@@ -195,7 +195,7 @@ class _ProfileState extends State<Profile> {
                                 ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.network(
-                                        'https://api.postbird.com.ng/public/img/profile/'+profilePic,
+                                        'https://api.postbird.com.ng/public/img/profile/'+profilePic!,
                                         height: 90.0,
                                         width: 90.0,
                                     ),
