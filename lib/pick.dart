@@ -2,7 +2,7 @@ import 'package:postbird/pickup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:postbird/navigator.dart';
-import 'package:postbird/Screens/Login.dart';
+import 'package:postbird/ui/views/startup/view/onboarding.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -111,7 +111,7 @@ class Pick extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Login()
+                                          builder: (context) => Onboarding()
                                           )
                                           );      
                                 },

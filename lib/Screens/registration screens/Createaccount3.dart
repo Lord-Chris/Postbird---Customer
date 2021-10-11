@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:postbird/Screens/registration screens/Signup.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:toast/toast.dart';
+// import 'package:toast/toast.dart';
 
 import '../strings.dart';
 
@@ -98,11 +98,11 @@ class _CreateAccount3State extends State<CreateAccount3> {
     print(status);
     // print(id);
     if (status == true) {
-      Toast.show('OTP Successfully Verified', context,
-          duration: Toast.LENGTH_LONG,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          gravity: Toast.TOP);
+      // Toast.show('OTP Successfully Verified', context,
+      //     duration: Toast.LENGTH_LONG,
+      //     backgroundColor: Colors.green,
+      //     textColor: Colors.white,
+      //     gravity: Toast.TOP);
       setState(() {
         visible = false;
       });
@@ -110,11 +110,11 @@ class _CreateAccount3State extends State<CreateAccount3> {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => SignUp(phon: phon)));
     } else {
-      Toast.show('Poor Network Connection', context,
-          duration: Toast.LENGTH_LONG,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          gravity: Toast.TOP);
+      // Toast.show('Poor Network Connection', context,
+      //     duration: Toast.LENGTH_LONG,
+      //     backgroundColor: Colors.red,
+      //     textColor: Colors.white,
+      //     gravity: Toast.TOP);
       Navigator.pop(context);
     }
   }

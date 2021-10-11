@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:postbird/Screens/Home3.dart';
 import 'package:http/http.dart' as http;
-import 'package:postbird/Screens/Login.dart';
+import 'package:postbird/ui/views/startup/view/onboarding.dart';
 import 'package:postbird/Screens/strings.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:toast/toast.dart';
+// import 'package:toast/toast.dart';
 
 class SignUp extends StatefulWidget {
   final phon;
@@ -51,7 +51,8 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future save() async {
-    final response = await http.post(Uri.parse(Strings.BASE_URL + 'register'), headers: {
+    final response =
+        await http.post(Uri.parse(Strings.BASE_URL + 'register'), headers: {
       'Accept': 'application/json'
     }, body: {
       "name": fullname,
@@ -69,20 +70,20 @@ class _SignUpState extends State<SignUp> {
     print(data);
     // print(id);
     if (status == true) {
-      Toast.show('Successfully Registerd ' + fullname!, context,
-          duration: Toast.LENGTH_LONG,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          gravity: Toast.TOP);
+      // Toast.show('Successfully Registerd ' + fullname!, context,
+      //     duration: Toast.LENGTH_LONG,
+      //     backgroundColor: Colors.green,
+      //     textColor: Colors.white,
+      //     gravity: Toast.TOP);
       // Navigator.pop(context);
       Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => Login()));
+          context, new MaterialPageRoute(builder: (context) => Onboarding()));
     } else {
-      Toast.show('Poor Network Connection', context,
-          duration: Toast.LENGTH_LONG,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          gravity: Toast.TOP);
+      // Toast.show('Poor Network Connection', context,
+      //     duration: Toast.LENGTH_LONG,
+      //     backgroundColor: Colors.red,
+      //     textColor: Colors.white,
+      //     gravity: Toast.TOP);
       // Navigator.pop(context);
       _btnController2.reset();
     }

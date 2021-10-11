@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:postbird/Screens/Login.dart';
+import 'package:postbird/ui/views/startup/view/onboarding.dart';
 import 'package:postbird/Screens/Security.dart';
 import 'package:postbird/Screens/Profile.dart';
 import 'package:postbird/Screens/FAQ2.dart';
@@ -61,7 +61,7 @@ class _AccountState extends State<Account> {
 
     Navigator.pushReplacement(
       context,
-      new MaterialPageRoute(builder: (context) => new Login()),
+      new MaterialPageRoute(builder: (context) => new Onboarding()),
     );
   }
 

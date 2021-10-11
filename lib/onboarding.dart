@@ -3,7 +3,7 @@ import 'package:postbird/pick.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:postbird/navigator.dart';
-import 'package:postbird/Screens/Login.dart';
+import 'package:postbird/ui/views/startup/view/onboarding.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -120,12 +120,12 @@ class HomePageOn extends StatelessWidget {
                           Container(
                             child: GestureDetector(
                               onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()
-                                          )
-                                          );      
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => Login()
+                                  //         )
+                                  //         );      
                                 },
 
                             child: Container(

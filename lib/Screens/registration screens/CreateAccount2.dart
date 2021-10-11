@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:postbird/Screens/registration screens/CreateAccount3.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:http/http.dart' as http;
-import 'package:toast/toast.dart';
 
 import '../strings.dart';
 
@@ -55,20 +54,20 @@ class _CreateAccount2State extends State<CreateAccount2> {
     // print(response.statusCode);
     print(status);
     if (status == true) {
-      Toast.show('OTP Successfully Sent to $phoneno', context,
-          duration: Toast.LENGTH_LONG,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          gravity: Toast.TOP);
+      // Toast.show('OTP Successfully Sent to $phoneno', context,
+      //     duration: Toast.LENGTH_LONG,
+      //     backgroundColor: Colors.green,
+      //     textColor: Colors.white,
+      //     gravity: Toast.TOP);
       var phon = phoneba;
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => CreateAccount3(phon: phon)));
     } else {
-      Toast.show('Looks Like the phone number as already taken ', context,
-          duration: Toast.LENGTH_LONG,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          gravity: Toast.TOP);
+      // Toast.show('Looks Like the phone number as already taken ', context,
+      //     duration: Toast.LENGTH_LONG,
+      //     backgroundColor: Colors.red,
+      //     textColor: Colors.white,
+      //     gravity: Toast.TOP);
       _btnController2.reset();
       // var phon = phone;
       // Navigator.pop(context);

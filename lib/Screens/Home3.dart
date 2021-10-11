@@ -16,7 +16,7 @@ import 'package:postbird/Screens/strings.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:toast/toast.dart';
+// import 'package:toast/toast.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -100,11 +100,11 @@ class _HomePageState extends State<HomePage> {
     if (form!.validate()) {
       form.save();
       if (int.parse(amount) < 500) {
-        Toast.show('Can not purchase below \₦ 500', context,
-            duration: Toast.LENGTH_LONG,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            gravity: Toast.TOP);
+        // Toast.show('Can not purchase below \₦ 500', context,
+        //     duration: Toast.LENGTH_LONG,
+        //     backgroundColor: Colors.red,
+        //     textColor: Colors.white,
+        //     gravity: Toast.TOP);
         _btnController2.reset();
       } else {
         purchasecredit();
@@ -137,11 +137,11 @@ class _HomePageState extends State<HomePage> {
     if (stat == true) {
       // topUp();
     } else if (stat == false) {
-      Toast.show(messg, context,
-          duration: Toast.LENGTH_LONG,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          gravity: Toast.TOP);
+      // Toast.show(messg, context,
+      //     duration: Toast.LENGTH_LONG,
+      //     backgroundColor: Colors.green,
+      //     textColor: Colors.white,
+      //     gravity: Toast.TOP);
       Navigator.pop(context);
     }
   }

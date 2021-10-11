@@ -1,8 +1,8 @@
-import 'package:postbird/models/user.dart';
-
-import 'i_auth_repository.dart';
+import 'package:postbird/core/index.dart';
 
 class AuthRepository extends IAuthRepository {
+  final _networkService = Get.find<INetworkService>();
+
   @override
   Future<void> forgotPassword(String email) {
     // TODO: implement forgotPassword
@@ -28,8 +28,15 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<void> verifyPhone(String number) {
-    // TODO: implement verifyPhone
-    throw UnimplementedError();
+  Future<void> verifyPhone(String number) async {
+    try {
+      final body = {"mobile": number};
+      await _networkService.post(ApiStrings.verifyPhone, body: body);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
   }
 }

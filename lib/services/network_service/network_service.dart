@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:postbird/core/api_strings.dart';
-import 'package:postbird/models/api_response.dart';
+import 'package:postbird/core/index.dart';
 
-import 'i_network_service.dart';
 import 'network_logger.dart';
 
 class NetworkService extends INetworkService {
@@ -31,7 +29,7 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } catch (e) {
       print(e.toString());
-      // throw Failure();
+      throw Failure(e.toString());
     }
   }
 
@@ -50,7 +48,7 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } catch (e) {
       print(e.toString());
-      // throw Failure();
+      throw Failure(e.toString());
     }
   }
 
@@ -69,7 +67,7 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } catch (e) {
       print(e.toString());
-      // throw Failure();
+      throw Failure(e.toString());
     }
   }
 
@@ -88,7 +86,7 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } catch (e) {
       print(e.toString());
-      // throw Failure();
+      throw Failure(e.toString());
     }
   }
 }
