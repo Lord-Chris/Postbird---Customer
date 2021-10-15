@@ -10,7 +10,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:postbird/Screens/Login1.dart';
+import 'package:postbird/ui/views/auth/views/login.dart';
 import 'package:postbird/Screens/Selectdate.dart';
 import 'package:postbird/Screens/model/card_model.dart';
 import 'package:postbird/Screens/model/place_model.dart';

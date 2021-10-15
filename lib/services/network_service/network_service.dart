@@ -20,13 +20,16 @@ class NetworkService extends INetworkService {
     try {
       final res = await _dio.delete(
         url,
-        queryParameters: body,
+        data: body,
         options: Options(headers: headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
-        return ApiResponse();
+        return ApiResponse(data: res.data);
       }
       throw res.statusMessage!;
+    } on DioError catch (e) {
+      print(e.toString());
+      throw Failure(e.response?.data['error']);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
@@ -43,9 +46,12 @@ class NetworkService extends INetworkService {
         options: Options(headers: headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
-        return ApiResponse();
+        return ApiResponse(data: res.data);
       }
       throw res.statusMessage!;
+    } on DioError catch (e) {
+      print(e.toString());
+      throw Failure(e.response?.data['error']);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
@@ -58,13 +64,16 @@ class NetworkService extends INetworkService {
     try {
       final res = await _dio.patch(
         url,
-        queryParameters: body,
+        data: body,
         options: Options(headers: headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
-        return ApiResponse();
+        return ApiResponse(data: res.data);
       }
       throw res.statusMessage!;
+    } on DioError catch (e) {
+      print(e.toString());
+      throw Failure(e.response?.data['error']);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
@@ -75,15 +84,18 @@ class NetworkService extends INetworkService {
   Future<ApiResponse?> post(String url,
       {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
     try {
-      final res = await _dio.get(
+      final res = await _dio.post(
         url,
-        queryParameters: body,
+        data: body,
         options: Options(headers: headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
-        return ApiResponse();
+        return ApiResponse(data: res.data);
       }
       throw res.statusMessage!;
+    } on DioError catch (e) {
+      print(e.toString());
+      throw Failure(e.response?.data['error']);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());

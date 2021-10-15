@@ -2,6 +2,7 @@ import 'package:postbird/core/index.dart';
 
 class AuthRepository extends IAuthRepository {
   final _networkService = Get.find<INetworkService>();
+  final _storageService = Get.find<IStorageService>();
 
   @override
   Future<void> forgotPassword(String email) {
@@ -10,9 +11,19 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<void> loginUser(String email, String password) {
-    // TODO: implement loginUser
-    throw UnimplementedError();
+  Future<User> loginUser(String email, String password) async {
+    try {
+      Map<String, dynamic> body = {'email': email, 'password': password};
+      final res = await _networkService.post(ApiStrings.login, body: body);
+      await _storageService.saveString(
+          StorageKeys.authToken, res!.data['token']);
+      return User.fromJson(res.data['data']);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
   }
 
   @override

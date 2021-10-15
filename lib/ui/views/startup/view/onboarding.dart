@@ -1,5 +1,6 @@
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
+import 'package:postbird/ui/views/auth/views/login.dart';
 
 import '../controller/onboarding_controller.dart';
 
@@ -68,7 +69,7 @@ class Onboarding extends StatelessWidget {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
-                            // Get.to()
+                            Get.to(() => Login());
                           },
                           child: Container(
                             width: screenWidth * 0.94,
