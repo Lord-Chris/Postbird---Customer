@@ -55,4 +55,14 @@ class StorageService extends IStorageService {
   Future<void> saveStringList(String key, List<String> val) async {
     await _storage.write(key, val);
   }
+
+  @override
+  Future<void> clearAll() async {
+    await _storage.erase();
+  }
+
+  @override
+  Future<void> clearData(String key) async {
+    await _storage.remove(key);
+  }
 }

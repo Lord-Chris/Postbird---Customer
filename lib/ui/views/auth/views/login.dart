@@ -1,15 +1,11 @@
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../controllers/login_controller.dart';
 
 enum LoginStatus { notSignIn, signIn }
 
 class Login extends StatelessWidget with Validator {
-  final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
-
   final _key = new GlobalKey<FormState>();
 
   @override
@@ -56,7 +52,7 @@ class Login extends StatelessWidget with Validator {
                             fontFamily: 'manrope',
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
-                            color: AppColors.textColor,
+                            color: AppColors.lightGrey,
                           ),
                         ),
                         SizedBox(
@@ -124,7 +120,7 @@ class Login extends StatelessWidget with Validator {
                                 controller.obsureText
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
-                                color: AppColors.textColor,
+                                color: AppColors.lightGrey,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(

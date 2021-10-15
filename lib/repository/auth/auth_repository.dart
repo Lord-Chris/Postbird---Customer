@@ -1,4 +1,5 @@
 import 'package:postbird/core/index.dart';
+import 'package:postbird/ui/constants/storage_keys.dart';
 
 class AuthRepository extends IAuthRepository {
   final _networkService = Get.find<INetworkService>();
@@ -50,4 +51,19 @@ class AuthRepository extends IAuthRepository {
       throw Failure(e.toString());
     }
   }
+
+  @override
+  Future<void> logOut() async {
+    try {
+      final headers = {"Authorization": token};
+      await _networkService.post(ApiStrings.logout, headers: headers);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  String? get token => _storageService.getString(StorageKeys.authToken);
 }

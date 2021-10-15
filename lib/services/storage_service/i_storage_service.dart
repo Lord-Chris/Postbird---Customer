@@ -9,4 +9,6 @@ abstract class IStorageService {
   int? getInt(String key);
   List<String>? getStringList(String key);
   Map<String, dynamic>? getMap(String key);
+  Future<void> clearData(String key);
+  Future<void> clearAll();
 }

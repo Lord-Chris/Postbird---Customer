@@ -149,7 +149,7 @@ class Onboarding extends StatelessWidget {
                             width: screenWidth * 0.94,
                             height: screenHeight * 0.075,
                             decoration: BoxDecoration(
-                              color: AppColors.fingerPrintColor,
+                              color: AppColors.darkGrey,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Center(

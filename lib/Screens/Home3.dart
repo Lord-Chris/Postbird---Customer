@@ -3,20 +3,16 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:postbird/Screens/GuidePage.dart';
-import 'package:postbird/Screens/Home6.dart';
 import 'package:postbird/Screens/Homemap.dart';
-import 'package:postbird/Screens/Homemapa.dart';
-import 'package:postbird/Screens/ShipmentStart.dart';
+import 'package:postbird/Screens/Profile.dart';
 import 'package:postbird/Screens/inbox.dart';
-import 'package:postbird/Screens/account.dart';
 import 'package:postbird/Screens/My Activity.dart';
 import 'package:postbird/Screens/ManualInputTrack.dart';
 import 'package:postbird/Screens/strings.dart';
+import 'package:postbird/ui/views/profile/views/profile_view.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-// import 'package:toast/toast.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,7 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  final List<Widget> _children = [HomePage(), Activity(), Inbox(), Account()];
+  final List<Widget> _children = [HomePage(), Activity(), Inbox(), Profile()];
   final _key = new GlobalKey<FormState>();
 
   final RoundedLoadingButtonController _btnController2 =
@@ -42,10 +38,17 @@ class _HomePageState extends State<HomePage> {
 
   final rateConroller = TextEditingController();
   final rateConrollerr = TextEditingController();
-  
 
-
-  String email = "", password="", avatar = "", fullname = "", id = "", amount = "", activityStatusText="No Activity", profilePic='default.png', token="", userRef="";
+  String email = "",
+      password = "",
+      avatar = "",
+      fullname = "",
+      id = "",
+      amount = "",
+      activityStatusText = "No Activity",
+      profilePic = 'default.png',
+      token = "",
+      userRef = "";
   String credits = "0";
   List activities = [];
 
@@ -57,7 +60,7 @@ class _HomePageState extends State<HomePage> {
       fullname = preferences.getString("name")!;
       password = preferences.getString('pwd')!;
       var t = preferences.getString("token");
-      token = 'Bearer '+t!;
+      token = 'Bearer ' + t!;
     });
     print('email: ' + email);
     print('ID: ' + id);
@@ -66,17 +69,16 @@ class _HomePageState extends State<HomePage> {
     login();
   }
 
-
   login() async {
-   print("ongoing"+email+password);
+    print("ongoing" + email + password);
     final response =
-    await http.post(Uri.parse(Strings.BASE_URL + 'login'), body: {
+        await http.post(Uri.parse(Strings.BASE_URL + 'login'), body: {
       "email": email,
       "password": password,
     });
 
-   final data = jsonDecode(response.body);  
-     print(data); 
+    final data = jsonDecode(response.body);
+    print(data);
     // return data;
     bool success = data['success'];
     var t = data['token'];
@@ -85,13 +87,13 @@ class _HomePageState extends State<HomePage> {
 
     if (success == true) {
       setState(() {
-        token = 'Bearer '+t;
-        savePref(token);        
+        token = 'Bearer ' + t;
+        savePref(token);
       });
     } else {
       print("fail");
     }
-    
+
     getProfileDetails();
   }
 
@@ -153,13 +155,11 @@ class _HomePageState extends State<HomePage> {
       password = preferences.getString("pwd")!;
     });
 
-    final response = 
-      await http.post(Uri.parse("https://api.postbird.com.ng/api/userProfile"), headers:{"Authorization" : token}, body:{
-          "email": email,
-          'password': password
-        }
-      );
-      
+    final response = await http.post(
+        Uri.parse("https://api.postbird.com.ng/api/userProfile"),
+        headers: {"Authorization": token},
+        body: {"email": email, 'password': password});
+
     final data = jsonDecode(response.body);
     var c = data['credit_balance'];
     var profilepic = data['profilepic'];
@@ -167,49 +167,49 @@ class _HomePageState extends State<HomePage> {
       credits = c;
       profilePic = profilepic;
     });
-    
-    sendData(data);  
-    
+
+    sendData(data);
+
     print(c);
   }
 
+  sendData(data) async {
+    //   final response = await http.post(Uri.parse("https://k-dev.org/postbird/reg/"), body:{
+    //     "id": data['id'],
+    //     "username": data['username'],
+    //     "email": data['email'],
+    //     "mobile": data['userid']
+    //   }
+    // );
+    final response =
+        await http.post(Uri.parse("https://k-dev.org/postbird/reg/"), headers: {
+      "Authorization": token
+    }, body: {
+      "id": data['id'].toString(),
+      "name": data['name'].toString(),
+      "username": data['username'].toString(),
+      "email": data['email'].toString(),
+      "mobile": data['mobile'].toString()
+    });
+    final reqData = jsonDecode(response.body);
 
-sendData(data) async{
-      //   final response = await http.post(Uri.parse("https://k-dev.org/postbird/reg/"), body:{
-      //     "id": data['id'],
-      //     "username": data['username'],
-      //     "email": data['email'],
-      //     "mobile": data['userid']
-      //   }
-      // );
-      final response = 
-      await http.post(Uri.parse("https://k-dev.org/postbird/reg/"), headers:{"Authorization" : token}, body:{
-             "id": data['id'].toString(),
-             "name": data['name'].toString(),
-             "username": data['username'].toString(),
-             "email": data['email'].toString(),
-             "mobile": data['mobile'].toString()
-        }
-      );
-      final reqData = jsonDecode(response.body);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.setString('userRef', reqData['ref']);
+    });
+    print("send data");
+    print(reqData['ref']);
+  }
 
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      setState(() {
-        preferences.setString('userRef', reqData['ref']);
-      });
-      print("send data");
-      print(reqData['ref']);
-}     
-
-savePref(String token) async {
+  savePref(String token) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       preferences.setString('token', token);
     });
   }
 
-fetchActivity() async{
-  // print("ongoing");
+  fetchActivity() async {
+    // print("ongoing");
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       id = preferences.getString("id")!;
@@ -221,24 +221,23 @@ fetchActivity() async{
     print(surl2);
     print(id);
 
-    final response =    
-        await http.get(Uri.parse(surl2));
+    final response = await http.get(Uri.parse(surl2));
 
-  //  final data = jsonDecode(response.body);
-   List data = ['a', 'b', 'c'];
-   print("activites");
-   print(data); 
+    //  final data = jsonDecode(response.body);
+    List data = ['a', 'b', 'c'];
+    print("activites");
+    print(data);
     var len = data.length;
-   setState(() {
-      activities = data;    
-      if(len > 1){
+    setState(() {
+      activities = data;
+      if (len > 1) {
         activityStatusText = "$len orders";
         // activityStatusText "$len orders";
-      }else if(len == 1){
+      } else if (len == 1) {
         activityStatusText = "$len order";
       }
-   });
-}
+    });
+  }
 
   @override
   void initState() {
@@ -513,25 +512,23 @@ fetchActivity() async{
                 ],
               ),
             ),
-            
             Positioned(
               top: screenHeight * 0.22,
               child: Container(
                 width: screenWidth,
                 height: screenHeight,
-                
                 child: Column(
                   children: [
                     SizedBox(
                       height: screenHeight * 0.05,
                     ),
                     Image(
-                      height: 240,
-                      width: 240,
-                      image: NetworkImage(
-                        'https://api.postbird.com.ng/public/img/profile/'+profilePic,
-                      )
-                    ),
+                        height: 240,
+                        width: 240,
+                        image: NetworkImage(
+                          'https://api.postbird.com.ng/public/img/profile/' +
+                              profilePic,
+                        )),
                     Text(
                       activityStatusText,
                       style: GoogleFonts.manrope(
@@ -642,13 +639,12 @@ fetchActivity() async{
                                       fontWeight: FontWeight.normal,
                                       height: 1),
                                 ),
-                             ),
+                              ),
                             ),
                           ),
                         ]))
                   ],
                 ),
-                
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(24),
@@ -658,7 +654,6 @@ fetchActivity() async{
                 ),
               ),
             ),
-            
             Positioned(
               top: screenHeight * 0.16,
               left: screenWidth * 0.03,
@@ -689,36 +684,34 @@ fetchActivity() async{
                 child: Stack(
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         _modalBottomSheetMenu();
                       },
-                      child:
-                     
-                    Positioned(
-                      top: screenHeight * 0.04,
-                      left: screenWidth * 0.03,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(' '),
-                          Icon(
-                            Icons.lock_clock,
-                            color: Colors.orangeAccent,
-                          ),
-                          Text(
-                            ' TopUp Credit',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Manrope',
-                                fontSize: 15,
-                                letterSpacing: 0,
-                                fontWeight: FontWeight.bold,
-                                height: 1),
-                          ),
-                        ],
+                      child: Positioned(
+                        top: screenHeight * 0.04,
+                        left: screenWidth * 0.03,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(' '),
+                            Icon(
+                              Icons.lock_clock,
+                              color: Colors.orangeAccent,
+                            ),
+                            Text(
+                              ' TopUp Credit',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Manrope',
+                                  fontSize: 15,
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     ),
                     Positioned(
                       top: screenHeight * 0.07,
@@ -753,28 +746,29 @@ fetchActivity() async{
                         ),
                         child: TextButton.icon(
                           //FlatButton.icon
-                           // color: Colors.white70,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TrackPackage1()));
-                            },
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.orangeAccent,
-                              size: 20,
+                          // color: Colors.white70,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TrackPackage1()));
+                          },
+                          icon: Icon(
+                            Icons.edit,
+                            color: Colors.orangeAccent,
+                            size: 20,
+                          ),
+                          label: Text(
+                            'Track Order',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Manrope',
+                              fontSize: 20,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.normal,
                             ),
-                            label: Text(
-                              'Track Order',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Manrope',
-                                fontSize: 20,
-                                letterSpacing: 0,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ), ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -865,13 +859,13 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  String userRef="", token="";
+  String userRef = "", token = "";
 
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       var t = preferences.getString("token");
-      token = 'Bearer '+t!;
+      token = 'Bearer ' + t!;
       userRef = preferences.getString("userRef")!;
     });
     print('token: ' + token);
@@ -880,13 +874,11 @@ class _NavBarState extends State<NavBar> {
     fetchNotifications();
   }
 
-
-  fetchNotifications() async{
-    final response = 
-    await http.post(Uri.parse("https://k-dev.org/postbird/notif/"), headers:{"Authorization" : token}, body:{
-        "user": userRef
-      }    
-    );
+  fetchNotifications() async {
+    final response = await http.post(
+        Uri.parse("https://k-dev.org/postbird/notif/"),
+        headers: {"Authorization": token},
+        body: {"user": userRef});
     final reqData = jsonDecode(response.body);
     print("notification");
     print(reqData);
@@ -894,7 +886,12 @@ class _NavBarState extends State<NavBar> {
   }
 
   int currentIndex = 0;
-  final List<Widget> _children = [HomePage(), Activity(), Inbox(), Account()];
+  final List<Widget> _children = [
+    HomePage(),
+    Activity(),
+    Inbox(),
+    ProfileView()
+  ];
 
   void onTappedBar(int index) {
     setState(() {
@@ -904,7 +901,7 @@ class _NavBarState extends State<NavBar> {
 
   @override
   void initState() {
-    // getPref();        
+    // getPref();
     super.initState();
   }
 
