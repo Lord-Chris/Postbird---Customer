@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:postbird/ui/views/profile/views/security.dart';
 import 'package:postbird/ui/views/startup/view/onboarding.dart';
 import 'package:postbird/Screens/Security.dart';
 import 'package:postbird/Screens/Profile.dart';
@@ -421,7 +422,7 @@ class _AccountState extends State<Account> {
                                   ),
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePassword()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Security()));
                                     },
                                     child: Text(
                                       'Security',

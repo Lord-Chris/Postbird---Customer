@@ -1,7 +1,9 @@
+import 'package:postbird/Screens/Profile.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
 import '../controllers/profile_controller.dart';
+import 'security.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -151,7 +153,7 @@ class ProfileView extends StatelessWidget {
                                         style: GoogleFonts.manrope(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 24,
-                                          color: AppColors.darkGrey,
+                                          color: AppColors.mediumGrey,
                                         ),
                                       ),
                                       SizedBox(
@@ -162,7 +164,7 @@ class ProfileView extends StatelessWidget {
                                         style: GoogleFonts.manrope(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16,
-                                          color: AppColors.darkGrey,
+                                          color: AppColors.mediumGrey,
                                         ),
                                       ),
                                     ],
@@ -189,7 +191,7 @@ class ProfileView extends StatelessWidget {
                                         style: GoogleFonts.manrope(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 24,
-                                          color: AppColors.darkGrey,
+                                          color: AppColors.mediumGrey,
                                         ),
                                       ),
                                       SizedBox(
@@ -200,7 +202,7 @@ class ProfileView extends StatelessWidget {
                                         style: GoogleFonts.manrope(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16,
-                                          color: AppColors.darkGrey,
+                                          color: AppColors.mediumGrey,
                                         ),
                                       ),
                                     ],
@@ -209,20 +211,16 @@ class ProfileView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(right: 20, left: 20, top: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => Profile()));
-                                  },
-                                  child: Container(
+                          InkWell(
+                            onTap: () => Get.to(() => Profile()),
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(right: 20, left: 20, top: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
                                     child: Row(
                                       children: [
                                         Image(
@@ -246,12 +244,12 @@ class ProfileView extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 18,
-                                ),
-                              ],
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 18,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Padding(
@@ -262,14 +260,13 @@ class ProfileView extends StatelessWidget {
                               color: AppColors.whiteColor,
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(right: 20, left: 20, top: 20),
-                            child: GestureDetector(
-                              onTap: () {
-                                // Navigator.pushNamed(
-                                //     context, '/change_password');
-                              },
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => Security());
+                            },
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(right: 20, left: 20, top: 20),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -315,11 +312,8 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                              right: 20,
-                              left: 20,
-                              top: 20,
-                            ),
+                            padding:
+                                EdgeInsets.only(right: 20, left: 20, top: 20),
                             child: GestureDetector(
                               onTap: () {
                                 // Navigator.push(

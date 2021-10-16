@@ -52,7 +52,7 @@ class Login extends StatelessWidget with Validator {
                             fontFamily: 'manrope',
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
-                            color: AppColors.lightGrey,
+                            color: AppColors.darkGrey,
                           ),
                         ),
                         SizedBox(
@@ -120,7 +120,7 @@ class Login extends StatelessWidget with Validator {
                                 controller.obsureText
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
-                                color: AppColors.lightGrey,
+                                color: AppColors.darkGrey,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
