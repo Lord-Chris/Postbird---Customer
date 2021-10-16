@@ -36,3 +36,5 @@ export 'package:postbird/services/storage_service/storage_service.dart';
 export 'package:postbird/ui/shared/app_colors.dart';
 export 'package:postbird/ui/shared/base_controller.dart';
 export 'package:postbird/ui/shared/snackbar.dart';
+export 'package:postbird/ui/shared/text_field.dart';
+

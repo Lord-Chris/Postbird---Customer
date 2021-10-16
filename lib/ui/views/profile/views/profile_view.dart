@@ -2,6 +2,7 @@ import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
 import '../controllers/profile_controller.dart';
+import 'security.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -267,8 +268,7 @@ class ProfileView extends StatelessWidget {
                                 EdgeInsets.only(right: 20, left: 20, top: 20),
                             child: GestureDetector(
                               onTap: () {
-                                // Navigator.pushNamed(
-                                //     context, '/change_password');
+                                Get.to(() => Security());
                               },
                               child: Row(
                                 mainAxisAlignment:
@@ -315,11 +315,8 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                              right: 20,
-                              left: 20,
-                              top: 20,
-                            ),
+                            padding:
+                                EdgeInsets.only(right: 20, left: 20, top: 20),
                             child: GestureDetector(
                               onTap: () {
                                 // Navigator.push(
