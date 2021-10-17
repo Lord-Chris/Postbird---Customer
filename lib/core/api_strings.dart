@@ -6,6 +6,7 @@ class ApiStrings {
   static const String login = base_url + 'login';
   static const String logout = base_url + 'logout';
   static const String updatePassword = base_url + 'updatepass';
+  static const String updateProfile = base_url + 'profileupdate';
   // static const String REGISTRATION = 'Registration';
   // static const String SECBASE_URL = 'https://api.postbird.com.ng/api/getpackageorder/';
 

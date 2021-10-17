@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class MNavigator {
+// class MNavigator {
 
-  static void goToHomePageOn(BuildContext context) {
-    Navigator.pushNamed(context, "/onboarding");
-  }
+//   static void goToHomePageOn(BuildContext context) {
+//     Navigator.pushNamed(context, "/onboarding");
+//   }
 
-  static void goTopick(BuildContext context) {
-    Navigator.pushNamed(context, "/pick");
-  }
+//   static void goTopick(BuildContext context) {
+//     Navigator.pushNamed(context, "/pick");
+//   }
 
-  static void goToPickUp(BuildContext context) {
-    Navigator.pushNamed(context, "/pickup");
-  }
+//   static void goToPickUp(BuildContext context) {
+//     Navigator.pushNamed(context, "/pickup");
+//   }
   
  
 
-}
+// }

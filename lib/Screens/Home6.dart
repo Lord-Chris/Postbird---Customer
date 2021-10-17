@@ -6,6 +6,7 @@ import 'package:postbird/Screens/ManualInputTrack.dart';
 import 'package:postbird/Screens/inbox.dart';
 import 'package:postbird/Screens/account.dart';
 import 'package:postbird/Screens/My Activity.dart';
+import 'package:postbird/ui/views/profile/views/profile_view.dart';
 
 class HomePage2 extends StatefulWidget {
   @override
@@ -541,7 +542,7 @@ class Navbar2 extends StatefulWidget {
 
 class _Navbar2State extends State<Navbar2> {
   int currentIndex = 0;
-  final List<Widget> _children = [HomePage2(), Activity(), Inbox(), Account()];
+  final List<Widget> _children = [HomePage2(), Activity(), Inbox(), ProfileView()];
 
   void onTappedBar(int index) {
     setState(() {

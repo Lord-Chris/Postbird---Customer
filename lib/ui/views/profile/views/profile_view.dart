@@ -3,6 +3,7 @@ import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
 import '../controllers/profile_controller.dart';
+import 'edit_profile.dart';
 import 'security.dart';
 
 class ProfileView extends StatelessWidget {
@@ -212,7 +213,7 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           InkWell(
-                            onTap: () => Get.to(() => Profile()),
+                            onTap: () => Get.to(() => EditProfile()),
                             child: Padding(
                               padding:
                                   EdgeInsets.only(right: 20, left: 20, top: 20),

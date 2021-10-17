@@ -56,6 +56,24 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
+  Future<void> updateProfile(User user) async {
+    try {
+      final body = user.toJson();
+      final headers = {"Authorization": "Bearer $token"};
+      await _networkService.post(
+        ApiStrings.updateProfile,
+        body: body,
+        headers: headers,
+      );
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
   Future<void> verifyOTP(String number, String otp) {
     // TODO: implement verifyOTP
     throw UnimplementedError();

@@ -1,5 +1,6 @@
 import 'package:postbird/core/index.dart';
 
+// ignore: must_be_immutable
 class MyTextField extends StatelessWidget {
   final String? label;
   final String? hint;
@@ -8,7 +9,9 @@ class MyTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final TextCapitalization textCapitalization;
-  final Widget? suffixIcon;
+  final Widget? suffix;
+  final Widget? prefix;
+
   MyTextField({
     Key? key,
     this.label,
@@ -17,8 +20,9 @@ class MyTextField extends StatelessWidget {
     this.validator,
     this.keyboardType,
     this.textCapitalization = TextCapitalization.none,
-    this.suffixIcon,
+    this.suffix,
     this.obscureText = false,
+    this.prefix,
   }) : super(key: key);
 
   @override
@@ -33,7 +37,8 @@ class MyTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         labelText: label,
-        suffixIcon: suffixIcon,
+        suffixIcon: suffix,
+        prefixIcon: prefix,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
