@@ -1,5 +1,4 @@
 import 'package:postbird/core/index.dart';
-import 'package:postbird/ui/shared/app_colors.dart';
 import 'package:postbird/ui/views/auth/views/login.dart';
 
 import '../controller/onboarding_controller.dart';
@@ -29,7 +28,7 @@ class Onboarding extends StatelessWidget {
                     width: 131,
                     height: 133,
                     child: Image.asset(
-                      'assets/group2.png',
+                      'assets/Group.png',
                       width: 100,
                       height: 100,
                     ),
@@ -101,7 +100,10 @@ class Onboarding extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: screenHeight * 0.02),
-                        GestureDetector(
+                        MyButton(
+                          label: 'Register',
+                          buttonColor: AppColors.whiteColor,
+                          labelColor: AppColors.darkGrey,
                           onTap: () {
                             print('Register');
                             // Navigator.push(
@@ -109,32 +111,6 @@ class Onboarding extends StatelessWidget {
                             //     MaterialPageRoute(
                             //         builder: (context) => CreateAccount2()));
                           },
-                          child: Container(
-                            width: screenWidth * 0.94,
-                            height: screenHeight * 0.075,
-                            decoration: BoxDecoration(
-                              color: AppColors.whiteColor,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: Colors.grey[400]!,
-                                width: 1,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Register',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color.fromRGBO(27, 27, 27, 1),
-                                  fontFamily: 'Manrope',
-                                  fontSize: 18,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.normal,
-                                  height: 1,
-                                ),
-                              ),
-                            ),
-                          ),
                         ),
                         SizedBox(height: screenHeight * 0.02),
                         GestureDetector(
@@ -180,36 +156,3 @@ class Onboarding extends StatelessWidget {
     );
   }
 }
-// Positioned(
-                        //     top: screenHeight*0.48,
-                        //     left:screenWidth*0.01,
-                        //     child:Container(
-                        //         width: screenWidth*0.94,
-                        //         height: screenHeight*0.078,
-                        //         decoration: BoxDecoration(
-                        //           borderRadius : BorderRadius.only(
-                        //             topLeft: Radius.circular(8),
-                        //             topRight: Radius.circular(8),
-                        //             bottomLeft: Radius.circular(8),
-                        //             bottomRight: Radius.circular(8),
-                        //           ),
-                        //           boxShadow : [BoxShadow(
-                        //               color: Color.fromRGBO(107, 103, 210, 0.3499999940395355),
-                        //               offset: Offset(0,18),
-                        //               blurRadius: 40
-                        //           )],
-                        //           color: Colors.grey[600],
-                        //         ),
-                        //       child: Center(
-                        //         child: Text('Continue with Fingerprint', textAlign: TextAlign.center, style: TextStyle(
-                        //             color: Color.fromRGBO(255, 255, 255, 1),
-                        //             fontFamily: 'Manrope',
-                        //             fontSize: 16,
-                        //             letterSpacing: 0,
-                        //             fontWeight: FontWeight.normal,
-                        //             height: 1
-                        //         ),) ,
-                        //       ),
-                        //     )
-                        // ),
-                      

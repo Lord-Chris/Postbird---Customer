@@ -63,7 +63,7 @@ class EditProfileController extends BaseController with Validator {
       await _authRepository.updateProfile(_user);
       setBusy(false);
       clearTextControllers();
-      MySnackBar.success("Password update successful!");
+      MySnackBar.success("Profile update successful!");
     } catch (e) {
       setBusy(false);
       MySnackBar.failure(e.toString());

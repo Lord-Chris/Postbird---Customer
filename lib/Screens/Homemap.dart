@@ -143,27 +143,27 @@ class _HomMapScreenState extends State<HomMapScreen> {
     return byteData.buffer.asUint8List();
   }
 
-  void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
-    LatLng latlng = LatLng(newLocalData.latitude!, newLocalData.longitude!);
-    this.setState(() {
-      marker = Marker(
-          markerId: MarkerId("home"),
-          position: latlng,
-          rotation: newLocalData.heading!,
-          draggable: false,
-          zIndex: 2,
-          flat: true,
-          anchor: Offset(0.5, 0.5),
-          icon: BitmapDescriptor.fromBytes(imageData));
-      circle = Circle(
-          circleId: CircleId("car"),
-          radius: newLocalData.accuracy!,
-          zIndex: 1,
-          strokeColor: Colors.blue,
-          center: latlng,
-          fillColor: Colors.blue.withAlpha(70));
-    });
-  }
+  // void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
+  //   LatLng latlng = LatLng(newLocalData.latitude!, newLocalData.longitude!);
+  //   this.setState(() {
+  //     marker = Marker(
+  //         markerId: MarkerId("home"),
+  //         position: latlng,
+  //         rotation: newLocalData.heading!,
+  //         draggable: false,
+  //         zIndex: 2,
+  //         flat: true,
+  //         anchor: Offset(0.5, 0.5),
+  //         icon: BitmapDescriptor.fromBytes(imageData));
+  //     circle = Circle(
+  //         circleId: CircleId("car"),
+  //         radius: newLocalData.accuracy!,
+  //         zIndex: 1,
+  //         strokeColor: Colors.blue,
+  //         center: latlng,
+  //         fillColor: Colors.blue.withAlpha(70));
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -195,14 +195,17 @@ class _HomMapScreenState extends State<HomMapScreen> {
     _selectedalvalue = _cards[0];
 
     myLocation = LatLng(mylat, mylog);
-    _markers.add(Marker(
+    _markers.add(
+      Marker(
         markerId: MarkerId("my location"),
         position: LatLng(myLocation!.latitude, myLocation!.longitude),
         icon: _mylocation!,
         infoWindow: InfoWindow(
           title: "Pick Up Location",
         ),
-        onTap: () {}));
+        onTap: () {},
+      ),
+    );
   }
 
   setPolylines() async {
@@ -290,51 +293,52 @@ class _HomMapScreenState extends State<HomMapScreen> {
       body: Stack(
         children: <Widget>[
           Container(
-              height: MediaQuery.of(context).size.height, //- 230.0,
-              child: myLocation == null
-                  ? Center(
-                      child: Text("Loading Map"),
-                    )
-                  : GoogleMap(
-                      key: _mapKey,
-                      mapType: MapType.normal,
-                      zoomGesturesEnabled: true,
-                      // myLocationEnabled: true,
-                      markers: _markers,
-                      polylines: _polylines,
-                      initialCameraPosition:
-                          CameraPosition(target: myLocation!, zoom: 15),
-                      onMapCreated: (GoogleMapController controller) {
-                        controller.setMapStyle(_mapStyle);
-                        _controller.complete(controller);
-                        //  _controller = controller;
-                        // setState(() {
-                        //   _markers.add(
-                        //     Marker(
-                        //         markerId: MarkerId("1"),
-                        //         position: LatLng(6.465422, 3.406448),
-                        //         icon: _taxilocation,
-                        //         onTap: () {}),
-                        //   );
+            height: MediaQuery.of(context).size.height, //- 230.0,
+            child: myLocation == null
+                ? Center(
+                    child: Text("Loading Map"),
+                  )
+                : GoogleMap(
+                    key: _mapKey,
+                    mapType: MapType.normal,
+                    zoomGesturesEnabled: true,
+                    // myLocationEnabled: true,
+                    markers: _markers,
+                    polylines: _polylines,
+                    initialCameraPosition:
+                        CameraPosition(target: myLocation!, zoom: 15),
+                    onMapCreated: (GoogleMapController controller) {
+                      controller.setMapStyle(_mapStyle);
+                      _controller.complete(controller);
+                      //  _controller = controller;
+                      // setState(() {
+                      //   _markers.add(
+                      //     Marker(
+                      //         markerId: MarkerId("1"),
+                      //         position: LatLng(6.465422, 3.406448),
+                      //         icon: _taxilocation,
+                      //         onTap: () {}),
+                      //   );
 
-                        //   _markers.add(
-                        //     Marker(
-                        //         markerId: MarkerId("2"),
-                        //         position: LatLng(6.30, 3.2145634),
-                        //         icon: _taxilocation,
-                        //         onTap: () {}),
-                        //   );
+                      //   _markers.add(
+                      //     Marker(
+                      //         markerId: MarkerId("2"),
+                      //         position: LatLng(6.30, 3.2145634),
+                      //         icon: _taxilocation,
+                      //         onTap: () {}),
+                      //   );
 
-                        //   _markers.add(
-                        //     Marker(
-                        //         markerId: MarkerId("3"),
-                        //         position: LatLng(6.35, 3.2139453),
-                        //         icon: _taxilocation,
-                        //         onTap: () {}),
-                        //   );
-                        // });
-                      },
-                    )),
+                      //   _markers.add(
+                      //     Marker(
+                      //         markerId: MarkerId("3"),
+                      //         position: LatLng(6.35, 3.2139453),
+                      //         icon: _taxilocation,
+                      //         onTap: () {}),
+                      //   );
+                      // });
+                    },
+                  ),
+          ),
           Positioned(top: 65, left: 5, right: 5, child: _buildHelloWidget()),
           _hasGottenCordinates
               ? _buildSelectRideWidget()
@@ -405,7 +409,7 @@ class _HomMapScreenState extends State<HomMapScreen> {
                     return await googleMapServices.getSuggestions(pattern);
                   },
                   itemBuilder: (context, suggetion) {
-                    return ListTile( 
+                    return ListTile(
                       title: Text(
                         'suggetion!.description',
                         style: TextStyle(fontSize: 12),
@@ -484,33 +488,34 @@ class _HomMapScreenState extends State<HomMapScreen> {
                         //     context,
                         //     MaterialPageRoute(
                         //         builder: (context) => SelectDate(name: name)));
-                      // },
-                      var senter = _fromLocationController.text;
-                      var denter = _toLocationController.text;
-                      var frmlat = _fromPlaceDetail?.lat;
-                      var frmlng = _fromPlaceDetail?.lng;
-                      var tolat = _toPlaceDetail?.lat;
-                      var tolng = _toPlaceDetail?.lng;
-                      print(senter);
-                      print(_fromPlaceDetail?.lat);
-                      print(_fromPlaceDetail?.lng);
-                      print(_toPlaceDetail?.lat);
-                      print(_toPlaceDetail?.lng);
-                      Navigator.of(context)
-                          .push(new MaterialPageRoute(builder: (context) {
-                      return SelectDate(name: name,
-                      fromPlaceDetail: _fromPlaceDetail,
-                      toPlaceDetail: _toPlaceDetail,
-                      polylines: _polylines,
-                      polylineCoordinates: polylineCoordinates,
-                      stname: senter,
-                      dtname: denter,
-                      frmlt: frmlat,
-                      frmlg: frmlng,
-                      tolt: tolat,
-                      tolg: tolng,
-                        );
-                      }));
+                        // },
+                        var senter = _fromLocationController.text;
+                        var denter = _toLocationController.text;
+                        var frmlat = _fromPlaceDetail?.lat;
+                        var frmlng = _fromPlaceDetail?.lng;
+                        var tolat = _toPlaceDetail?.lat;
+                        var tolng = _toPlaceDetail?.lng;
+                        print(senter);
+                        print(_fromPlaceDetail?.lat);
+                        print(_fromPlaceDetail?.lng);
+                        print(_toPlaceDetail?.lat);
+                        print(_toPlaceDetail?.lng);
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return SelectDate(
+                            name: name,
+                            fromPlaceDetail: _fromPlaceDetail,
+                            toPlaceDetail: _toPlaceDetail,
+                            polylines: _polylines,
+                            polylineCoordinates: polylineCoordinates,
+                            stname: senter,
+                            dtname: denter,
+                            frmlt: frmlat,
+                            frmlg: frmlng,
+                            tolt: tolat,
+                            tolg: tolng,
+                          );
+                        }));
                       },
                       color: Colors.orange,
                       textColor: Colors.white,
@@ -646,51 +651,50 @@ class _HomMapScreenState extends State<HomMapScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Center(child: Builder(builder: (context) {
-                        return MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                      return MaterialButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        color: Color(
+                          0xFFFEBC52,
+                        ),
+                        onPressed: () {
+                          var senter = _fromLocationController.text;
+                          var denter = _toLocationController.text;
+                          var frmlat = _fromPlaceDetail?.lat;
+                          var frmlng = _fromPlaceDetail?.lng;
+                          var tolat = _toPlaceDetail?.lat;
+                          var tolng = _toPlaceDetail?.lng;
+                          print(senter);
+                          print(_fromPlaceDetail?.lat);
+                          print(_fromPlaceDetail?.lng);
+                          print(_toPlaceDetail?.lat);
+                          print(_toPlaceDetail?.lng);
+                          Navigator.of(context)
+                              .push(new MaterialPageRoute(builder: (context) {
+                            return SelectDate(
+                              name: name,
+                              fromPlaceDetail: _fromPlaceDetail,
+                              toPlaceDetail: _toPlaceDetail,
+                              polylines: _polylines,
+                              polylineCoordinates: polylineCoordinates,
+                              stname: senter,
+                              dtname: denter,
+                              frmlt: frmlat,
+                              frmlg: frmlng,
+                              tolt: tolat,
+                              tolg: tolng,
+                            );
+                          }));
+                        },
+                        child: Center(
+                          child: Text(
+                            "Continue",
+                            style: CustomStyles.cardBoldTextStyle,
                           ),
-                          color: Color(
-                            0xFFFEBC52,
-                          ),
-                          onPressed: () {
-                       
-                      var senter = _fromLocationController.text;
-                      var denter = _toLocationController.text;
-                      var frmlat = _fromPlaceDetail?.lat;
-                      var frmlng = _fromPlaceDetail?.lng;
-                      var tolat = _toPlaceDetail?.lat;
-                      var tolng = _toPlaceDetail?.lng;
-                      print(senter);
-                      print(_fromPlaceDetail?.lat);
-                      print(_fromPlaceDetail?.lng);
-                      print(_toPlaceDetail?.lat);
-                      print(_toPlaceDetail?.lng);
-                      Navigator.of(context)
-                          .push(new MaterialPageRoute(builder: (context) {
-                      return SelectDate(name: name,
-                      fromPlaceDetail: _fromPlaceDetail,
-                      toPlaceDetail: _toPlaceDetail,
-                      polylines: _polylines,
-                      polylineCoordinates: polylineCoordinates,
-                      stname: senter,
-                      dtname: denter,
-                      frmlt: frmlat,
-                      frmlg: frmlng,
-                      tolt: tolat,
-                      tolg: tolng,
-                        );
-                      }));
-                      },
-                          child: Center(
-                            child: Text(
-                              "Continue",
-                              style: CustomStyles.cardBoldTextStyle,
-                            ),
-                          ),
-                        );
-                      }
-                ))
+                        ),
+                      );
+                    }))
                   ],
                 ),
               )

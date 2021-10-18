@@ -9,6 +9,7 @@ import 'package:postbird/Screens/inbox.dart';
 import 'package:postbird/Screens/My Activity.dart';
 import 'package:postbird/Screens/ManualInputTrack.dart';
 import 'package:postbird/Screens/strings.dart';
+import 'package:postbird/ui/views/home/views/home_view.dart';
 import 'package:postbird/ui/views/profile/views/profile_view.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -887,7 +888,7 @@ class _NavBarState extends State<NavBar> {
 
   int currentIndex = 0;
   final List<Widget> _children = [
-    HomePage(),
+    HomeView(),
     Activity(),
     Inbox(),
     ProfileView()

@@ -19,7 +19,7 @@ class Place {
 class PlaceDetail {
   final String placeId;
   final String formattedAddress;
-  final String formattedPhoneNumber;
+  final String? formattedPhoneNumber;
   final String name;
   final double rating;
   final String vicinity;

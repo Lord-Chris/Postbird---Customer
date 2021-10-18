@@ -8,7 +8,7 @@ class GoogleMapServices {
 
   GoogleMapServices({required this.sessionToken});
 
-  Future<List> getSuggestions(String query) async {
+  Future<List<Place>> getSuggestions(String query) async {
     final String baseUrl =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     String type = 'establishment';
