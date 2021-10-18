@@ -14,7 +14,6 @@ class MyButton extends StatelessWidget {
     this.height,
     this.buttonColor = AppColors.primaryColor,
     required this.label,
-
     this.labelColor = AppColors.whiteColor,
     this.hasShadow = false,
     this.hasBorder = false,
@@ -55,9 +54,7 @@ class MyButton extends StatelessWidget {
               color: labelColor,
               fontFamily: 'Manrope',
               fontSize: 18,
-              letterSpacing: 0,
-              fontWeight: FontWeight.normal,
-              height: 1,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

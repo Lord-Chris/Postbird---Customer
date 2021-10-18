@@ -104,6 +104,7 @@ class Onboarding extends StatelessWidget {
                           label: 'Register',
                           buttonColor: AppColors.whiteColor,
                           labelColor: AppColors.darkGrey,
+                          hasBorder: true,
                           onTap: () {
                             print('Register');
                             // Navigator.push(

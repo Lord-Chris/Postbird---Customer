@@ -60,17 +60,18 @@ class SelectLocationController extends BaseController {
     );
     if (isFrom) {
       _fromPlaceDetail = placeDetail;
-      _moveCamera(origin: _fromPlaceDetail);
+      await _moveCamera(origin: _fromPlaceDetail);
     } else {
       _toPlaceDetail = placeDetail;
-      _moveCamera(destination: _toPlaceDetail);
+      await _moveCamera(destination: _toPlaceDetail);
     }
     // _moveCamera(_fromPlaceDetail!, _toPlaceDetail!);
     sessionToken = null;
     update();
   }
 
-  void _moveCamera({PlaceDetail? origin, PlaceDetail? destination}) async {
+  Future<void> _moveCamera(
+      {PlaceDetail? origin, PlaceDetail? destination}) async {
     if (_fromPlaceDetail == null && _toPlaceDetail == null) {
       markers.clear();
     }

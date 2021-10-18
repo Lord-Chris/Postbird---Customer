@@ -1,4 +1,3 @@
-import 'package:postbird/Screens/Homemap.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 import 'package:postbird/ui/views/home/views/select_location.dart';
