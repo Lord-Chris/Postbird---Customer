@@ -217,6 +217,7 @@ class EditProfile extends StatelessWidget {
                                           hint: '56789',
                                           validator:
                                               controller.validatePhoneNumber,
+                                          readOnly: true,
                                           // prefix: Column(
                                           //   mainAxisAlignment:
                                           //       MainAxisAlignment.center,

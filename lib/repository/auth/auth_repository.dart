@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/constants/storage_keys.dart';
 
@@ -58,8 +59,11 @@ class AuthRepository extends IAuthRepository {
   @override
   Future<void> updateProfile(User user) async {
     try {
-      final body = user.toJson();
-      final headers = {"Authorization": "Bearer $token"};
+      final body = FormData.fromMap(user.toJson());
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "multipart/form-data"
+      };
       await _networkService.post(
         ApiStrings.updateProfile,
         body: body,

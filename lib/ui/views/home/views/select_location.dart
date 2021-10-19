@@ -40,30 +40,6 @@ class SelectLocation extends StatelessWidget {
                           onMapCreated: (GoogleMapController _controller) {
                             _controller.setMapStyle(controller.mapStyle);
                             controller.mapController = _controller;
-                            //  _controller = ;
-                            // controller.markers.add(
-                            //   Marker(
-                            //       markerId: MarkerId("1"),
-                            //       position: LatLng(6.465422, 3.406448),
-                            //       // icon: _taxilocation,
-                            //       onTap: () {}),
-                            // );
-
-                            // controller.markers.add(
-                            //   Marker(
-                            //       markerId: MarkerId("2"),
-                            //       position: LatLng(6.30, 3.2145634),
-                            //       // icon: _taxilocation,
-                            //       onTap: () {}),
-                            // );
-
-                            // controller.markers.add(
-                            //   Marker(
-                            //       markerId: MarkerId("3"),
-                            //       position: LatLng(6.35, 3.2139453),
-                            //       // icon: _taxilocation,
-                            //       onTap: () {}),
-                            // );
                           },
                         ),
                 ),
@@ -171,6 +147,10 @@ class SelectLocation extends StatelessWidget {
                           TypeAheadField(
                             direction: AxisDirection.up,
                             debounceDuration: Duration(milliseconds: 500),
+                            loadingBuilder: (context) => Center(
+                              child: CircularProgressIndicator(
+                                  color: AppColors.primaryColor),
+                            ),
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: controller.toLocation,
                               autofocus: false,
@@ -212,58 +192,7 @@ class SelectLocation extends StatelessWidget {
                                   false, suggestion);
                             },
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.end,
-                          //   children: <Widget>[
-                          //     MaterialButton(
-                          //       onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => SelectDate(name: name)));
-                          // },
-                          // var senter = _fromLocationController.text;
-                          // var denter = _toLocationController.text;
-                          // var frmlat = _fromPlaceDetail?.lat;
-                          // var frmlng = _fromPlaceDetail?.lng;
-                          // var tolat = _toPlaceDetail?.lat;
-                          // var tolng = _toPlaceDetail?.lng;
-                          // print(senter);
-                          // print(_fromPlaceDetail?.lat);
-                          // print(_fromPlaceDetail?.lng);
-                          // print(_toPlaceDetail?.lat);
-                          // print(_toPlaceDetail?.lng);
-                          // Navigator.of(context)
-                          //     .push(new MaterialPageRoute(builder: (context) {
-                          //   return SelectDate(
-                          //     name: name,
-                          //     fromPlaceDetail: _fromPlaceDetail,
-                          //     toPlaceDetail: _toPlaceDetail,
-                          //     polylines: _polylines,
-                          //     polylineCoordinates: polylineCoordinates,
-                          //     stname: senter,
-                          //     dtname: denter,
-                          //     frmlt: frmlat,
-                          //     frmlg: frmlng,
-                          //     tolt: tolat,
-                          //     tolg: tolng,
-                          //   );
-                          // }));
-                          //       },
-                          //       color: Colors.orange,
-                          //       textColor: Colors.white,
-                          //       child: Icon(
-                          //         Icons.arrow_forward,
-                          //         size: 15,
-                          //       ),
-                          //       padding: EdgeInsets.all(6),
-                          //       shape: CircleBorder(),
-                          //     )
-                          //   ],
-                          // )
+                          SizedBox(height: 10),
                         ],
                       ),
                     ),

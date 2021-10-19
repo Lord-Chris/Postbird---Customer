@@ -241,137 +241,102 @@ class ReviewOrder extends StatelessWidget {
           thickness: 1,
         ),
         SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Delivery',
-              textAlign: TextAlign.left,
-              style: GoogleFonts.manrope(
-                color: Color.fromRGBO(70, 70, 70, 1),
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
+        Visibility(
+          visible: controller.isBusy,
+          child: Column(
+            children: [
+              CircularProgressIndicator(color: AppColors.primaryColor),
+              SizedBox(height: 10),
+              Text(
+                'Calculating Price',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              ' ',
-              textAlign: TextAlign.right,
-              style: GoogleFonts.manrope(
-                color: Color.fromRGBO(0, 0, 0, 1),
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Shipping Assurance',
-              textAlign: TextAlign.left,
-              style: GoogleFonts.manrope(
-                color: Color.fromRGBO(70, 70, 70, 1),
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            Text(
-              '2',
-              textAlign: TextAlign.right,
-              style: GoogleFonts.manrope(
-                color: Color.fromRGBO(0, 0, 0, 1),
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
-            )
-          ],
-        ),
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Subtotal',
-              textAlign: TextAlign.left,
-              style: GoogleFonts.manrope(
-                color: Color.fromRGBO(0, 0, 0, 1),
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            FutureBuilder(
-                // future: pricegetting(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.data == null) {
-                return Text(
-                  'Calculating Price',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              } else {
-                return Column(
-                  children: [
-                    new Visibility(
-                        visible: false,
-                        child: TextFormField(
-                            enabled: false,
-                            keyboardType: TextInputType.phone,
-                            // controller: rateConroller
-                            //   ..text =
-                            //       snapshot.data.toString(),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'You\'re getting' +
-                                  '₦\' 00'.replaceAllMapped(
-                                      new RegExp(
-                                          r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                      (Match m) => "${m[1]},") +
-                                  '.00' +
-                                  ' to ',
-                              hintStyle: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.grey),
-                            ),
-                            style: TextStyle(color: Colors.red))),
-                    Row(
-                      children: [
-                        Text('           '),
-                        Text(
-                          'Credits ' + snapshot.data,
-                          textAlign: TextAlign.right,
-                          style: GoogleFonts.manrope(
-                            color: Color.fromRGBO(0, 0, 0, 1),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
+            ],
+          ),
+          replacement: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Delivery',
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.manrope(
+                      color: Color.fromRGBO(70, 70, 70, 1),
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
                     ),
-                  ],
-                );
-              }
-            }),
-            //  Text(
-            //   '₦1042.23',
-            //   textAlign: TextAlign.right,
-            //   style: GoogleFonts.manrope(
-            //       color: Color.fromRGBO(0, 0, 0, 1),
-            //       fontSize: 24,
-            //       letterSpacing: 0,
-            //       fontWeight: FontWeight.w700,
-            //       height: 1),
-            // ),
-          ],
+                  ),
+                  Text(
+                    ' ',
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.manrope(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Shipping Assurance',
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.manrope(
+                      color: Color.fromRGBO(70, 70, 70, 1),
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  Text(
+                    '0',
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.manrope(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Subtotal',
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.manrope(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    'Credits ' + 'snapshot.data',
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.manrope(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         SizedBox(height: 30),
         MyButton(
           label: "Create Order",
+          onTap: ()=> controller.createOrder(),
         ),
       ],
     );

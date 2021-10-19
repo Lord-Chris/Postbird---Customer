@@ -58,6 +58,7 @@ class Recipient extends StatelessWidget {
           ),
           SizedBox(height: 10),
           MyTextField(
+            controller: controller.postCode,
             keyboardType: TextInputType.number,
             hint: 'XXXXX',
           ),

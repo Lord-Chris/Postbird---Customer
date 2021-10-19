@@ -184,19 +184,21 @@ class Shipment extends StatelessWidget {
         ),
         SizedBox(height: 30),
         Text(
-          'Package Details',
+          'Package Name',
           textAlign: TextAlign.left,
           style: GoogleFonts.manrope(
             color: Color.fromRGBO(27, 27, 27, 1),
             fontSize: 16,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
         SizedBox(height: 10),
         MyTextField(
           keyboardType: TextInputType.name,
-          hint: 'Notes',
-          controller: controller.notes,
+          textCapitalization: TextCapitalization.words,
+          hint: 'Package Name',
+          controller: controller.packageName,
+          validator: controller.validateNotEmpty,
         ),
         SizedBox(height: 10),
         Row(
@@ -208,7 +210,7 @@ class Shipment extends StatelessWidget {
               style: GoogleFonts.manrope(
                 color: Colors.grey[700],
                 fontSize: 15,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
             Checkbox(

@@ -5,6 +5,7 @@ import 'network_logger.dart';
 
 class NetworkService extends INetworkService {
   Dio _dio = Dio();
+  final _headers = {'Accept': 'application/json'};
 
   NetworkService() {
     _dio = Dio();
@@ -16,12 +17,15 @@ class NetworkService extends INetworkService {
 
   @override
   Future<ApiResponse?> delete(String url,
-      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+      {dynamic body, Map<String, String>? headers}) async {
     try {
+      if (headers != null) {
+        _headers.addAll(headers);
+      }
       final res = await _dio.delete(
         url,
         data: body,
-        options: Options(headers: headers),
+        options: Options(headers: _headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
@@ -38,12 +42,15 @@ class NetworkService extends INetworkService {
 
   @override
   Future<ApiResponse?> get(String url,
-      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+      {dynamic body, Map<String, String>? headers}) async {
     try {
+      if (headers != null) {
+        _headers.addAll(headers);
+      }
       final res = await _dio.get(
         url,
         queryParameters: body,
-        options: Options(headers: headers),
+        options: Options(headers: _headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
@@ -60,12 +67,15 @@ class NetworkService extends INetworkService {
 
   @override
   Future<ApiResponse?> patch(String url,
-      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+      {dynamic body, Map<String, String>? headers}) async {
     try {
+      if (headers != null) {
+        _headers.addAll(headers);
+      }
       final res = await _dio.patch(
         url,
         data: body,
-        options: Options(headers: headers),
+        options: Options(headers: _headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
@@ -82,12 +92,15 @@ class NetworkService extends INetworkService {
 
   @override
   Future<ApiResponse?> post(String url,
-      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+      {dynamic body, Map<String, String>? headers}) async {
     try {
+      if (headers != null) {
+        _headers.addAll(headers);
+      }
       final res = await _dio.post(
         url,
         data: body,
-        options: Options(headers: headers),
+        options: Options(headers: _headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
