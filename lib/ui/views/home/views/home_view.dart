@@ -164,7 +164,7 @@ class HomeView extends StatelessWidget {
                           top: screenHeight * 0.09,
                           left: screenWidth * 0.06,
                           child: Text(
-                            'credits' + '  Credits',
+                            controller.user.credit! + '  Credits',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               color: Colors.black,

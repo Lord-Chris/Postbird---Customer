@@ -57,9 +57,13 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<void> updateProfile(User user) async {
+  Future<void> updateProfile(User user, [File? pic]) async {
     try {
       final body = FormData.fromMap(user.toJson());
+      if (pic != null)
+        body.files.add(
+          MapEntry('picture', await MultipartFile.fromFile(pic.path)),
+        );
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "multipart/form-data"

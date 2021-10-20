@@ -58,39 +58,10 @@ class Login extends StatelessWidget with Validator {
                         SizedBox(
                           height: 10,
                         ),
-                        TextFormField(
+                        MyTextField(
                           controller: controller.emailController,
                           validator: (e) => validateEmail(e),
                           keyboardType: TextInputType.name,
-                          cursorColor: AppColors.primaryColor,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                color: Color(
-                                  0xFFDEDEDE,
-                                ),
-                              ),
-                            ),
-                            labelStyle: TextStyle(
-                              fontFamily: 'manrope',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.blackColor,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                          ),
                         ),
                         SizedBox(height: 20),
                         Text(
@@ -107,47 +78,19 @@ class Login extends StatelessWidget with Validator {
                         SizedBox(
                           height: 10,
                         ),
-                        TextFormField(
+                        MyTextField(
                           controller: controller.passwordController,
                           validator: validatePassword,
+                          keyboardType: TextInputType.visiblePassword,
                           obscureText: controller.obsureText,
-                          keyboardType: TextInputType.name,
-                          cursorColor: AppColors.primaryColor,
-                          decoration: InputDecoration(
-                            suffixIcon: GestureDetector(
-                              onTap: () => controller.toggleObscurity(),
-                              child: Icon(
-                                controller.obsureText
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined,
-                                color: AppColors.darkGrey,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                color: Color(
-                                  0xFFDEDEDE,
-                                ),
-                              ),
-                            ),
-                            labelStyle: TextStyle(
-                              fontFamily: 'manrope',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.blackColor,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                color: AppColors.primaryColor,
-                              ),
+                          maxLines: 1,
+                          suffix: GestureDetector(
+                            onTap: () => controller.toggleObscurity(),
+                            child: Icon(
+                              controller.obsureText
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: AppColors.mediumGrey,
                             ),
                           ),
                         ),

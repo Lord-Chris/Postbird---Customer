@@ -76,9 +76,10 @@ class ProfileView extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.network(
-                                    'https://api.postbird.com.ng/public/img/profile/default.png',
+                                    'https://api.postbird.com.ng/public/img/profile/${controller.user.profilePic}',
                                     height: height / 12,
                                     width: height / 12,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                                 SizedBox(width: 20),
@@ -105,12 +106,8 @@ class ProfileView extends StatelessWidget {
                                             ),
                                           ),
                                           TextButton(
-                                            onPressed: () {
-                                              // Navigator.pushNamed(
-                                              //   context,
-                                              //   '/edit_profile',
-                                              // );
-                                            },
+                                            onPressed: () =>
+                                                Get.to(EditProfile()),
                                             child: Text(
                                               'Edit Profile',
                                               style: GoogleFonts.manrope(

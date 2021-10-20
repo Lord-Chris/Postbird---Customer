@@ -14,23 +14,26 @@ class MyTextField extends StatelessWidget {
   final Widget? prefix;
   final bool readOnly;
   final bool expands;
-  final int? maxLines, maxLength;
+  final int? minLines, maxLines, maxLength;
 
-  MyTextField(
-      {Key? key,
-      this.label,
-      this.hint,
-      this.controller,
-      this.validator,
-      this.keyboardType,
-      this.textCapitalization = TextCapitalization.none,
-      this.suffix,
-      this.obscureText = false,
-      this.prefix,
-      this.initialValue,
-      this.readOnly = false,
-      this.expands = false, this.maxLines, this.maxLength,})
-      : assert(initialValue == null || controller == null),
+  MyTextField({
+    Key? key,
+    this.label,
+    this.hint,
+    this.controller,
+    this.validator,
+    this.keyboardType,
+    this.textCapitalization = TextCapitalization.none,
+    this.suffix,
+    this.obscureText = false,
+    this.prefix,
+    this.initialValue,
+    this.readOnly = false,
+    this.expands = false,
+    this.minLines,
+    this.maxLines,
+    this.maxLength,
+  })  : assert(initialValue == null || controller == null),
         super(key: key);
 
   @override
@@ -45,8 +48,8 @@ class MyTextField extends StatelessWidget {
       obscureText: obscureText,
       readOnly: readOnly,
       expands: expands,
-      maxLines: null,
-      minLines: maxLines,
+      maxLines: maxLines,
+      minLines: minLines,
       maxLength: maxLength,
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
       decoration: InputDecoration(

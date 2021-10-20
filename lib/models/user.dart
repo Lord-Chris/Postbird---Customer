@@ -1,11 +1,13 @@
 class User {
   int? id;
-  final String fullName;
-  final String? username;
-  final String email;
-  final String phone;
+  String fullName;
+  String? username;
+  String email;
+  String phone;
   String? password;
   String? address;
+  String? profilePic;
+  String? credit;
 
   User({
     required this.id,
@@ -14,6 +16,8 @@ class User {
     required this.email,
     required this.phone,
     required this.address,
+    required this.profilePic,
+    required this.credit,
   });
 
   User.register({
@@ -40,6 +44,8 @@ class User {
       email: json['email'],
       phone: json['mobile'],
       address: json['address'],
+      profilePic: json['profilepic'],
+      credit: json['credit_balance'],
     );
   }
 
@@ -50,5 +56,7 @@ class User {
         'email': email,
         'mobile': phone,
         'address': address,
+        'profilepic': profilePic,
+        'credit_balance': credit,
       };
 }

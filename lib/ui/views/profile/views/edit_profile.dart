@@ -112,42 +112,58 @@ class EditProfile extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
-                                          child: Image.network(
-                                            'https://api.postbird.com.ng/public/img/profile/default.png',
-                                          ),
+                                          child: controller.tempImage == null
+                                              ? Image.network(
+                                                  'https://api.postbird.com.ng/public/img/profile/${controller.user.profilePic}',
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image.file(
+                                                  controller.tempImage!,
+                                                  fit: BoxFit.cover,
+                                                ),
                                         ),
                                         SizedBox(width: 20),
-                                        Container(
-                                          padding:
-                                              EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                          width: 150,
-                                          height: 35,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            border: Border.all(
-                                              color: Color(
-                                                0xFFDEDEDE,
-                                              ),
-                                            ),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Icon(
-                                                Icons.camera_alt_outlined,
-                                                color: AppColors.darkGrey,
-                                              ),
-                                              Text(
-                                                'Upload Photo',
-                                                style: GoogleFonts.manrope(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
-                                                  color: AppColors.darkGrey,
+                                        InkWell(
+                                          onTap: () async {
+                                            bool? res = await Get.bottomSheet(
+                                              SelectPicSheet(),
+                                            );
+                                            if (res != null)
+                                              controller.selectImage(res);
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.fromLTRB(
+                                                10, 0, 10, 0),
+                                            width: 150,
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                              border: Border.all(
+                                                color: Color(
+                                                  0xFFDEDEDE,
                                                 ),
                                               ),
-                                            ],
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Icon(
+                                                  Icons.camera_alt_outlined,
+                                                  color: AppColors.darkGrey,
+                                                ),
+                                                Text(
+                                                  'Upload Photo',
+                                                  style: GoogleFonts.manrope(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 14,
+                                                    color: AppColors.darkGrey,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -268,6 +284,34 @@ class EditProfile extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class SelectPicSheet extends StatelessWidget {
+  const SelectPicSheet({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.whiteColor,
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          ListTile(
+            leading: Icon(Icons.camera),
+            title: Text('Take a Picture'),
+            onTap: () => Get.back(result: false),
+          ),
+          ListTile(
+            leading: Icon(Icons.album),
+            title: Text('Select from Gallery'),
+            onTap: () => Get.back(result: true),
+          ),
+        ],
+      ),
     );
   }
 }

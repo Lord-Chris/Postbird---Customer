@@ -2,6 +2,7 @@ import 'package:postbird/core/index.dart';
 
 class EditProfileController extends BaseController with Validator {
   final _storageService = Get.find<IStorageService>();
+  final _mediaService = Get.find<IMediaService>();
   final _authRepository = Get.find<IAuthRepository>();
   late final name;
   late final email;
@@ -10,6 +11,8 @@ class EditProfileController extends BaseController with Validator {
   late final newPassword;
   late final confirmPassword;
   late final currentPassword;
+
+  File? tempImage;
 
   @override
   void onInit() {
@@ -27,6 +30,11 @@ class EditProfileController extends BaseController with Validator {
 
   void toggleObscurity() {
     obsureText = !obsureText;
+    update();
+  }
+
+  Future<void> selectImage(bool fromGallery) async {
+    tempImage = await _mediaService.getImage(fromGallery: fromGallery);
     update();
   }
 

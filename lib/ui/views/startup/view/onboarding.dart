@@ -66,38 +66,12 @@ class Onboarding extends StatelessWidget {
                     // height: screenHeight,
                     child: Column(
                       children: <Widget>[
-                        GestureDetector(
+                        MyButton(
+                          label: 'Login',
+                          hasShadow: true,
                           onTap: () {
                             Get.to(() => Login());
                           },
-                          child: Container(
-                            width: screenWidth * 0.94,
-                            height: screenHeight * 0.07,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.blackColor.withOpacity(0.2),
-                                  offset: Offset(0, 10),
-                                  blurRadius: 20,
-                                )
-                              ],
-                              color: AppColors.primaryColor,
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Login',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(255, 255, 255, 1),
-                                    fontFamily: 'Manrope',
-                                    fontSize: 18,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.normal,
-                                    height: 1),
-                              ),
-                            ),
-                          ),
                         ),
                         SizedBox(height: screenHeight * 0.02),
                         MyButton(
@@ -114,7 +88,10 @@ class Onboarding extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: screenHeight * 0.02),
-                        GestureDetector(
+                        MyButton(
+                          label: 'Continue with FingerPrint',
+                          buttonColor: AppColors.mediumGrey,
+                          hasShadow: true,
                           onTap: () {
                             print('LAST...');
                             // Navigator.push(
@@ -122,27 +99,6 @@ class Onboarding extends StatelessWidget {
                             //     MaterialPageRoute(
                             //         builder: (context) => NavBar()));
                           },
-                          child: Container(
-                            width: screenWidth * 0.94,
-                            height: screenHeight * 0.075,
-                            decoration: BoxDecoration(
-                              color: AppColors.mediumGrey,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Continue with FingerPrint',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppColors.whiteColor,
-                                    fontFamily: 'Manrope',
-                                    fontSize: 18,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.normal,
-                                    height: 1),
-                              ),
-                            ),
-                          ),
                         ),
                       ],
                     ),
