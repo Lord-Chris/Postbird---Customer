@@ -1,5 +1,5 @@
-import 'package:postbird/Screens/complete_activity.dart';
-import 'package:postbird/Screens/i_progress_activity.dart';
+import 'package:postbird/ui/views/activity/widgets/complete_view.dart';
+import 'package:postbird/ui/views/activity/widgets/progress_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;

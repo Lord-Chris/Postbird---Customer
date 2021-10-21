@@ -3,21 +3,16 @@ import 'package:postbird/ui/views/startup/view/onboarding.dart';
 import 'package:postbird/core/index.dart';
 
 class SplashController extends GetxController {
+  final _storageService = Get.find<IStorageService>();
+
   @override
   void onInit() {
     super.onInit();
     Future.delayed(
-      Duration(seconds: 5),
-      () => Get.to(() => getPref() == null ? Onboarding() : HomePage()),
+      Duration(seconds: 3),
+      () => Get.to(() => token == null ? Onboarding() : NavBar()),
     );
   }
 
-  String? getPref() {
-    // SharedPreferences preferences = await SharedPreferences.getInstance();
-    // setState(() {
-    //   value = preferences.getInt("value")!;
-    // });
-
-    // print(value);
-  }
+  String? get token => _storageService.getString(StorageKeys.authToken);
 }

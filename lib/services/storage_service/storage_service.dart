@@ -3,8 +3,13 @@ import 'package:postbird/core/index.dart';
 import 'i_storage_service.dart';
 
 class StorageService extends IStorageService {
-  // SharedPreferences _prefs = SharedPreferences.getInstance();
-  final _storage = GetStorage('postbird');
+  late final _storage;
+
+  @override
+  Future<void> init() async {
+    await GetStorage.init('postbird');
+    _storage = GetStorage('postbird');
+  }
 
   @override
   bool? getBool(String key) {

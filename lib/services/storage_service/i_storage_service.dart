@@ -1,4 +1,5 @@
 abstract class IStorageService {
+  Future<void> init();
   Future<void> saveString(String key, String val);
   Future<void> saveInt(String key, int val);
   Future<void> saveBool(String key, bool val);

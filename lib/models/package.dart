@@ -1,14 +1,17 @@
 class Package {
-  final String packageName;
-  final PackageLocation origin, destination;
-  final PackageUser sender, receiver;
-  final String? size;
-  final bool isFragile;
-  final String date;
-  final String? note;
+  String? id;
+  String packageName;
+  PackageLocation origin, destination;
+  PackageUser sender, receiver;
+  String? size;
+  bool isFragile;
+  String date;
+  String? note;
   String? price;
+  bool? isComplete;
 
   Package({
+    this.id,
     required this.packageName,
     required this.origin,
     required this.destination,
@@ -19,7 +22,37 @@ class Package {
     required this.date,
     this.note,
     this.price,
+    this.isComplete,
   });
+
+  factory Package.fromJson(Map<String, dynamic> json) {
+    return Package(
+      packageName: json['packagename'],
+      sender: PackageUser(
+        name: json['sendername'],
+        phone: json['senderphone'],
+        address: json["address"],
+      ),
+      receiver: PackageUser(
+        name: json['recipientname'],
+        phone: json['recipientphone'],
+        address: json['recipientaddress'],
+      ),
+      date: json['date'],
+      note: json['additionalinfo'],
+      size: json['packsize'],
+      origin: PackageLocation(
+        long: double.parse(json['frmlg']),
+        lat: double.parse(json['frmlt']),
+      ),
+      destination: PackageLocation(
+        long: double.parse(json['tolg']),
+        lat: double.parse(json['tolt']),
+        address: json['detination'],
+      ),
+      isFragile: true,
+    );
+  }
 
   Map<String, dynamic> toPriceMap() {
     return {
@@ -61,6 +94,10 @@ class PackageUser {
     required this.address,
     this.postCode,
   });
+
+  // factory PackageUser.fromJson(Map<String, dynamic> json){
+  // return PackageUser(name: "sendername", phone: "senderphone", address: "");
+  // }
 }
 
 class PackageLocation {
