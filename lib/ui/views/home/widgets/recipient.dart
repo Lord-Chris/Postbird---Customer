@@ -91,6 +91,7 @@ class Recipient extends StatelessWidget {
           ),
           SizedBox(height: 10),
           MyTextField(
+            controller: controller.notes,
             keyboardType: TextInputType.multiline,
             hint: 'Please Confirm',
             maxLength: 1200,
@@ -102,6 +103,7 @@ class Recipient extends StatelessWidget {
               label: "Continue",
               onTap: () {
                 if (!controller.formKey.currentState!.validate()) return;
+                FocusScope.of(context).unfocus();
                 controller.onPageChanged(2);
               },
             ),

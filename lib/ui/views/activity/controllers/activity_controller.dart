@@ -6,7 +6,7 @@ class ActivityController extends BaseController
   final _activityRepo = Get.find<IActivityRepository>();
   late final TabController tabController;
   String id = "";
-  List _activities = [];
+  List<Package> _activities = [];
 
   @override
   void onInit() {
@@ -33,5 +33,5 @@ class ActivityController extends BaseController
   }
 
   int get tabIndex => tabController.index;
-  List get activities => _activities;
+  List<Package> get activities => _activities;
 }

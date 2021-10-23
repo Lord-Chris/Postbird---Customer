@@ -13,7 +13,7 @@ class ActivityView extends StatelessWidget {
       init: ActivityController(),
       builder: (controller) {
         var screenWidth = MediaQuery.of(context).size.width;
-        var screenHeight = MediaQuery.of(context).size.height;
+        // var screenHeight = MediaQuery.of(context).size.height;
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           body: SafeArea(

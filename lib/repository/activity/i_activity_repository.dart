@@ -1,7 +1,7 @@
 import 'package:postbird/core/index.dart';
 
 abstract class IActivityRepository {
-  Future fetchPrice(Package package);
+  Future<int> fetchPrice(Package package);
   Future<void> createOrder(Package package);
   Future<List<Package>> fetchActivity();
 }

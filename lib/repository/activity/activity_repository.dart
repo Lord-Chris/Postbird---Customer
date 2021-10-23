@@ -11,7 +11,7 @@ class ActivityRepository extends IActivityRepository {
     try {
       Map<String, dynamic> body = package.toMap();
       final headers = {"Authorization": "Bearer $token"};
-
+      body.addAll({'stype': 2});
       await _networkService.post(ApiStrings.processOrder,
           body: body, headers: headers);
     } on Failure catch (e) {
@@ -23,12 +23,13 @@ class ActivityRepository extends IActivityRepository {
   }
 
   @override
-  Future fetchPrice(Package package) async {
+  Future<int> fetchPrice(Package package) async {
     try {
       Map<String, dynamic> body = package.toPriceMap();
       final headers = {"Authorization": "Bearer $token"};
       final res = await _networkService.post(ApiStrings.priceCheck,
           body: body, headers: headers);
+      return res!.data['price'];
     } on Failure catch (e) {
       throw e;
     } catch (e) {

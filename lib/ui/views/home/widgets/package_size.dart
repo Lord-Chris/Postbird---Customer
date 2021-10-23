@@ -27,7 +27,7 @@ class PackageSize extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               width: 2,
-              color: index == controller.currentIndex
+              color: index == controller.packSizeIndex
                   ? AppColors.primaryColor
                   : AppColors.iconGrey,
             ),
