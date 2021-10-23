@@ -8,7 +8,7 @@ class ReviewOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    // var screenHeight = MediaQuery.of(context).size.height;
     return ListView(
       children: [
         SizedBox(height: 30),
@@ -320,7 +320,7 @@ class ReviewOrder extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Credits ' + 'snapshot.data',
+                    '${controller.price}' + ' Credits',
                     textAlign: TextAlign.right,
                     style: GoogleFonts.manrope(
                       color: Color.fromRGBO(0, 0, 0, 1),
@@ -334,9 +334,12 @@ class ReviewOrder extends StatelessWidget {
           ),
         ),
         SizedBox(height: 30),
-        MyButton(
-          label: "Create Order",
-          onTap: ()=> controller.createOrder(),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: MyButton(
+            label: "Create Order",
+            onTap: () => controller.createOrder(),
+          ),
         ),
       ],
     );

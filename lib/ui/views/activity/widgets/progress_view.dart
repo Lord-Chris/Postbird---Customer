@@ -2,49 +2,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 import '../controllers/activity_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:postbird/Screens/strings.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class InProgressActivityTwo extends StatelessWidget {
-  // fetchActivity() async{
-  //   // print("ongoing");
-  //     SharedPreferences preferences = await SharedPreferences.getInstance();
-  //     setState(() {
-  //       id = preferences.getString("id")!;
-  //     });
-  //     print('ID: ' + id);
-
-  //     var surl = Strings.SECBASE_URL;
-  //     var surl2 = surl + id;
-  //     print(surl2);
-  //     print(id);
-
-  //     final response = await http.get(Uri.parse(surl2));
-
-  //     final dat = jsonDecode(response.body);
-
-  //     if(dat['success'] == "true"){
-  //       var data = dat['data'];
-  //       var arr = [];
-  //       for (var i=0; i<data.length; i++){
-  //         if(data[i]['status'] == "0"){
-  //           arr.add(data[i]);
-  //         }
-  //       }
-  //       //  print(data);
-  //       setState(() {
-  //         activites = arr;
-  //       });
-  //     }
-  //     print("new activities");
-  //     print(activites);
-  // }
-
   final controller = Get.find<ActivityController>();
   Widget build(BuildContext context) {
-    final activities = controller.activities.where((e) => !e.isComplete);
+    final activities = controller.activities.where((e) => !e.isComplete!);
     return RefreshIndicator(
       onRefresh: () => controller.fetchActivities(),
       child: Visibility(
@@ -92,7 +54,7 @@ class InProgressActivityTwo extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          activity.receiver.name,
+                          activity.packageName,
                           style: GoogleFonts.manrope(
                             fontWeight: FontWeight.w700,
                             fontSize: 14,
@@ -122,7 +84,7 @@ class InProgressActivityTwo extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    activity.destination.address,
+                    activity.destination.address!,
                     style: GoogleFonts.manrope(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,

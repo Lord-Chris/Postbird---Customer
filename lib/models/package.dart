@@ -1,18 +1,23 @@
 class Package {
   String? id;
+  int? userId;
   String packageName;
+  String packageDetails;
   PackageLocation origin, destination;
   PackageUser sender, receiver;
   String? size;
   bool isFragile;
   String date;
   String? note;
-  String? price;
+  int? price;
   bool? isComplete;
+  int? type;
 
   Package({
     this.id,
+    this.userId,
     required this.packageName,
+    required this.packageDetails,
     required this.origin,
     required this.destination,
     required this.sender,
@@ -23,11 +28,13 @@ class Package {
     this.note,
     this.price,
     this.isComplete,
+    this.type,
   });
 
   factory Package.fromJson(Map<String, dynamic> json) {
     return Package(
       packageName: json['packagename'],
+      packageDetails: json['packagedetails'],
       sender: PackageUser(
         name: json['sendername'],
         phone: json['senderphone'],
@@ -58,31 +65,36 @@ class Package {
     return {
       'from': origin.address,
       'to': destination.address,
-      'size': 'heavy',
+      'size': 'large',
     };
   }
 
   Map<String, dynamic> toMap() => {
-        "sname": sender.name,
-        "spaddress": sender.address,
-        "stype": "explicabo",
-        "packagesize": size,
-        "spfragile": isFragile,
-        "sphone": sender.phone,
-        "date": date,
+        'user_id': userId,
         "packagename": packageName,
-        "rname": receiver.name,
-        "rpaddress": receiver.address,
-        "rpostal": receiver.postCode,
-        "rphone": receiver.phone,
-        "radnote": note,
+        "packagedetails": packageDetails,
+        "packtype": type,
+        "packsize": size,
+        "fragile": isFragile,
+        "date": date,
+        "amount": price,
+        "additionalinfo": note ?? '',
+        "sendername": sender.name,
+        "address": sender.address,
+        "senderphone": sender.phone,
+        "recipientname": receiver.name,
+        "recipientaddress": receiver.address,
+        "recipientphone": receiver.phone,
+        "postalzip": receiver.postCode,
+        "destination": destination.address,
         "frmlt": origin.lat,
         "tolt": destination.lat,
         "frmlg": origin.long,
         "tolg": destination.long,
-        "credits": price,
       };
 }
+
+// `user_id`, `detination`, `status`,
 
 class PackageUser {
   final String name, phone, address;

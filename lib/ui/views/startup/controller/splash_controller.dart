@@ -14,5 +14,6 @@ class SplashController extends GetxController {
     );
   }
 
-  String? get token => _storageService.getString(StorageKeys.authToken);
+  String? get token =>
+      null; // _storageService.getString(StorageKeys.authToken);
 }

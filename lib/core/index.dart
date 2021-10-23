@@ -50,6 +50,7 @@ export 'package:postbird/ui/shared/button.dart';
 
 // utilities
 export 'package:postbird/utilities/map_utils.dart';
+export 'package:postbird/utilities/general_utils.dart';
 
 // widgets
 export 'package:postbird/ui/views/home/widgets/create_package_indicator.dart';

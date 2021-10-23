@@ -90,9 +90,12 @@ class MyTextField extends StatelessWidget {
 class MyDropDownField extends StatelessWidget {
   final String? label;
   final String? hint;
-  final String? Function(String?)? validator;
+  final String? Function(dynamic)? validator;
   final Widget? suffix;
   final Widget? prefix;
+  final List<String> items;
+  final void Function(int?)? onChanged;
+  final int? initialValue;
 
   MyDropDownField({
     Key? key,
@@ -101,14 +104,23 @@ class MyDropDownField extends StatelessWidget {
     this.validator,
     this.suffix,
     this.prefix,
+    required this.items,
+    this.onChanged,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
-      items: <DropdownMenuItem<String>>[],
-      // onTap: ,
+      items: items
+          .map((e) => DropdownMenuItem(
+                child: Text(e),
+                value: items.indexOf(e),
+              ))
+          .toList(),
       validator: validator,
+      value: initialValue,
+      onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hint,
         labelText: label,

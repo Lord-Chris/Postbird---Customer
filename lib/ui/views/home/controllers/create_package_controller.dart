@@ -1,5 +1,6 @@
 import 'package:postbird/Screens/model/place_model.dart';
 import 'package:postbird/core/index.dart';
+import 'package:postbird/ui/views/home/views/home_view.dart';
 
 class CreatePackageController extends BaseController with Validator {
   final _storageService = Get.find<IStorageService>();
@@ -9,6 +10,7 @@ class CreatePackageController extends BaseController with Validator {
   final DateTime date;
   final pageController = PageController();
   final packageName = TextEditingController();
+  final packageDetails = TextEditingController();
   final recipientName = TextEditingController();
   final recipientPhone = TextEditingController();
   final postCode = TextEditingController();
@@ -19,14 +21,15 @@ class CreatePackageController extends BaseController with Validator {
   int pageIndex = 0;
   var name;
   var address;
-  int? currentIndex;
+  int? packSizeIndex;
   bool checkBoxValue = false;
-  String? price;
+  int? price;
+  int? itemType;
 
   CreatePackageController(this.origin, this.destination, this.date);
 
   void updatePackageSize(int index) {
-    currentIndex = index;
+    packSizeIndex = index;
     update();
   }
 
@@ -53,21 +56,30 @@ class CreatePackageController extends BaseController with Validator {
     }
   }
 
-  void back() {
+  bool back([bool isButton = true]) {
     if (pageIndex > 0) {
       onPageChanged(pageIndex - 1);
+      return false;
     } else {
-      Get.back();
+      if (isButton) {
+        Get.back();
+        return false;
+      } else
+        return true;
     }
   }
 
   Future<void> fetchPrice() async {
     try {
       package = Package(
+        userId: user.id,
         packageName: packageName.text,
+        packageDetails: packageDetails.text,
         isFragile: checkBoxValue,
         date: date.toIso8601String(),
         note: notes.text,
+        size: GenUtils.packSizeIntToString(packSizeIndex!),
+        type: itemType,
         sender: PackageUser(
           name: user.fullName,
           address: origin.formattedAddress,
@@ -91,8 +103,19 @@ class CreatePackageController extends BaseController with Validator {
         ),
       );
       setBusy(true);
-      await _activityRepo.fetchPrice(package!);
+      price = await _activityRepo.fetchPrice(package!);
       setBusy(false);
+    } on Failure catch (e) {
+      setBusy(false);
+      MySnackBar.failure(e.toString());
+    }
+  }
+
+  Future<void> createOrder() async {
+    try {
+      package = package!..price = price;
+      await _activityRepo.createOrder(package!);
+      Get.offAll(() => HomeView());
     } on Failure catch (e) {
       setBusy(false);
       MySnackBar.failure(e.toString());
@@ -100,14 +123,4 @@ class CreatePackageController extends BaseController with Validator {
   }
 
   User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
-
-  Future<void> createOrder() async {
-    try {
-      package = package!..price = price;
-      //  await _activityRepo.createOrder(package!);
-    } on Failure catch (e) {
-      setBusy(false);
-      MySnackBar.failure(e.toString());
-    }
-  }
 }
