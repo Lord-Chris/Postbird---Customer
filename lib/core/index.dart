@@ -1,5 +1,7 @@
 // packages
 export 'dart:io';
+export 'dart:async';
+
 export 'package:flutter/material.dart';
 export 'package:get/get_state_manager/get_state_manager.dart';
 export 'package:get/instance_manager.dart';

@@ -52,35 +52,11 @@ class MyTextField extends StatelessWidget {
       minLines: minLines,
       maxLength: maxLength,
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
-      decoration: InputDecoration(
+      decoration: decoration().copyWith(
         hintText: hint,
         labelText: label,
         suffixIcon: suffix,
         prefixIcon: prefix,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: AppColors.primaryColor,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: AppColors.iconGrey.withOpacity(0.5),
-          ),
-        ),
-        labelStyle: TextStyle(
-          fontFamily: 'manrope',
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: AppColors.blackColor,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: AppColors.primaryColor,
-          ),
-        ),
       ),
     );
   }
@@ -121,36 +97,39 @@ class MyDropDownField extends StatelessWidget {
       validator: validator,
       value: initialValue,
       onChanged: onChanged,
-      decoration: InputDecoration(
+      decoration: decoration().copyWith(
         hintText: hint,
         labelText: label,
         suffixIcon: suffix,
         prefixIcon: prefix,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: AppColors.primaryColor,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: AppColors.iconGrey.withOpacity(0.5),
-          ),
-        ),
-        labelStyle: TextStyle(
-          fontFamily: 'manrope',
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: AppColors.blackColor,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: AppColors.primaryColor,
-          ),
-        ),
       ),
     );
   }
 }
+
+InputDecoration decoration() => InputDecoration(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(
+          color: AppColors.primaryColor,
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(
+          color: AppColors.iconGrey.withOpacity(0.5),
+        ),
+      ),
+      labelStyle: TextStyle(
+        fontFamily: 'manrope',
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: AppColors.blackColor,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(
+          color: AppColors.primaryColor,
+        ),
+      ),
+    );

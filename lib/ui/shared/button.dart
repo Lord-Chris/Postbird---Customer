@@ -5,8 +5,8 @@ class MyButton extends StatelessWidget {
   final double? width, height;
   final Color? buttonColor;
   final String label;
-  final Color? labelColor;
-  final bool hasShadow, hasBorder;
+  final Color? labelColor, loaderColor;
+  final bool hasShadow, hasBorder, isBusy;
   const MyButton({
     Key? key,
     this.onTap,
@@ -15,8 +15,10 @@ class MyButton extends StatelessWidget {
     this.buttonColor = AppColors.primaryColor,
     required this.label,
     this.labelColor = AppColors.whiteColor,
+    this.loaderColor = AppColors.whiteColor,
     this.hasShadow = false,
     this.hasBorder = false,
+    this.isBusy = false,
   }) : super(key: key);
 
   @override
@@ -47,14 +49,20 @@ class MyButton extends StatelessWidget {
           ],
         ),
         child: Center(
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: labelColor,
-              fontFamily: 'Manrope',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
+          child: Visibility(
+            visible: !isBusy,
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: labelColor,
+                fontFamily: 'Manrope',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            replacement: CircularProgressIndicator(
+              color: loaderColor,
             ),
           ),
         ),

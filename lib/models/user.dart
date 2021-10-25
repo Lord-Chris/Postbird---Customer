@@ -59,4 +59,14 @@ class User {
         'profilepic': profilePic,
         'credit_balance': credit,
       };
+
+  Map<String, dynamic> toRegisterJson() => {
+        'name': fullName,
+        'username': username,
+        'email': email,
+        'mobile': phone,
+        'address': address,
+        'password': password,
+        'password_confirmation': password,
+      };
 }

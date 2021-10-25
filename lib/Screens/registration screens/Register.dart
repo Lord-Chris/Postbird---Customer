@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10
                   ),
                   TextFormField(
                     keyboardType: TextInputType.name,

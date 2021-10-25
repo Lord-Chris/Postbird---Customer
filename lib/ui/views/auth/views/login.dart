@@ -125,9 +125,7 @@ class Login extends StatelessWidget with Validator {
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Manrope',
                                     fontSize: 18,
-                                    letterSpacing: 0,
                                     fontWeight: FontWeight.normal,
-                                    height: 1,
                                   ),
                                 ),
                                 replacement: CircularProgressIndicator(

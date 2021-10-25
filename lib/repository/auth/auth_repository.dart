@@ -29,9 +29,16 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<void> registerUser(User user) {
-    // TODO: implement registerUser
-    throw UnimplementedError();
+  Future<void> registerUser(User user) async {
+    try {
+      Map<String, dynamic> body = user.toRegisterJson();
+      await _networkService.post(ApiStrings.register, body: body);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
   }
 
   @override
@@ -82,9 +89,16 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<void> verifyOTP(String number, String otp) {
-    // TODO: implement verifyOTP
-    throw UnimplementedError();
+  Future<void> verifyOTP(String number, String otp) async {
+    try {
+      final body = {"phone": number, "verification_code": otp};
+      await _networkService.post(ApiStrings.verifyOtp, body: body);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
   }
 
   @override

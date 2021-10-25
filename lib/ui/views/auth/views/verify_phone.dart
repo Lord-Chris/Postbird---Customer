@@ -1,6 +1,9 @@
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
+
+import '../controllers/signup_controller.dart';
 
 class VerifyPhone extends StatelessWidget {
   VerifyPhone({Key? key}) : super(key: key);
@@ -8,7 +11,8 @@ class VerifyPhone extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
+    return GetBuilder<SignUpController>(
+      init: SignUpController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.whiteColor,
@@ -40,233 +44,107 @@ class VerifyPhone extends StatelessWidget {
               left: 20,
               right: 20,
             ),
-            child: ListView(
-              children: [
-                SizedBox(
-                  height: 60,
-                ),
-                Text(
-                  'Enter Your Phone Number',
-                  style: TextStyle(
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  SizedBox(height: 60),
+                  Text(
+                    'Enter Your Phone Number',
+                    style: TextStyle(
                       fontFamily: 'manrope',
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
-                      color: AppColors.blackColor),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'We believe that a connected world is a better world, and that belief guides.',
-                  style: TextStyle(
-                    fontFamily: 'manrope',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: AppColors.blackColor,
+                      color: AppColors.blackColor,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.whiteColor,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        width: 92,
-                        height: 60,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                              ),
-                              child: Image(
-                                width: 42,
-                                height: 26,
-                                image: AssetImage(
-                                  'assets/Image2.png',
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Icon(
-                              Icons.arrow_drop_down,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Form(
-                          key: _formKey,
-                          child: Container(
-                            child: TextFormField(
-                              validator: (e) {
-                                if (e!.isEmpty) {
-                                  return "Please Enter a Valid Phone No";
-                                }
-                              },
-                              onSaved: (e) {
-                                // => phoneno = e!
-                                },
-                              onChanged: (String text) {
-                                // setState(() {
-                                //   phoneno = text;
-                                // });
-                                // print(phoneno);
-                              },
-                              keyboardType: TextInputType.phone,
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                    color: Color(
-                                      0xFFDEDEDE,
-                                    ),
-                                  ),
-                                ),
-                                prefixText: '+234   ',
-                                prefixStyle: GoogleFonts.manrope(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(
-                                    0xFF1B1B1B,
-                                  ),
-                                ),
-                                labelStyle: GoogleFonts.manrope(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(
-                                    0xFF1B1B1B,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                    color: Color(
-                                      0xFFFEBC52,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 150,
-                ),
-                Text(
-                  'By clicking ‘Continue’, you have read and agree with our ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
+                  SizedBox(height: 20),
+                  Text(
+                    'We believe that a connected world is a better world, and that belief guides.',
+                    style: TextStyle(
                       fontFamily: 'manrope',
-                      color: Color(
-                        0xFF000000,
-                      ),
-                      fontSize: 12,
-                      letterSpacing: 0,
                       fontWeight: FontWeight.w400,
-                      height: 1),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Center(
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Terms',
-                      style: TextStyle(
-                        fontFamily: 'manrope',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: Color(
-                          0xFFFEBC52,
-                        ),
-                      ),
-                      children: [
-                        TextSpan(
-                          text: ' and ',
-                          style: TextStyle(
-                            fontFamily: 'manrope',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: Color(
-                              0xFF000000,
-                            ),
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Conditions',
-                          style: TextStyle(
-                            fontFamily: 'manrope',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: Color(
-                              0xFFFEBC52,
-                            ),
-                          ),
-                        ),
-                      ],
+                      fontSize: 16,
+                      color: AppColors.blackColor,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                // RoundedLoadingButton(
-                //   color: Color(0xFFFEBC52),
-                //   successColor: Color(0xFFFEBC52),
-                //   controller: _btnController2,
-                //   onPressed: () => _doSomething(_btnController2),
-                //   valueColor: Colors.black,
-                //   borderRadius: 10,
-                //   child: Text('Continue',
-                //       style: TextStyle(
-                //           fontSize: 16,
-                //           fontWeight: FontWeight.w500,
-                //           fontFamily: 'manrope',
-                //           color: Colors.white)),
-                // ),
-                // GestureDetector(
-                //   onTap: () {
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => CreateAccount3()));
-                //   },
-                //   child: Container(
-                //     height: 50,
-                //     width: double.infinity,
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(8),
-                //       color: Color(
-                //         0xFFFEBC52,
-                //       ),
-                //     ),
-                //     child: Center(
-                //       child: Text(
-                //         'Continue',
-                //         style: TextStyle(
-                //           fontFamily: 'manrope',
-                //           color: Color(0xFFFFFFFF),
-                //           fontWeight: FontWeight.w500,
-                //           fontSize: 16,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
+                  SizedBox(height: 30),
+                  InternationalPhoneNumberInput(
+                    cursorColor: AppColors.primaryColor,
+                    formatInput: true,
+                    keyboardType: TextInputType.phone,
+                    textFieldController: controller.phoneController,
+                    validator: controller.validatePhoneNumber,
+                    onInputChanged: (PhoneNumber value) async {
+                      print(controller.phone);
+                      controller.phone = value.phoneNumber!;
+                      print(controller.phone);
+                    },
+                    inputDecoration:
+                        decoration().copyWith(hintText: 'Phone Number'),
+                    selectorConfig: SelectorConfig(
+                      showFlags: true,
+                      useEmoji: true,
+                      selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                    ),
+                  ),
+                  SizedBox(height: 250),
+                  Text(
+                    'By clicking ‘Continue’, you have read and agree with our ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'manrope',
+                      color: AppColors.blackColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(height: 3),
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Terms',
+                        style: TextStyle(
+                          fontFamily: 'manrope',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: AppColors.primaryColor,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: ' and ',
+                            style: TextStyle(
+                              fontFamily: 'manrope',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: AppColors.blackColor,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'Conditions',
+                            style: TextStyle(
+                              fontFamily: 'manrope',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  MyButton(
+                    label: "Continue",
+                    isBusy: controller.isBusy,
+                    onTap: () {
+                      if (!_formKey.currentState!.validate()) return;
+                      controller.onVerifyPhone();
+                    },
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         );

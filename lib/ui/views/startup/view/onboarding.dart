@@ -1,5 +1,6 @@
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/views/auth/views/login.dart';
+import 'package:postbird/ui/views/auth/views/verify_phone.dart';
 
 import '../controller/onboarding_controller.dart';
 
@@ -80,26 +81,22 @@ class Onboarding extends StatelessWidget {
                           labelColor: AppColors.darkGrey,
                           hasBorder: true,
                           onTap: () {
-                            print('Register');
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => CreateAccount2()));
+                            Get.to(() => VerifyPhone());
                           },
                         ),
                         SizedBox(height: screenHeight * 0.02),
-                        MyButton(
-                          label: 'Continue with FingerPrint',
-                          buttonColor: AppColors.mediumGrey,
-                          hasShadow: true,
-                          onTap: () {
-                            print('LAST...');
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => NavBar()));
-                          },
-                        ),
+                        // MyButton(
+                        //   label: 'Continue with FingerPrint',
+                        //   buttonColor: AppColors.mediumGrey,
+                        //   hasShadow: true,
+                        //   onTap: () {
+                        //     print('LAST...');
+                        //     // Navigator.push(
+                        //     //     context,
+                        //     //     MaterialPageRoute(
+                        //     //         builder: (context) => NavBar()));
+                        //   },
+                        // ),
                       ],
                     ),
                   ),
