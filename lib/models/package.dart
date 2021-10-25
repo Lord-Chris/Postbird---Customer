@@ -55,9 +55,9 @@ class Package {
       destination: PackageLocation(
         long: double.parse(json['tolg']),
         lat: double.parse(json['tolt']),
-        address: json['detination'],
+        address: json['destination'],
       ),
-      isFragile: true,
+      isFragile: json['fragile'],
     );
   }
 
