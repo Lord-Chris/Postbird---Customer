@@ -10,7 +10,7 @@ class SplashController extends GetxController {
     super.onInit();
     Future.delayed(
       Duration(seconds: 3),
-      () => Get.to(() => token == null ? Onboarding() : NavBar()),
+      () => Get.off(() => token == null ? Onboarding() : NavBar()),
     );
   }
 

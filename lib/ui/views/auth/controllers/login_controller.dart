@@ -19,7 +19,7 @@ class LoginController extends BaseController {
       final user = await _authRepository.loginUser(
           emailController.text, passwordController.text);
       await _storageService.saveMap(StorageKeys.userData, user.toJson());
-      Get.to(() => NavBar());
+      Get.off(() => NavBar());
       setBusy(false);
     } on Failure catch (e) {
       setBusy(false);

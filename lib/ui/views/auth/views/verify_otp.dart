@@ -129,12 +129,13 @@ class VerifyOtp extends StatelessWidget {
                           : 'Resend code in ${controller.remainingTime}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontFamily: 'manrope',
-                          color: Color.fromRGBO(0, 0, 0, 0.6000000238418579),
-                          fontSize: 12,
-                          letterSpacing: 0,
-                          fontWeight: FontWeight.normal,
-                          height: 1),
+                        fontFamily: 'manrope',
+                        color: controller.remainingTime == 0
+                            ? AppColors.primaryColor
+                            : AppColors.blackColor.withOpacity(0.6),
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                      ),
                     )),
                 SizedBox(
                   height: 200,
