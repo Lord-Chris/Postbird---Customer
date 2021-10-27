@@ -6,6 +6,7 @@ Future<void> setUpServices() async {
   await _setupStorageSevice();
   Get.lazyPut<INetworkService>(() => NetworkService(), fenix: true);
   Get.lazyPut<IMediaService>(() => MediaService(), fenix: true);
+  Get.lazyPut<IMapService>(() => MapService(), fenix: true);
 
   // repositories
   Get.lazyPut<IAuthRepository>(() => AuthRepository(), fenix: true);

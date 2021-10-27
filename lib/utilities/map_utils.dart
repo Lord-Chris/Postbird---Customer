@@ -7,8 +7,6 @@ import 'package:postbird/core/index.dart';
 class MapUtils {
   static Future<Uint8List> getMarker() async {
     ByteData byteData = await rootBundle.load("assets/Courier.png");
-
-    // await DefaultAssetBundle.of(context).load("assets/images/car_icon.png");
     return byteData.buffer.asUint8List();
   }
 
@@ -22,7 +20,13 @@ class MapUtils {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     final myLocation = LatLng(position.latitude, position.longitude);
-
     return myLocation;
+  }
+
+  static Future<BitmapDescriptor> bitMapFromImage(String val) async {
+    final res = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 5, size: Size.fromRadius(50)),
+        val);
+    return res;
   }
 }

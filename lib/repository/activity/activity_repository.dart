@@ -1,10 +1,9 @@
-import 'package:postbird/core/api_strings.dart';
 import 'package:postbird/core/index.dart';
-import 'package:postbird/models/package.dart';
 
 class ActivityRepository extends IActivityRepository {
   final _networkService = Get.find<INetworkService>();
   final _storageService = Get.find<IStorageService>();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Future<void> createOrder(Package package) async {
@@ -14,6 +13,7 @@ class ActivityRepository extends IActivityRepository {
       body.addAll({'stype': 2});
       await _networkService.post(ApiStrings.processOrder,
           body: body, headers: headers);
+      await _firestore.collection(Constants.PACKAGES).doc("package").set(body);
     } on Failure catch (e) {
       throw e;
     } catch (e) {
@@ -37,8 +37,6 @@ class ActivityRepository extends IActivityRepository {
       throw Failure(e.toString());
     }
   }
-
-  String? get token => _storageService.getString(StorageKeys.authToken);
 
   @override
   Future<List<Package>> fetchActivity() async {
@@ -64,4 +62,24 @@ class ActivityRepository extends IActivityRepository {
       throw Failure(e.toString());
     }
   }
+
+  @override
+  Stream<bool> findCourier(String packageId) {
+    final snapshots = _firestore.collection(Constants.PACKAGES).snapshots();
+    return snapshots.transform(RepoUtils.packageTransformer(packageId));
+  }
+
+  @override
+  Future<void> cancelCourierSearch(String packageId) async {
+    try {
+      await _firestore.collection(Constants.PACKAGES).doc(packageId).delete();
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  String? get token => _storageService.getString(StorageKeys.authToken);
 }

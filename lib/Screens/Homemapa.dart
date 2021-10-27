@@ -11,7 +11,7 @@ import 'package:postbird/Screens/utils/constants.dart';
 import 'package:postbird/Screens/utils/styles.dart';
 import 'package:uuid/uuid.dart';
 import 'model/card_model.dart';
-import 'model/place_model.dart';
+import '../models/place_model.dart';
 import 'model/ride_option_model.dart';
 // import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 

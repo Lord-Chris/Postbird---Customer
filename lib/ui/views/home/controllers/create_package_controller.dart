@@ -1,6 +1,5 @@
-import 'package:postbird/Screens/model/place_model.dart';
+import 'package:postbird/models/place_model.dart';
 import 'package:postbird/core/index.dart';
-import 'package:postbird/Screens/Home3.dart';
 
 class CreatePackageController extends BaseController with Validator {
   final _storageService = Get.find<IStorageService>();
@@ -115,7 +114,8 @@ class CreatePackageController extends BaseController with Validator {
     try {
       package = package!..price = price;
       await _activityRepo.createOrder(package!);
-      Get.offAll(() => NavBar());
+      Get.back(result: true);
+      MySnackBar.success("Package created successfully");
     } on Failure catch (e) {
       setBusy(false);
       MySnackBar.failure(e.toString());

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:postbird/Screens/model/place_model.dart';
+import 'package:postbird/models/place_model.dart';
 import 'package:postbird/Screens/utils/constants.dart';
 
 class GoogleMapServices {

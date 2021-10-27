@@ -15,6 +15,9 @@ export 'package:google_maps_flutter/google_maps_flutter.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:firebase_core/firebase_core.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:flutter_polyline_points/flutter_polyline_points.dart';
+export 'package:place_picker/uuid.dart';
+export 'package:postbird/Screens/provider/google_map_service.dart';
 
 // core
 export 'package:postbird/core/api_strings.dart';
@@ -30,6 +33,7 @@ export 'package:postbird/models/user.dart';
 export 'package:postbird/models/failure.dart';
 export 'package:postbird/models/api_response.dart';
 export 'package:postbird/models/package.dart';
+export 'package:postbird/models/place_model.dart';
 
 //repository
 export 'package:postbird/repository/auth/auth_repository.dart';
@@ -44,6 +48,8 @@ export 'package:postbird/services/storage_service/i_storage_service.dart';
 export 'package:postbird/services/storage_service/storage_service.dart';
 export 'package:postbird/services/media_service/i_media_service.dart';
 export 'package:postbird/services/media_service/media_service.dart';
+export 'package:postbird/services/map_service/i_map_service.dart';
+export 'package:postbird/services/map_service/map_service.dart';
 
 // shared
 export 'package:postbird/ui/shared/app_colors.dart';
@@ -55,6 +61,7 @@ export 'package:postbird/ui/shared/button.dart';
 // utilities
 export 'package:postbird/utilities/map_utils.dart';
 export 'package:postbird/utilities/general_utils.dart';
+export 'package:postbird/utilities/repo_utils.dart';
 
 // widgets
 export 'package:postbird/ui/views/home/widgets/create_package_indicator.dart';
