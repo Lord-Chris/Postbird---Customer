@@ -137,36 +137,16 @@ class VerifyOtp extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     )),
-                SizedBox(
-                  height: 200,
-                ),
-                GestureDetector(
+                SizedBox(height: 200),
+                MyButton(
+                  label: 'Confirm',
+                  isBusy: controller.isBusy,
                   onTap: () {
                     if (!_formKey.currentState!.validate()) return;
                     controller.onVerifyOtp();
                   },
-                  child: Container(
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Color(
-                        0xFFFEBC52,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Confirm',
-                        style: TextStyle(
-                          fontFamily: 'manrope',
-                          color: Color(0xFFFFFFFF),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
+
               ],
             ),
           ),

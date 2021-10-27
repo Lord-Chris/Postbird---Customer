@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:postbird/Screens/SelectDate.dart';
 
 class ShipmentStart extends StatefulWidget {
   final name;
@@ -80,10 +79,10 @@ class _ShipmentStartState extends State<ShipmentStart> {
                           left: screenWidth * 0.15,
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SelectDate()));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => SelectDate()));
                             },
                             child: Text(
                               'Select Date',

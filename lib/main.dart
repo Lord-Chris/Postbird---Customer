@@ -1,8 +1,11 @@
+import 'package:flutter/widgets.dart';
 import 'package:postbird/core/index.dart';
 
 import 'ui/views/startup/view/splash_view.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await setUpServices();
   runApp(MyApp());
 }

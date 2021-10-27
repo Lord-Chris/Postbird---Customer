@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:place_picker/uuid.dart';
-import 'package:postbird/Screens/Sender.dart';
 import 'package:postbird/Screens/model/place_model.dart';
 import 'package:postbird/Screens/provider/google_map_service.dart';
 import 'package:postbird/core/index.dart';
@@ -40,7 +38,7 @@ class SelectLocationController extends BaseController {
 
   void initMap() async {
     myLocation = await MapUtils.getMyLocation();
-    addToMarker(
+    await addToMarker(
         user.id.toString(), "assets/Group3.png", "Your Location", myLocation!);
     update();
   }
@@ -81,7 +79,7 @@ class SelectLocationController extends BaseController {
       mapController!.animateCamera(
         CameraUpdate.newLatLng(LatLng(origin.lat, origin.lng)),
       );
-      addToMarker(origin.placeId, "assets/Courier.png", 'Pick Up', from,
+      await addToMarker(origin.placeId, "assets/Courier.png", 'Pick Up', from,
           origin.formattedAddress);
     }
     if (destination != null) {
@@ -90,7 +88,7 @@ class SelectLocationController extends BaseController {
       mapController!.animateCamera(
         CameraUpdate.newLatLng(LatLng(destination.lat, destination.lng)),
       );
-      addToMarker(destination.placeId, "assets/ReceipentMarker.png",
+      await addToMarker(destination.placeId, "assets/ReceipentMarker.png",
           'Destination', to, destination.formattedAddress);
     }
 
@@ -126,7 +124,7 @@ class SelectLocationController extends BaseController {
     polylines.add(_polyline);
   }
 
-  void addToMarker(String id, String image, String title, LatLng loc,
+  Future<void> addToMarker(String id, String image, String title, LatLng loc,
       [String? label]) async {
     final _val = await bitMapFromImage(image);
     markers.add(

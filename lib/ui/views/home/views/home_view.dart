@@ -82,29 +82,6 @@ class HomeView extends StatelessWidget {
                                 Get.to(() => SelectLocation());
                               },
                             ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color.fromRGBO(
-                                          107, 103, 210, 0.3499999940395355),
-                                      offset: Offset(0, 18),
-                                      blurRadius: 40)
-                                ],
-                              ),
-                              child: Text(
-                                'Send a Package',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(255, 255, 255, 1),
-                                    fontFamily: 'Manrope',
-                                    fontSize: 16,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.normal,
-                                    height: 1),
-                              ),
-                            ),
                           ],
                         ),
                       ),

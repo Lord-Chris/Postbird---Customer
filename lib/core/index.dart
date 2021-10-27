@@ -13,6 +13,8 @@ export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:google_maps_flutter/google_maps_flutter.dart';
 export 'package:image_picker/image_picker.dart';
+export 'package:firebase_core/firebase_core.dart';
+export 'package:cloud_firestore/cloud_firestore.dart';
 
 // core
 export 'package:postbird/core/api_strings.dart';

@@ -61,7 +61,7 @@ class Login extends StatelessWidget with Validator {
                         MyTextField(
                           controller: controller.emailController,
                           validator: (e) => validateEmail(e),
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.emailAddress,
                         ),
                         SizedBox(height: 20),
                         Text(

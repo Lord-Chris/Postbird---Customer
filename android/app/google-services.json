@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "343544707192",
+    "project_id": "postbird-75efe",
+    "storage_bucket": "postbird-75efe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343544707192:android:8129b5a05107423e53958d",
+        "android_client_info": {
+          "package_name": "com.barefooted.postbird"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343544707192-vc9aldgphft32du4sbiqoqo1ok8tadkc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.barefooted.postbird",
+            "certificate_hash": "b26df63016fad13ecd540fb5ae7c4bb187d358e4"
+          }
+        },
+        {
+          "client_id": "343544707192-8d553ikuvm5mbrb54t9fpavtmfln1kt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXDhiBLww-kyYlGw0VzlgBhU3_1AbUw50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343544707192-8d553ikuvm5mbrb54t9fpavtmfln1kt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,3 @@
-import 'package:postbird/Screens/Profile.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 

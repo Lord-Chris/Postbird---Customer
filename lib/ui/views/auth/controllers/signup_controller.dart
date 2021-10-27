@@ -55,6 +55,7 @@ class SignUpController extends BaseController with Validator {
   Future<void> onVerifyOtp() async {
     try {
       setBusy(true);
+      await Future.delayed(Duration(seconds: 1));
       await _authRepository.verifyOTP(phone, otp.text);
       Get.off(() => SignUp());
       setBusy(false);
