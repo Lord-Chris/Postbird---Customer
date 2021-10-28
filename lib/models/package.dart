@@ -1,6 +1,6 @@
 class Package {
-  String? id;
-  int? userId;
+  int? id;
+  String? userId;
   String packageName;
   String packageDetails;
   PackageLocation origin, destination;
@@ -11,7 +11,7 @@ class Package {
   String? note;
   int? price;
   bool? isComplete;
-  int? type;
+  String? type;
 
   Package({
     this.id,
@@ -33,6 +33,10 @@ class Package {
 
   factory Package.fromJson(Map<String, dynamic> json) {
     return Package(
+      id: json['id'],
+      userId: json['user_id'],
+      type: json['packtype'],
+      price: double.parse(json['amount']).toInt(),
       packageName: json['packagename'],
       packageDetails: json['packagedetails'],
       sender: PackageUser(

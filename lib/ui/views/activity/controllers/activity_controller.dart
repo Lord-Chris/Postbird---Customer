@@ -24,7 +24,7 @@ class ActivityController extends BaseController
   Future<void> fetchActivities() async {
     try {
       setBusy(true);
-      _activities = await _activityRepo.fetchActivity();
+      _activities = await _activityRepo.fetchAllActivities();
       setBusy(false);
     } on Failure catch (e) {
       setBusy(false);

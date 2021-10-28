@@ -7,7 +7,7 @@ class PackageDetailController extends BaseController {
   final _activityRepo = Get.find<IActivityRepository>();
   final _mapService = Get.find<IMapService>();
   final Key mapKey = UniqueKey();
-  final Package package;
+  Package package;
 
   set mapController(val) => _mapService.mapController = val;
 
@@ -16,6 +16,7 @@ class PackageDetailController extends BaseController {
     super.onInit();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       initMap();
+      fetchPackageDetails();
     });
   }
 
@@ -26,6 +27,17 @@ class PackageDetailController extends BaseController {
         'Destination', destination, package.destination.address);
     await _mapService.setPolylines(origin, destination);
     update();
+  }
+
+  Future<void> fetchPackageDetails() async {
+    try {
+      setBusy(true);
+      package = await _activityRepo.fetchPackageDetails(package.id.toString());
+      setBusy(false);
+    } on Failure catch (e) {
+      setBusy(false);
+      MySnackBar.failure(e.toString());
+    }
   }
 
   LatLng get origin => LatLng(package.origin.lat, package.origin.long);

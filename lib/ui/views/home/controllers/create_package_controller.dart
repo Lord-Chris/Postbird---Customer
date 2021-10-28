@@ -16,7 +16,7 @@ class CreatePackageController extends BaseController with Validator {
   final notes = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  Package? package;
+  Package? _package;
   int pageIndex = 0;
   var name;
   var address;
@@ -70,15 +70,15 @@ class CreatePackageController extends BaseController with Validator {
 
   Future<void> fetchPrice() async {
     try {
-      package = Package(
-        userId: user.id,
+      _package = Package(
+        userId: user.id.toString(),
         packageName: packageName.text,
         packageDetails: packageDetails.text,
         isFragile: checkBoxValue,
         date: date.toIso8601String(),
         note: notes.text,
         size: GenUtils.packSizeIntToString(packSizeIndex!),
-        type: itemType,
+        type: itemType.toString(),
         sender: PackageUser(
           name: user.fullName,
           address: origin.formattedAddress,
@@ -102,7 +102,7 @@ class CreatePackageController extends BaseController with Validator {
         ),
       );
       setBusy(true);
-      price = await _activityRepo.fetchPrice(package!);
+      price = await _activityRepo.fetchPrice(_package!);
       setBusy(false);
     } on Failure catch (e) {
       setBusy(false);
@@ -113,13 +113,14 @@ class CreatePackageController extends BaseController with Validator {
   Future<void> createOrder() async {
     try {
       setBusy(true);
-      package = package!..price = price;
-      await AuthRepository().loginUser("devchris@gmail.com", "123456");
-      await _activityRepo.createOrder(package!);
-      Get.back(result: package);
+      _package!.price = price;
+      // await AuthRepository().loginUser("devchris@gmail.com", "123456");
+      _package?.id = await _activityRepo.createOrder(_package!);
+      Get.back(result: _package);
       MySnackBar.success("Package created successfully");
     } on Failure catch (e) {
       setBusy(false);
+      print("ERRORRR");
       MySnackBar.failure(e.toString());
     }
   }

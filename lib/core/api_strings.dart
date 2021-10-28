@@ -14,6 +14,8 @@ class ApiStrings {
   static const String priceCheck = base_url + 'metricpack';
   static const String processOrder = base_url + 'proccessorder';
   static const String fetchActivities = base_url + 'activities';
+  static const String packageDetails = base_url + 'package/';
+  static const String findDriver = base_url + 'finddriver/';
   // static const String REGISTRATION = 'Registration';
   // static const String SECBASE_URL = 'https://api.postbird.com.ng/api/getpackageorder/';
 

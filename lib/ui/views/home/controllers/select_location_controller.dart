@@ -62,8 +62,9 @@ class SelectLocationController extends BaseController with Validator {
     showLocationPicker = false;
     startCountDown();
     update();
-    _streamSub =
-        _activityRepo.streamPackage("package").listen(_handlePackageStream);
+    _streamSub = _activityRepo
+        .streamPackage("${_package!.id!}")
+        .listen(_handlePackageStream);
   }
 
   void onCourierSearchButtonTap() {
@@ -88,15 +89,14 @@ class SelectLocationController extends BaseController with Validator {
   void _handlePackageStream(bool packageExists) {
     if (!packageExists) {
       MySnackBar.success("Courier Found");
-      Get.off(() => PackageDetailView(
-            package: _package!,
-          ));
+      Get.offAll(() => PackageDetailView(package: _package!),
+          predicate: (route) => route.isFirst);
     }
   }
 
   Future<void> cancelSearch() async {
     _streamSub?.cancel();
-    await _activityRepo.cancelCourierSearch("package");
+    await _activityRepo.cancelCourierSearch("${_package!.id!}");
     findingCourier = false;
     update(["Courier Search"]);
   }
@@ -104,8 +104,9 @@ class SelectLocationController extends BaseController with Validator {
   Future<void> searchAgain() async {
     try {
       searchCount = 60;
-      _streamSub =
-          _activityRepo.streamPackage("package").listen(_handlePackageStream);
+      _streamSub = _activityRepo
+          .streamPackage("${_package!.id!}")
+          .listen(_handlePackageStream);
       await _activityRepo.findCourier(_package!);
       findingCourier = true;
       startCountDown();

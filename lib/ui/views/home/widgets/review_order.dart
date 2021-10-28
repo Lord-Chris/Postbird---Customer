@@ -242,7 +242,7 @@ class ReviewOrder extends StatelessWidget {
         ),
         SizedBox(height: 20),
         Visibility(
-          visible: controller.isBusy,
+          visible: controller.isBusy && controller.price == null,
           child: Column(
             children: [
               CircularProgressIndicator(color: AppColors.primaryColor),

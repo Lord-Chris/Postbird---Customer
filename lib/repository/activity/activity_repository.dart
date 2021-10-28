@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:postbird/core/index.dart';
 
 class ActivityRepository extends IActivityRepository {
@@ -6,14 +8,16 @@ class ActivityRepository extends IActivityRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
-  Future<void> createOrder(Package package) async {
+  Future<int> createOrder(Package package) async {
     try {
       Map<String, dynamic> body = package.toMap();
       final headers = {"Authorization": "Bearer $token"};
       body.addAll({'stype': 2});
-      await _networkService.post(ApiStrings.processOrder,
+      final res = await _networkService.post(ApiStrings.processOrder,
           body: body, headers: headers);
+      package.id = res!.data['data']['id'];
       await findCourier(package);
+      return package.id!;
     } on Failure catch (e) {
       throw e;
     } catch (e) {
@@ -39,7 +43,7 @@ class ActivityRepository extends IActivityRepository {
   }
 
   @override
-  Future<List<Package>> fetchActivity() async {
+  Future<List<Package>> fetchAllActivities() async {
     try {
       List<Package> _actvities = [];
 
@@ -64,10 +68,27 @@ class ActivityRepository extends IActivityRepository {
   }
 
   @override
+  Future<Package> fetchPackageDetails(String id) async {
+    try {
+      final headers = {"Authorization": "Bearer $token"};
+      final res = await _networkService.get(ApiStrings.packageDetails + id,
+          headers: headers);
+      // log(res!.data.toString());
+      return Package.fromJson(res?.data['data']);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
   Future<void> findCourier(Package package) async {
     try {
-      Map<String, dynamic> body = package.toMap();
-      await _firestore.collection(Constants.PACKAGES).doc("package").set(body);
+      final headers = {"Authorization": "Bearer $token"};
+      await _networkService.get(ApiStrings.findDriver + package.id!.toString(),
+          headers: headers);
     } on Failure catch (e) {
       throw e;
     } catch (e) {
