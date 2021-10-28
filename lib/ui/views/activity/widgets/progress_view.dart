@@ -1,6 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
+import 'package:postbird/ui/views/activity/views/package_detail_view.dart';
 import '../controllers/activity_controller.dart';
 
 class InProgressActivityTwo extends StatelessWidget {
@@ -17,81 +18,85 @@ class InProgressActivityTwo extends StatelessWidget {
           itemCount: activities.length,
           itemBuilder: (__, index) {
             final activity = controller.activities[index];
-            return Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              height: 130,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: AppColors.whiteishColor,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 30,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'In Progress',
-                        style: GoogleFonts.manrope(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ),
+            return InkWell(
+              //TODO: Navigate to find courier.
+              onTap: ()=> Get.to(()=> PackageDetailView(package: activity)),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                height: 130,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: AppColors.whiteishColor,
                   ),
-                  SizedBox(height: 5),
-                  Flexible(
-                    child: Row(
-                      children: [
-                        Text(
-                          activity.packageName,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryColor.withOpacity(0.4),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'In Progress',
                           style: GoogleFonts.manrope(
                             fontWeight: FontWeight.w700,
                             fontSize: 14,
-                            color: AppColors.blackColor,
+                            color: AppColors.primaryColor,
                           ),
                         ),
-                        SizedBox(width: 5),
-                        Text(
-                          '|',
-                          style: GoogleFonts.manrope(
-                            fontWeight: FontWeight.w200,
-                            fontSize: 14,
-                            color: AppColors.blackColor.withOpacity(0.5),
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          activity.receiver.phone,
-                          style: GoogleFonts.manrope(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: AppColors.blackColor.withOpacity(0.6),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    activity.destination.address!,
-                    style: GoogleFonts.manrope(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: AppColors.blackColor.withOpacity(0.4),
+                    SizedBox(height: 5),
+                    Flexible(
+                      child: Row(
+                        children: [
+                          Text(
+                            activity.packageName,
+                            style: GoogleFonts.manrope(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: AppColors.blackColor,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '|',
+                            style: GoogleFonts.manrope(
+                              fontWeight: FontWeight.w200,
+                              fontSize: 14,
+                              color: AppColors.blackColor.withOpacity(0.5),
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            activity.receiver.phone,
+                            style: GoogleFonts.manrope(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: AppColors.blackColor.withOpacity(0.6),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 5),
+                    Text(
+                      activity.destination.address!,
+                      style: GoogleFonts.manrope(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: AppColors.blackColor.withOpacity(0.4),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },

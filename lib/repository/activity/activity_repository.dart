@@ -13,7 +13,7 @@ class ActivityRepository extends IActivityRepository {
       body.addAll({'stype': 2});
       await _networkService.post(ApiStrings.processOrder,
           body: body, headers: headers);
-      await _firestore.collection(Constants.PACKAGES).doc("package").set(body);
+      await findCourier(package);
     } on Failure catch (e) {
       throw e;
     } catch (e) {
@@ -64,7 +64,20 @@ class ActivityRepository extends IActivityRepository {
   }
 
   @override
-  Stream<bool> findCourier(String packageId) {
+  Future<void> findCourier(Package package) async {
+    try {
+      Map<String, dynamic> body = package.toMap();
+      await _firestore.collection(Constants.PACKAGES).doc("package").set(body);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
+  Stream<bool> streamPackage(String packageId) {
     final snapshots = _firestore.collection(Constants.PACKAGES).snapshots();
     return snapshots.transform(RepoUtils.packageTransformer(packageId));
   }

@@ -33,7 +33,7 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       print(e.toString());
-      throw Failure(e.response?.data['error']);
+      convertException(e);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
@@ -58,7 +58,7 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       print(e.toString());
-      throw Failure(e.response?.data['error']);
+      convertException(e);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
@@ -83,7 +83,7 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       print(e.toString());
-      throw Failure(e.response?.data['error']);
+      convertException(e);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
@@ -108,10 +108,27 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       print(e.toString());
-      throw Failure(e.response?.data['error']);
+      convertException(e);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
+    }
+  }
+
+  Failure convertException(DioError e) {
+    switch (e.type) {
+      case DioErrorType.connectTimeout:
+        throw Failure("Connection Timed Out");
+      case DioErrorType.sendTimeout:
+        throw Failure("Connection Timed Out");
+      case DioErrorType.receiveTimeout:
+        throw Failure("Connection Timed Out");
+      case DioErrorType.response:
+        throw Failure(e.response?.data['error']);
+      case DioErrorType.cancel:
+        throw Failure(e.response?.data['error']);
+      case DioErrorType.other:
+        throw Failure("No Internet Connection");
     }
   }
 }

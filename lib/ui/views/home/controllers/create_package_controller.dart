@@ -112,9 +112,11 @@ class CreatePackageController extends BaseController with Validator {
 
   Future<void> createOrder() async {
     try {
+      setBusy(true);
       package = package!..price = price;
+      await AuthRepository().loginUser("devchris@gmail.com", "123456");
       await _activityRepo.createOrder(package!);
-      Get.back(result: true);
+      Get.back(result: package);
       MySnackBar.success("Package created successfully");
     } on Failure catch (e) {
       setBusy(false);

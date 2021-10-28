@@ -17,11 +17,13 @@ class MapService extends IMapService {
 
   set mapController(val) => _mapController = val;
 
+  @override
   Future<void> initMap(String id) async {
     _myLocation = await MapUtils.getMyLocation();
-    await _addToMarker(id, "assets/Group3.png", "Your Location", _myLocation!);
+    await addToMarker(id, "assets/Group3.png", "Your Location", _myLocation!);
   }
 
+  @override
   Future<List<Place>> fetchSuggestions(String pattern) async {
     try {
       if (_sessionToken == null) {
@@ -35,6 +37,7 @@ class MapService extends IMapService {
     }
   }
 
+  @override
   Future<void> selectSuggestion(bool isFrom, Place suggestion) async {
     try {
       final placeDetail = await _googleMapServices!.getPlaceDetail(
@@ -66,7 +69,7 @@ class MapService extends IMapService {
       await _mapController!.animateCamera(
         CameraUpdate.newLatLng(LatLng(origin.lat, origin.lng)),
       );
-      await _addToMarker(origin.placeId, "assets/Courier.png", 'Pick Up', from,
+      await addToMarker(origin.placeId, "assets/Courier.png", 'Pick Up', from,
           origin.formattedAddress);
     }
     if (destination != null) {
@@ -75,7 +78,7 @@ class MapService extends IMapService {
       await _mapController!.animateCamera(
         CameraUpdate.newLatLng(LatLng(destination.lat, destination.lng)),
       );
-      await _addToMarker(destination.placeId, "assets/ReceipentMarker.png",
+      await addToMarker(destination.placeId, "assets/ReceipentMarker.png",
           'Destination', to, destination.formattedAddress);
     }
 
@@ -83,10 +86,11 @@ class MapService extends IMapService {
     LatLng to = LatLng(_toPlaceDetail!.lat, _toPlaceDetail!.lng);
 
     if (_fromPlaceDetail != null && _toPlaceDetail != null)
-      await _setPolylines(from, to);
+      await setPolylines(from, to);
   }
 
-  Future<void> _setPolylines(LatLng fromLocation, LatLng toLocation) async {
+  @override
+  Future<void> setPolylines(LatLng fromLocation, LatLng toLocation) async {
     _polylines.clear();
 
     PolylineResult result = await _polylinePoints.getRouteBetweenCoordinates(
@@ -111,7 +115,8 @@ class MapService extends IMapService {
     _polylines.add(_polyline);
   }
 
-  Future<void> _addToMarker(String id, String image, String title, LatLng loc,
+  @override
+  Future<void> addToMarker(String id, String image, String title, LatLng loc,
       [String? label]) async {
     final _val = await MapUtils.bitMapFromImage(image);
     _markers.add(
@@ -124,11 +129,16 @@ class MapService extends IMapService {
     );
   }
 
+  @override
   Set<Marker> get markers => _markers;
+  @override
   Set<Polyline> get polylines => _polylines;
+  @override
   LatLng? get myLocation => _myLocation;
+  @override
   GoogleMapController? get mapController => _mapController;
-  String? get sessionToken => _sessionToken;
+  @override
   PlaceDetail? get fromPlaceDetail => _fromPlaceDetail;
+  @override
   PlaceDetail? get toPlaceDetail => _toPlaceDetail;
 }

@@ -57,7 +57,7 @@ class Package {
         lat: double.parse(json['tolt']),
         address: json['destination'],
       ),
-      isFragile: json['fragile'],
+      isFragile: json['fragile'] == '1' ? true : false,
     );
   }
 
