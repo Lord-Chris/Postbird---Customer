@@ -23,7 +23,7 @@ class InboxView extends StatelessWidget {
                       'Inbox',
                       style: GoogleFonts.manrope(
                         fontWeight: FontWeight.w700,
-                        fontSize: 18,
+                        fontSize: 20,
                         color: AppColors.whiteColor,
                       ),
                     ),
@@ -32,7 +32,7 @@ class InboxView extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: screenWidth,
-                    padding: EdgeInsets.only(top: 50),
+                    padding: EdgeInsets.only(top: 20),
                     decoration: BoxDecoration(
                       color: AppColors.whiteColor,
                       borderRadius: BorderRadius.vertical(
@@ -47,28 +47,33 @@ class InboxView extends StatelessWidget {
                             ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         }
-                        if (!snapshot.data!.isEmpty) {
+                        if ((snapshot.data == null || snapshot.data!.isEmpty)) {
                           return Center(
                             child: Text(
                               "No available chats. Create a package to chat",
                               style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
                           );
                         }
                         return ListView.builder(
-                          itemCount: 10, //snapshot.data?.length ?? 0,
+                          itemCount: snapshot.data?.length ?? 1,
                           itemBuilder: (__, index) {
-                            InboxItem? inbox = InboxItem(
-                                userId: 1,
-                                messageId: '',
-                                name: '',
-                                photoUrl: '');
-                            //snapshot.data?[index];
-                            return InboxContainer(inbox: inbox);
+                            InboxItem? inbox = snapshot.data?[index];
+                            //     InboxItem(
+                            //   userId: 100,
+                            //   messageId: 'This on that',
+                            //   name: 'Developer Chris',
+                            //   photoUrl:
+                            //       'https://api.postbird.com.ng/public/img/profile/default.png',
+                            //   lastMessage: "200 things are coming",
+                            //   timeStamp: DateTime.now(),
+                            // );
+                            // assert(inbox!.userId != 30);
+                            return InboxContainer(inbox: inbox!);
                           },
                         );
                       },

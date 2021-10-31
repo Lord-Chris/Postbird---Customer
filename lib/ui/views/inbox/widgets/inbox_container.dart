@@ -1,5 +1,6 @@
 import 'package:postbird/core/index.dart';
 import '../views/chat_view.dart';
+
 class InboxContainer extends StatelessWidget {
   const InboxContainer({
     Key? key,
@@ -9,7 +10,7 @@ class InboxContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> Get.to(()=> ChatView(chatinfo: inbox)),
+      onTap: () => Get.to(() => ChatView(chatinfo: inbox)),
       child: Slidable(
         actionPane: SlidableDrawerActionPane(),
         actionExtentRatio: 0.25,
@@ -49,7 +50,7 @@ class InboxContainer extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: Text(
-                  inbox.timeStamp.toString(),
+                  DateFormat.Hm().format(inbox.timeStamp!),
                   style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w600,
                     fontSize: 10,
@@ -64,8 +65,7 @@ class InboxContainer extends StatelessWidget {
                     padding: const EdgeInsets.all(0),
                     child: CircleAvatar(
                       radius: 15,
-                      backgroundImage: NetworkImage(
-                          'https://api.postbird.com.ng/public/img/profile/default.png'),
+                      backgroundImage: NetworkImage(inbox.photoUrl),
                     ),
                   ),
                   SizedBox(width: 15),
@@ -73,7 +73,7 @@ class InboxContainer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "conversations[item.key]['name']",
+                        inbox.name,
                         style: GoogleFonts.manrope(
                           fontWeight: FontWeight.w700,
                           fontSize: 14,
@@ -93,7 +93,7 @@ class InboxContainer extends StatelessWidget {
                               ),
                             )
                           : Text(
-                              "conversations[item.key]['msg']",
+                              "${inbox.lastMessage}",
                               style: GoogleFonts.manrope(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,

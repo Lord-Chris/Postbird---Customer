@@ -13,7 +13,7 @@ class InboxItem {
     required this.photoUrl,
     this.timeStamp,
     this.lastMessage,
-    this.unreadCount,
+    this.unreadCount = 0,
   });
 
   // factory InboxItem.fromJson(Map<String, dynamic> json) {

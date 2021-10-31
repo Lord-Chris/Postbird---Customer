@@ -35,7 +35,7 @@ class ChatContainer extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                "chat[item.key]['msg']",
+                chat.message,
                 style: GoogleFonts.manrope(
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
@@ -45,7 +45,7 @@ class ChatContainer extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Text(
-                "chat[item.key]['time']",
+                DateFormat.Hm().format(chat.timestamp),
                 style: GoogleFonts.manrope(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,

@@ -6,13 +6,6 @@ class RepoUtils {
     return StreamTransformer<Event, bool>.fromHandlers(
         handleData: (data, sink) {
       final exists = !data.snapshot.exists;
-      print(exists);
-
-      // _data.removeWhere((key, value) => value['package_id'] != id);
-      // final exists = _data.isNotEmpty;
-      // print(exists);
-      // // .map((e) => e).contains(id);
-      // print(exists);
       sink.add(exists);
     });
   }
@@ -23,19 +16,22 @@ class RepoUtils {
       final inboxList = <InboxItem>[];
 
       data.docs.forEach((element) {
-        List ids = inboxList.map((e) => e.messageId).toList();
-        if (ids.contains(element.id)) {
-          inboxList.removeWhere((el) => el.messageId == element.id);
+        List ids = inboxList.map((e) => e.messageId.split(' ').first).toList();
+        if (ids.contains(element.id.split(' ').first)) {
+          inboxList.removeWhere((el) =>
+              el.messageId.split(' ').first == element.id.split(' ').first);
         }
+        print(inboxList);
+        bool sender = element.data()['isSender'];
         inboxList.add(
           InboxItem(
-            userId: element.data()['receiverId'],
+            userId: element.data()[sender ? 'receiverId' : 'senderId'],
             messageId: element.id,
-            name: element.data()['receiverName'],
-            photoUrl: element.data()['receiverPhoto'],
+            name: element.data()[sender ? 'receiverName' : 'senderName'],
+            photoUrl: element.data()[sender ? 'receiverPhoto' : "senderPhoto"],
             lastMessage: element.data()['message'],
-            unreadCount: element.data()['hasRead'],
-            timeStamp: element.data()['timestamp'],
+            timeStamp: DateTime.fromMillisecondsSinceEpoch(
+                element.data()['timestamp']),
           ),
         );
       });

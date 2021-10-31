@@ -11,7 +11,7 @@ class ChatView extends StatelessWidget {
     return GetBuilder<ChatController>(
       init: ChatController(chatinfo),
       builder: (controller) {
-        double height = MediaQuery.of(context).size.height;
+        // double height = MediaQuery.of(context).size.height;
         double width = MediaQuery.of(context).size.width;
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
@@ -81,9 +81,8 @@ class ChatView extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 radius: 17,
-                                backgroundImage: NetworkImage(
-                                  'https://api.postbird.com.ng/public/img/profile/default.png',
-                                ),
+                                backgroundImage:
+                                    NetworkImage(chatinfo.photoUrl),
                               ),
                               SizedBox(width: 10),
                               Expanded(
@@ -102,7 +101,7 @@ class ChatView extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "chatinfo.name",
+                                      chatinfo.name,
                                       style: GoogleFonts.manrope(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
@@ -113,7 +112,7 @@ class ChatView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Today, 12 Sep 2020',
+                                DateFormat.yMMMEd().format(chatinfo.timeStamp!),
                                 style: GoogleFonts.manrope(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 10,
@@ -132,26 +131,46 @@ class ChatView extends StatelessWidget {
                           child: StreamBuilder<List<ChatItem>>(
                             stream: controller.streamChats(),
                             builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              if (snapshot.data!.isEmpty) {
+                                return Center(
+                                  child: Text(
+                                    "No available chats. Start a conversation.",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                );
+                              }
                               return ListView.separated(
                                 physics: ScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: 10,
+                                reverse: true,
+                                itemCount: snapshot.data?.length ?? 0,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
                                 separatorBuilder: (__, i) =>
                                     SizedBox(height: 10),
                                 itemBuilder: (__, index) {
-                                  final chat = ChatItem(
-                                      message: "message",
-                                      isSender: !false,
-                                      timestamp: DateTime.now(),
-                                      hasRead: false,
-                                      receiverId: 1,
-                                      receiverName: '',
-                                      receiverPhoto: '',
-                                      senderId: 1,
-                                      senderName: '',
-                                      senderPhoto: '');
+                                  // final chat = ChatItem(
+                                  //     message: "message",
+                                  //     isSender: !false,
+                                  //     timestamp: DateTime.now(),
+                                  //     hasRead: false,
+                                  //     receiverId: 1,
+                                  //     receiverName: '',
+                                  //     receiverPhoto: '',
+                                  //     senderId: 1,
+                                  //     senderName: '',
+                                  //     senderPhoto: '');
+
+                                  final chat = snapshot.data![index];
                                   return ChatContainer(chat: chat);
                                 },
                               );
