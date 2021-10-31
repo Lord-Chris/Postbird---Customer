@@ -9,19 +9,14 @@ class PackageDetailView extends StatelessWidget {
   final Package package;
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PackageDetailController>(
-      init: PackageDetailController(package: package),
-      builder: (controller) {
-        return Scaffold(
-          body: SafeArea(
-            child: Visibility(
-              visible: package.isComplete ?? false,
-              child: DeliveredDetails(package: package),
-              replacement: NotDeliveredDetails(package: package),
-            ),
-          ),
-        );
-      },
+    return Scaffold(
+      body: SafeArea(
+        child: Visibility(
+          visible: package.packageStatus == PackageStatus.delivered,
+          child: DeliveredDetails(package: package),
+          replacement: NotDeliveredDetails(package: package),
+        ),
+      ),
     );
   }
 }

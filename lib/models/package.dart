@@ -1,6 +1,8 @@
+import 'package:postbird/core/index.dart';
+
 class Package {
   int? id;
-  String? userId;
+  String? userId, code, courierId;
   String packageName;
   String packageDetails;
   PackageLocation origin, destination;
@@ -10,7 +12,7 @@ class Package {
   String date;
   String? note;
   int? price;
-  bool? isComplete;
+  PackageStatus? packageStatus;
   String? type;
 
   Package({
@@ -27,7 +29,7 @@ class Package {
     required this.date,
     this.note,
     this.price,
-    this.isComplete,
+    this.packageStatus,
     this.type,
   });
 
@@ -62,6 +64,7 @@ class Package {
         address: json['destination'],
       ),
       isFragile: json['fragile'] == '1' ? true : false,
+      packageStatus: GenUtils.stringToPackageStatus(json['status']),
     );
   }
 
@@ -122,3 +125,8 @@ class PackageLocation {
 
   PackageLocation({required this.long, required this.lat, this.address});
 }
+
+// class CourierInfo {
+//   final String id, driverId, customerId, packageId;
+//   final 
+// }

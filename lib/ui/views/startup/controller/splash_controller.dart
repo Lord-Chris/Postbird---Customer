@@ -3,7 +3,7 @@ import 'package:postbird/ui/views/startup/view/onboarding.dart';
 import 'package:postbird/core/index.dart';
 
 class SplashController extends GetxController {
-  // final _storageService = Get.find<IStorageService>();
+  final _storageService = Get.find<IStorageService>();
 
   @override
   void onInit() {
@@ -14,6 +14,5 @@ class SplashController extends GetxController {
     );
   }
 
-  String? get token =>
-      null; // _storageService.getString(StorageKeys.authToken);
+  String? get token => _storageService.getString(StorageKeys.authToken);
 }

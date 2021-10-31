@@ -6,6 +6,6 @@ abstract class IActivityRepository {
   Future<List<Package>> fetchAllActivities();
   Future<Package> fetchPackageDetails(String id);
   Future<void> findCourier(Package package);
-  Stream<bool> streamPackage(String packageId);
+  Stream<bool> streamPackage();
   Future<void> cancelCourierSearch(String packageId);
 }

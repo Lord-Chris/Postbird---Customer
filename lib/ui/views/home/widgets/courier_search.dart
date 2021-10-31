@@ -3,8 +3,9 @@ import '../controllers/select_location_controller.dart';
 
 class CourierSearch extends StatelessWidget {
   const CourierSearch({
-    Key? key,
+    Key? key,this.show,
   }) : super(key: key);
+  final bool? show;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CourierSearch extends StatelessWidget {
             left: 0,
             right: 0,
             child: Visibility(
-              visible: controller.showCourierSearchBox,
+              visible: show?? controller.showCourierSearchBox,
               child: Container(
                 height: height * 0.4,
                 alignment: Alignment.bottomCenter,

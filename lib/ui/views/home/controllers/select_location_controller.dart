@@ -7,7 +7,7 @@ import 'package:postbird/ui/views/home/views/create_package.dart';
 
 class SelectLocationController extends BaseController with Validator {
   final bool searchOnOpen;
-  SelectLocationController(this.searchOnOpen);
+  SelectLocationController(this.searchOnOpen, this.package);
 
   final _storageService = Get.find<IStorageService>();
   final _activityRepo = Get.find<IActivityRepository>();
@@ -26,7 +26,7 @@ class SelectLocationController extends BaseController with Validator {
   int searchCount = 60;
 
   DateTime? date;
-  Package? _package;
+  Package? package;
 
   set mapController(val) => _mapService.mapController = val;
 
@@ -49,22 +49,25 @@ class SelectLocationController extends BaseController with Validator {
     if (!formKey.currentState!.validate()) return;
     if (_toPlaceDetail == null || _fromPlaceDetail == null)
       return MySnackBar.failure("Fill all fields");
-    _package = await Get.to(() => CreatePackage(
+    package = await Get.to(() => CreatePackage(
         date: date!, destination: _toPlaceDetail!, origin: _fromPlaceDetail!));
-    if (_package != null) {
+    if (package != null) {
       startSearch();
     }
   }
 
   void startSearch() async {
-    await _activityRepo.findCourier(_package!);
-    showCourierSearchBox = findingCourier = true;
-    showLocationPicker = false;
-    startCountDown();
-    update();
-    _streamSub = _activityRepo
-        .streamPackage("${_package!.id!}")
-        .listen(_handlePackageStream);
+    try {
+      await _activityRepo.findCourier(package!);
+      _streamSub = _activityRepo.streamPackage().listen(_handlePackageStream);
+      showCourierSearchBox = findingCourier = true;
+      showLocationPicker = false;
+      startCountDown();
+      update();
+    } catch (e) {
+      print(e.toString());
+      MySnackBar.failure(e.toString());
+    }
   }
 
   void onCourierSearchButtonTap() {
@@ -81,33 +84,35 @@ class SelectLocationController extends BaseController with Validator {
         update(["countdown"]);
       } else {
         await cancelSearch();
-        _timer?.cancel();
       }
+      _timer = timer;
     });
   }
 
   void _handlePackageStream(bool packageExists) {
     if (!packageExists) {
-      MySnackBar.success("Courier Found");
-      Get.offAll(() => PackageDetailView(package: _package!),
+      Get.offAll(() => PackageDetailView(package: package!),
           predicate: (route) => route.isFirst);
+      MySnackBar.success("Courier Found");
     }
   }
 
   Future<void> cancelSearch() async {
     _streamSub?.cancel();
-    await _activityRepo.cancelCourierSearch("${_package!.id!}");
+    _timer?.cancel();
+    _timer = null;
+    searchCount = 60;
+    await _activityRepo.cancelCourierSearch("${package!.id}");
     findingCourier = false;
+    // _refId = null;
     update(["Courier Search"]);
   }
 
   Future<void> searchAgain() async {
     try {
       searchCount = 60;
-      _streamSub = _activityRepo
-          .streamPackage("${_package!.id!}")
-          .listen(_handlePackageStream);
-      await _activityRepo.findCourier(_package!);
+      _streamSub = _activityRepo.streamPackage().listen(_handlePackageStream);
+      await _activityRepo.findCourier(package!);
       findingCourier = true;
       startCountDown();
       update(["Courier Search"]);
@@ -128,6 +133,9 @@ class SelectLocationController extends BaseController with Validator {
 
   @override
   void onClose() {
+    if (findingCourier) {
+      cancelSearch();
+    }
     _streamSub?.cancel();
     super.onClose();
   }

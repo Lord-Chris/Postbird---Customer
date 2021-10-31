@@ -1,4 +1,5 @@
 import 'package:postbird/core/index.dart';
+import 'package:postbird/ui/views/inbox/views/chat_view.dart';
 
 class PackageDetailController extends BaseController {
   PackageDetailController({required this.package});
@@ -40,9 +41,21 @@ class PackageDetailController extends BaseController {
     }
   }
 
+  void navigateToChat() {
+    Get.to(() => ChatView(
+          chatinfo: InboxItem(
+            userId: user.id!,
+            messageId: "",
+            name: "Driver name",
+            photoUrl: "DriverPhoto",
+          ),
+        ));
+  }
+
   LatLng get origin => LatLng(package.origin.lat, package.origin.long);
   LatLng get destination =>
       LatLng(package.destination.lat, package.destination.long);
   Set<Marker> get markers => _mapService.markers;
   Set<Polyline> get polylines => _mapService.polylines;
+  User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
 }

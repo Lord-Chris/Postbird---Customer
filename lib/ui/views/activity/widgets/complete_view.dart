@@ -8,7 +8,7 @@ class CompleteActivity extends StatelessWidget {
   final controller = Get.find<ActivityController>();
 
   Widget build(BuildContext context) {
-    final activities = controller.activities.where((e) => e.isComplete!);
+    final activities = controller.activities.where((e) => e.packageStatus == PackageStatus.delivered);
     return RefreshIndicator(
       onRefresh: () => controller.fetchActivities(),
       child: Visibility(

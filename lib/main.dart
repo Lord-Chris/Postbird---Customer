@@ -17,28 +17,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       home: SplashView(),
-      theme: ThemeData(primaryColor: AppColors.primaryColor),
+      theme: ThemeData(
+        primaryColor: AppColors.primaryColor,
+        accentColor: AppColors.primaryColor,
+        colorScheme: ColorScheme.light(primary: AppColors.primaryColor),
+      ),
       debugShowCheckedModeBanner: true,
     );
   }
 }
-
-
-
-
-//class SplashScreen extends StatefulWidget {
-  //@override
-  //_SplashScreenState createState() => _SplashScreenState();
-//}
-
-//class _SplashScreenState extends State<SplashScreen> {
- // @override
- // Widget build(BuildContext context) {
-   // return Scaffold(
-     //  body: center(
-    //
-      // ),
-  //  );
- // }
-//}
-

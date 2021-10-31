@@ -1,11 +1,11 @@
-import 'dart:developer';
-
+import 'package:firebase_database/firebase_database.dart';
 import 'package:postbird/core/index.dart';
 
 class ActivityRepository extends IActivityRepository {
   final _networkService = Get.find<INetworkService>();
   final _storageService = Get.find<IStorageService>();
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  String? _refId;
 
   @override
   Future<int> createOrder(Package package) async {
@@ -51,10 +51,10 @@ class ActivityRepository extends IActivityRepository {
       final res = await _networkService.get(ApiStrings.fetchActivities,
           headers: headers);
       List<Package> inProgress = (res!.data['progress'] as List)
-          .map((e) => Package.fromJson(e)..isComplete = false)
+          .map((e) => Package.fromJson(e))
           .toList();
       List<Package> complete = (res.data['complete'] as List)
-          .map((e) => Package.fromJson(e)..isComplete = false)
+          .map((e) => Package.fromJson(e))
           .toList();
       _actvities.addAll(inProgress);
       _actvities.addAll(complete);
@@ -86,11 +86,18 @@ class ActivityRepository extends IActivityRepository {
   @override
   Future<void> findCourier(Package package) async {
     try {
-      final headers = {"Authorization": "Bearer $token"};
-      await _networkService.get(ApiStrings.findDriver + package.id!.toString(),
-          headers: headers);
-    } on Failure catch (e) {
-      throw e;
+      // call find driver endpoint and fetch package ID
+      final _headers = {"Authorization": "Bearer $token"};
+      final _res = await _networkService
+          .get("${ApiStrings.findDriver}${package.id}", headers: _headers);
+      final _packageId = _res!.data['data']['package_id'];
+
+      // Get the ref ID on the database
+      Iterable<MapEntry> _data = (await packagePath.get()).value.entries;
+      final _val = _data.lastWhere((e) => e.value['package_id'] == _packageId);
+      _refId = _val.key;
+    } on Failure {
+      rethrow;
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());
@@ -98,15 +105,24 @@ class ActivityRepository extends IActivityRepository {
   }
 
   @override
-  Stream<bool> streamPackage(String packageId) {
-    final snapshots = _firestore.collection(Constants.PACKAGES).snapshots();
-    return snapshots.transform(RepoUtils.packageTransformer(packageId));
+  Stream<bool> streamPackage() {
+    final snapshots = packagePath.child(_refId!);
+    return snapshots.onChildRemoved
+        .transform(RepoUtils.packageTransformer(_refId!));
   }
 
   @override
   Future<void> cancelCourierSearch(String packageId) async {
     try {
-      await _firestore.collection(Constants.PACKAGES).doc(packageId).delete();
+      //check for remnant data with same id and delete
+      Iterable<MapEntry>? allData = (await packagePath.get()).value?.entries;
+      final _badData =
+          allData?.where((e) => "${e.value['package_id']}" == packageId);
+      if (_badData != null && _badData.isNotEmpty) {
+        for (MapEntry element in _badData) {
+          await packagePath.child(element.key).remove();
+        }
+      }
     } on Failure catch (e) {
       throw e;
     } catch (e) {
@@ -116,4 +132,6 @@ class ActivityRepository extends IActivityRepository {
   }
 
   String? get token => _storageService.getString(StorageKeys.authToken);
+  DatabaseReference get packagePath =>
+      _database.reference().child("drivers/available_packages");
 }
