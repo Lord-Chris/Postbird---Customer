@@ -119,6 +119,7 @@ class Security extends StatelessWidget {
                                       keyboardType:
                                           TextInputType.visiblePassword,
                                       obscureText: controller.obsureText,
+                                      maxLines: 1,
                                       suffix: GestureDetector(
                                         onTap: () =>
                                             controller.toggleObscurity(),
@@ -148,6 +149,7 @@ class Security extends StatelessWidget {
                                       keyboardType:
                                           TextInputType.visiblePassword,
                                       obscureText: controller.obsureText,
+                                      maxLines: 1,
                                       suffix: GestureDetector(
                                         onTap: () =>
                                             controller.toggleObscurity(),
@@ -191,6 +193,7 @@ class Security extends StatelessWidget {
                                         ),
                                       ),
                                       hint: 'Confirm Password',
+                                      maxLines: 1,
                                       validator: (val) =>
                                           controller.validateConfirmPassword(
                                               val, controller.newPassword.text),

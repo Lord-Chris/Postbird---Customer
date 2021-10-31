@@ -14,6 +14,7 @@ class Package {
   int? price;
   PackageStatus? packageStatus;
   String? type;
+  Courier? courier;
 
   Package({
     this.id,
@@ -31,6 +32,7 @@ class Package {
     this.price,
     this.packageStatus,
     this.type,
+    this.courier,
   });
 
   factory Package.fromJson(Map<String, dynamic> json) {
@@ -65,6 +67,9 @@ class Package {
       ),
       isFragile: json['fragile'] == '1' ? true : false,
       packageStatus: GenUtils.stringToPackageStatus(json['status']),
+      courier: json['courier'] != null
+          ? Courier.fromJson(json['courier']['driver'])
+          : null,
     );
   }
 
@@ -101,7 +106,30 @@ class Package {
       };
 }
 
-// `user_id`, `detination`, `status`,
+class Courier {
+  final int id;
+  final String name, email, username, phone, photo;
+
+  Courier({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.username,
+    required this.phone,
+    required this.photo,
+  });
+
+  factory Courier.fromJson(Map<String, dynamic> json) {
+    return Courier(
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      username: json['username'],
+      phone: json['mobile'],
+      photo: Constants.PHOTOS_BASEURL + json['profilepic'],
+    );
+  }
+}
 
 class PackageUser {
   final String name, phone, address;
@@ -125,8 +153,3 @@ class PackageLocation {
 
   PackageLocation({required this.long, required this.lat, this.address});
 }
-
-// class CourierInfo {
-//   final String id, driverId, customerId, packageId;
-//   final 
-// }

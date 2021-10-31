@@ -20,6 +20,7 @@ export 'package:place_picker/uuid.dart';
 export 'package:postbird/Screens/provider/google_map_service.dart';
 export 'package:flutter_slidable/flutter_slidable.dart';
 export 'package:intl/intl.dart' hide TextDirection;
+export 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 // core
 export 'package:postbird/core/api_strings.dart';
@@ -44,6 +45,8 @@ export 'package:postbird/repository/auth/auth_repository.dart';
 export 'package:postbird/repository/auth/i_auth_repository.dart';
 export 'package:postbird/repository/activity/activity_repository.dart';
 export 'package:postbird/repository/activity/i_activity_repository.dart';
+export 'package:postbird/repository/inbox/i_inbox_repository.dart';
+export 'package:postbird/repository/inbox/inbox_repository.dart';
 
 // services
 export 'package:postbird/services/network_service/i_network_service.dart';
@@ -54,8 +57,8 @@ export 'package:postbird/services/media_service/i_media_service.dart';
 export 'package:postbird/services/media_service/media_service.dart';
 export 'package:postbird/services/map_service/i_map_service.dart';
 export 'package:postbird/services/map_service/map_service.dart';
-export 'package:postbird/repository/inbox/i_inbox_repository.dart';
-export 'package:postbird/repository/inbox/inbox_repository.dart';
+export 'package:postbird/services/call_service/i_call_service.dart';
+export 'package:postbird/services/call_service/call_service.dart';
 
 // shared
 export 'package:postbird/ui/shared/app_colors.dart';

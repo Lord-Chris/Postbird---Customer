@@ -7,6 +7,7 @@ class PackageDetailController extends BaseController {
   final _storageService = Get.find<IStorageService>();
   final _activityRepo = Get.find<IActivityRepository>();
   final _mapService = Get.find<IMapService>();
+  final _callService = Get.find<ICallService>();
   final Key mapKey = UniqueKey();
   Package package;
 
@@ -15,9 +16,9 @@ class PackageDetailController extends BaseController {
   @override
   void onInit() {
     super.onInit();
+    fetchPackageDetails();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       initMap();
-      fetchPackageDetails();
     });
   }
 
@@ -42,14 +43,23 @@ class PackageDetailController extends BaseController {
   }
 
   void navigateToChat() {
-    Get.to(() => ChatView(
+    Get.to(
+      () => ChatView(
           chatinfo: InboxItem(
-            userId: user.id!,
-            messageId: "",
-            name: "Driver name",
-            photoUrl: "DriverPhoto",
-          ),
-        ));
+        messageId: "",
+        userId: package.courier!.id,
+        name: package.courier!.name,
+        photoUrl: package.courier!.photo,
+      )),
+    );
+  }
+
+  void onCallTap() async {
+    try {
+      await _callService.localCall(package.courier!.phone);
+    } catch (e) {
+      MySnackBar.failure(e.toString());
+    }
   }
 
   LatLng get origin => LatLng(package.origin.lat, package.origin.long);

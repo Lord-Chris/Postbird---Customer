@@ -111,14 +111,16 @@ class ChatView extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Text(
-                                DateFormat.yMMMEd().format(chatinfo.timeStamp!),
-                                style: GoogleFonts.manrope(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 10,
-                                  color: Colors.grey[600],
+                              if (chatinfo.timeStamp != null)
+                                Text(
+                                  DateFormat.yMMMEd()
+                                      .format(chatinfo.timeStamp!),
+                                  style: GoogleFonts.manrope(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 10,
+                                    color: Colors.grey[600],
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                         ),

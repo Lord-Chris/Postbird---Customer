@@ -42,9 +42,9 @@ class RepoUtils {
   static StreamTransformer<QuerySnapshot<Map<String, dynamic>>, List<ChatItem>>
       chatTransformer(String recipientId) {
     return StreamTransformer.fromHandlers(handleData: (data, sink) {
-      data.docs.removeWhere((chat) => chat.id.split(" ").first != recipientId);
-      final chatList =
-          data.docs.map((e) => ChatItem.fromJson(e.data())).toList();
+      final list = data.docs;
+      list.removeWhere((chat) => chat.id.split(" ").first != recipientId);
+      final chatList = list.map((e) => ChatItem.fromJson(e.data())).toList();
       chatList.sort((a, b) {
         DateTime first = a.timestamp;
         DateTime second = b.timestamp;

@@ -134,7 +134,7 @@ class SelectLocationController extends BaseController with Validator {
   @override
   void onClose() {
     if (findingCourier) {
-      cancelSearch();
+      // cancelSearch();
     }
     _streamSub?.cancel();
     super.onClose();
