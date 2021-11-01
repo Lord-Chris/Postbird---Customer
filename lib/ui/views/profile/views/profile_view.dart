@@ -1,3 +1,4 @@
+import 'package:postbird/ui/views/profile/views/faq.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
@@ -367,7 +368,7 @@ class ProfileView extends StatelessWidget {
                                 EdgeInsets.only(right: 20, left: 20, top: 20),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/help');
+                                Get.to(() => Faq2());
                               },
                               child: Row(
                                 mainAxisAlignment:

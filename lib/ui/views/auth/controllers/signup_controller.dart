@@ -1,12 +1,10 @@
 import 'package:postbird/core/index.dart';
-import 'package:postbird/ui/views/auth/views/login.dart';
 import 'package:postbird/ui/views/startup/view/onboarding.dart';
 import '../views/verify_otp.dart';
 import '../views/signup.dart';
 
 class SignUpController extends BaseController with Validator {
   final _authRepository = Get.find<IAuthRepository>();
-  final _storageService = Get.find<IStorageService>();
   final phoneController = TextEditingController();
   final name = TextEditingController();
   final username = TextEditingController();

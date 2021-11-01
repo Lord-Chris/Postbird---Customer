@@ -1,4 +1,3 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
