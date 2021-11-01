@@ -34,6 +34,25 @@ class NotDeliveredDetails extends StatelessWidget {
               ),
             ),
             Positioned(
+              top: 15.0,
+              left: 10.0,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.whiteColor,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.primaryColor,
+                  ),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+              ),
+            ),
+            Positioned(
               bottom: 20,
               left: 20,
               right: 20,

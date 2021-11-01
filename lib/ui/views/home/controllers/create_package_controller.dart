@@ -101,8 +101,10 @@ class CreatePackageController extends BaseController with Validator {
           address: destination.formattedAddress,
         ),
       );
+      price = null;
       setBusy(true);
-      price = await _activityRepo.fetchPrice(_package!);
+      _package = await _activityRepo.fetchPrice(_package!);
+      price = _package!.price;
       setBusy(false);
     } on Failure catch (e) {
       setBusy(false);
@@ -113,8 +115,6 @@ class CreatePackageController extends BaseController with Validator {
   Future<void> createOrder() async {
     try {
       setBusy(true);
-      _package!.price = price;
-      // await AuthRepository().loginUser("devchris@gmail.com", "123456");
       _package?.id = await _activityRepo.createOrder(_package!);
       Get.back(result: _package);
       MySnackBar.success("Package created successfully");

@@ -35,7 +35,6 @@ class SelectLocationController extends BaseController with Validator {
     super.onInit();
     if (searchOnOpen) {
       startSearch();
-      return;
     }
     initMap();
   }
@@ -134,7 +133,7 @@ class SelectLocationController extends BaseController with Validator {
   @override
   void onClose() {
     if (findingCourier) {
-      // cancelSearch();
+      cancelSearch();
     }
     _streamSub?.cancel();
     super.onClose();

@@ -138,14 +138,17 @@ class CreatePackage extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-                            child: PageView(
-                              controller: controller.pageController,
-                              physics: NeverScrollableScrollPhysics(),
-                              children: [
-                                Shipment(),
-                                Recipient(),
-                                ReviewOrder(),
-                              ],
+                            child: Form(
+                              key: controller.formKey,
+                              child: PageView(
+                                controller: controller.pageController,
+                                physics: NeverScrollableScrollPhysics(),
+                                children: [
+                                  Shipment(),
+                                  Recipient(),
+                                  ReviewOrder(),
+                                ],
+                              ),
                             ),
                           ),
                         ],

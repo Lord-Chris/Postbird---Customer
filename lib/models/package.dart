@@ -13,7 +13,7 @@ class Package {
   String? note;
   int? price;
   PackageStatus? packageStatus;
-  String? type;
+  String? type, distance;
   Courier? courier;
 
   Package({
@@ -33,6 +33,7 @@ class Package {
     this.packageStatus,
     this.type,
     this.courier,
+    this.distance,
   });
 
   factory Package.fromJson(Map<String, dynamic> json) {
@@ -55,6 +56,7 @@ class Package {
       ),
       date: json['date'],
       note: json['additionalinfo'],
+      distance: json['distance'],
       size: json['packsize'],
       origin: PackageLocation(
         long: double.parse(json['frmlg']),
@@ -99,6 +101,7 @@ class Package {
         "recipientphone": receiver.phone,
         "postalzip": receiver.postCode,
         "destination": destination.address,
+        "distance": distance,
         "frmlt": origin.lat,
         "tolt": destination.lat,
         "frmlg": origin.long,

@@ -27,13 +27,16 @@ class ActivityRepository extends IActivityRepository {
   }
 
   @override
-  Future<int> fetchPrice(Package package) async {
+  Future<Package> fetchPrice(Package package) async {
     try {
       Map<String, dynamic> body = package.toPriceMap();
       final headers = {"Authorization": "Bearer $token"};
       final res = await _networkService.post(ApiStrings.priceCheck,
           body: body, headers: headers);
-      return res!.data['price'];
+      package
+        ..price = res!.data['price']
+        ..distance = res.data['data']['distance'];
+      return package;
     } on Failure catch (e) {
       throw e;
     } catch (e) {
