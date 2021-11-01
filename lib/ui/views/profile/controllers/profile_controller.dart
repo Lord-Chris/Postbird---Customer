@@ -19,4 +19,5 @@ class ProfileController extends BaseController {
   }
 
   User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
+  int get sentPackages => _storageService.getInt(StorageKeys.packageCount) ?? 0;
 }

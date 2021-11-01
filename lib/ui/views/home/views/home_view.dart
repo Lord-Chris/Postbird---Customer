@@ -1,6 +1,6 @@
 import 'package:postbird/core/index.dart';
-import 'package:postbird/ui/shared/app_colors.dart';
-import 'package:postbird/ui/views/home/views/select_location.dart';
+import 'select_location.dart';
+import 'track_package.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends StatelessWidget {
@@ -168,7 +168,7 @@ class HomeView extends StatelessWidget {
                               ),
                             ),
                             child: TextButton.icon(
-                              onPressed: () {},
+                              onPressed: () => Get.to(() => TrackPackage()),
                               icon: Icon(
                                 Icons.edit,
                                 color: Colors.orangeAccent,

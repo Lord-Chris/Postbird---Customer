@@ -1,5 +1,3 @@
-import 'package:postbird/core/index.dart';
-
 class ChatItem {
   final String message;
   final int senderId,receiverId;

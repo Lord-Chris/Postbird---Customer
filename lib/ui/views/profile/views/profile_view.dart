@@ -146,7 +146,7 @@ class ProfileView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        '16',
+                                        controller.sentPackages.toString(),
                                         style: GoogleFonts.manrope(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 24,
@@ -157,7 +157,7 @@ class ProfileView extends StatelessWidget {
                                         height: 5,
                                       ),
                                       Text(
-                                        'Send Package',
+                                        'Sent Packages',
                                         style: GoogleFonts.manrope(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16,

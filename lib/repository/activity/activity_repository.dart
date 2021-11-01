@@ -58,6 +58,8 @@ class ActivityRepository extends IActivityRepository {
           .toList();
       _actvities.addAll(inProgress);
       _actvities.addAll(complete);
+      _storageService.saveInt(
+          StorageKeys.packageCount, complete.length + inProgress.length);
       return _actvities;
     } on Failure catch (e) {
       throw e;
