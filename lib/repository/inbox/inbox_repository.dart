@@ -21,14 +21,17 @@ class InboxRepository extends IInboxRepository {
   @override
   Future<void> sendChat(ChatItem chat) async {
     try {
+      // define sender and receiver collection paths
       final sendColl = inboxCollection.doc("${user.id}").collection("chats");
       final recColl =
           inboxCollection.doc("${chat.receiverId}").collection("chats");
-      // sender's collection
+      
+      // send message to sender's collection
       String docId =
           "${chat.receiverId} ${chat.timestamp.millisecondsSinceEpoch}";
       await sendColl.doc(docId).set(chat.toJson());
-      //receiver's collection
+
+      // send message to receiver's collection
       docId = "${chat.senderId} ${chat.timestamp.millisecondsSinceEpoch}";
       final _chat = chat
         ..isSender = false

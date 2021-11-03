@@ -5,6 +5,7 @@ import 'package:postbird/ui/shared/app_colors.dart';
 import '../controllers/profile_controller.dart';
 import 'edit_profile.dart';
 import 'security.dart';
+import 'notifications.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -106,8 +107,8 @@ class ProfileView extends StatelessWidget {
                                             ),
                                           ),
                                           TextButton(
-                                            onPressed: () =>
-                                                Get.to(EditProfile()),
+                                            onPressed: () => controller
+                                                .navigateToEditProfile(),
                                             child: Text(
                                               'Edit Profile',
                                               style: GoogleFonts.manrope(
@@ -210,7 +211,7 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           InkWell(
-                            onTap: () => Get.to(() => EditProfile()),
+                            onTap: () => controller.navigateToEditProfile(),
                             child: Padding(
                               padding:
                                   EdgeInsets.only(right: 20, left: 20, top: 20),
@@ -309,16 +310,13 @@ class ProfileView extends StatelessWidget {
                               color: AppColors.whiteColor,
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(right: 20, left: 20, top: 20),
-                            child: GestureDetector(
-                              onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Notifications()));
-                              },
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => Notifications());
+                            },
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(right: 20, left: 20, top: 20),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -363,13 +361,13 @@ class ProfileView extends StatelessWidget {
                               color: AppColors.whiteColor,
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(right: 20, left: 20, top: 20),
-                            child: GestureDetector(
-                              onTap: () {
-                                Get.to(() => Faq2());
-                              },
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => Faq2());
+                            },
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(right: 20, left: 20, top: 20),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

@@ -47,6 +47,7 @@ export 'package:postbird/repository/activity/activity_repository.dart';
 export 'package:postbird/repository/activity/i_activity_repository.dart';
 export 'package:postbird/repository/inbox/i_inbox_repository.dart';
 export 'package:postbird/repository/inbox/inbox_repository.dart';
+export 'package:postbird/repository/notifications/noification_repository.dart';
 
 // services
 export 'package:postbird/services/network_service/i_network_service.dart';

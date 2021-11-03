@@ -64,22 +64,45 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<void> updateProfile(User user, [File? pic]) async {
+  Future<void> updateProfile(User user) async {
     try {
       final body = FormData.fromMap(user.toJson());
-      if (pic != null)
-        body.files.add(
-          MapEntry('picture', await MultipartFile.fromFile(pic.path)),
-        );
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "multipart/form-data"
       };
-      await _networkService.post(
+      final res = await _networkService.post(
         ApiStrings.updateProfile,
         body: body,
         headers: headers,
       );
+      final _newUser = User.fromJson(res?.data['data']);
+      await _storageService.saveMap(StorageKeys.userData, _newUser.toJson());
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
+  Future<void> updateProfilePic(File pic) async {
+    try {
+      final body = FormData.fromMap(
+        {'picture': await MultipartFile.fromFile(pic.path)},
+      );
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "multipart/form-data"
+      };
+      final res = await _networkService.post(
+        ApiStrings.updateProfilePic,
+        body: body,
+        headers: headers,
+      );
+      final _newUser = User.fromJson(res?.data['data']);
+      await _storageService.saveMap(StorageKeys.userData, _newUser.toJson());
     } on Failure catch (e) {
       throw e;
     } catch (e) {
@@ -118,7 +141,9 @@ class AuthRepository extends IAuthRepository {
   Future<void> logOut() async {
     try {
       final headers = {"Authorization": "Bearer $token"};
-      await _networkService.post(ApiStrings.logout, headers: headers);
+      final body = {"token": "Bearer $token"};
+      await _networkService.post(ApiStrings.logout,
+          headers: headers, body: body);
     } on Failure catch (e) {
       throw e;
     } catch (e) {

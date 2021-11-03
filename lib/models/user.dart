@@ -43,7 +43,7 @@ class User {
       username: json['username'],
       email: json['email'],
       phone: json['mobile'],
-      address: json['address'],
+      address: json['address'] ?? '',
       profilePic: json['profilepic'],
       credit: json['credit_balance'],
     );
@@ -55,7 +55,7 @@ class User {
         'username': username,
         'email': email,
         'mobile': phone,
-        'address': address,
+        'address': address ?? '',
         'profilepic': profilePic,
         'credit_balance': credit,
       };

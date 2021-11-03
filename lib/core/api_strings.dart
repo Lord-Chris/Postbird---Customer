@@ -1,6 +1,6 @@
 class ApiStrings {
   static const String base_url = 'https://api.postbird.com.ng/api/';
-  // static const String base_url = 'http://aspirapro.test/api/';
+
   //AUTH
   static const String verifyPhone = base_url + 'checknum';
   static const String verifyOtp = base_url + 'verify';
@@ -9,6 +9,7 @@ class ApiStrings {
   static const String logout = base_url + 'logout';
   static const String updatePassword = base_url + 'updatepass';
   static const String updateProfile = base_url + 'profileupdate';
+  static const String updateProfilePic = base_url + 'profilepicture';
 
   // Activity
   static const String priceCheck = base_url + 'metricpack';
@@ -16,7 +17,7 @@ class ApiStrings {
   static const String fetchActivities = base_url + 'activities';
   static const String packageDetails = base_url + 'package/';
   static const String findDriver = base_url + 'finddriver/';
-  // static const String REGISTRATION = 'Registration';
-  // static const String SECBASE_URL = 'https://api.postbird.com.ng/api/getpackageorder/';
 
+  // notifications
+  static const String notificationDetails = base_url + "notifications/";
 }

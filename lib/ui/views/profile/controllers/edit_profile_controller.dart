@@ -57,18 +57,27 @@ class EditProfileController extends BaseController with Validator {
       if (user.fullName == name.text &&
           user.email == email.text &&
           user.phone == phone.text &&
-          user.address == address.text) {
+          user.address == address.text &&
+          tempImage == null) {
         MySnackBar.failure('Profile has no changes');
         return;
       }
-      User _user = User.update(
-        fullName: name.text,
-        email: email.text,
-        phone: phone.text,
-        address: address.text,
-      );
       setBusy(true);
-      await _authRepository.updateProfile(_user);
+      if (!(user.fullName == name.text &&
+          user.email == email.text &&
+          user.phone == phone.text &&
+          user.address == address.text)) {
+        User _user = User.update(
+          fullName: name.text,
+          email: email.text,
+          phone: phone.text,
+          address: address.text,
+        );
+        await _authRepository.updateProfile(_user);
+      }
+      if (tempImage != null) {
+        await _authRepository.updateProfilePic(tempImage!);
+      }
       setBusy(false);
       clearTextControllers();
       MySnackBar.success("Profile update successful!");
