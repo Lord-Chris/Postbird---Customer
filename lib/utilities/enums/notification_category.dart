@@ -1,0 +1,1 @@
+enum NotificationCategory { Order, Personal }

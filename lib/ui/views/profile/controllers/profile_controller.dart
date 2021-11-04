@@ -4,7 +4,7 @@ import 'package:postbird/ui/views/startup/view/onboarding.dart';
 
 class ProfileController extends BaseController {
   final _storageService = Get.find<IStorageService>();
-  final _authRepository = Get.find<IAuthRepository>();
+  // final _authRepository = Get.find<IAuthRepository>();
 
   void navigateToEditProfile() async {
     await Get.to(() => EditProfile());

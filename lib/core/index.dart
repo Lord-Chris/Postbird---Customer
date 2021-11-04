@@ -39,6 +39,7 @@ export 'package:postbird/models/package.dart';
 export 'package:postbird/models/place_model.dart';
 export 'package:postbird/models/chat_item.dart';
 export 'package:postbird/models/inbox_item.dart';
+export 'package:postbird/models/notification_item.dart';
 
 //repository
 export 'package:postbird/repository/auth/auth_repository.dart';
@@ -73,6 +74,7 @@ export 'package:postbird/utilities/map_utils.dart';
 export 'package:postbird/utilities/general_utils.dart';
 export 'package:postbird/utilities/repo_utils.dart';
 export 'package:postbird/utilities/enums/driver_status.dart';
+export 'package:postbird/utilities/enums/notification_category.dart';
 
 // widgets
 export 'package:postbird/ui/views/home/widgets/create_package_indicator.dart';
