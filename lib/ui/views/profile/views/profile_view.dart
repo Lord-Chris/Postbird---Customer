@@ -3,7 +3,6 @@ import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
 import '../controllers/profile_controller.dart';
-import 'edit_profile.dart';
 import 'security.dart';
 import 'notifications.dart';
 

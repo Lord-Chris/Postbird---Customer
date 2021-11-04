@@ -5,19 +5,23 @@ class NotificationRepository {
   final _networkService = Get.find<INetworkService>();
   final _storageService = Get.find<IStorageService>();
   final FirebaseDatabase _database = FirebaseDatabase.instance;
-  String? _refId;
 
   // @override
   Stream<List> streamNotifications() {
     return notificationsPath.onChildAdded.transform(notificationTransformer());
   }
 
-  Future<List> fetchNotifications() async {
-    final _headers = {"Authorization": "Bearer $token"};
-    var res = await _networkService.post(ApiStrings.notificationDetails,
-        headers: _headers);
-    print(res!.data['data']);
-    return res.data['data'];
+  Future<List<NotificationItem>> fetchNotifications() async {
+    try {
+      final _headers = {"Authorization": "Bearer $token"};
+      var res = await _networkService.get(ApiStrings.notificationDetails,
+          headers: _headers);
+      return (res!.data['notifications'] as List)
+          .map((e) => NotificationItem.fromJson(e))
+          .toList();
+    } catch (e) {
+      throw Failure(e.toString());
+    }
   }
 
   DatabaseReference get notificationsPath =>
