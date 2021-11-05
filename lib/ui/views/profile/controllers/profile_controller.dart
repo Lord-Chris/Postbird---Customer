@@ -4,7 +4,7 @@ import 'package:postbird/ui/views/startup/view/onboarding.dart';
 
 class ProfileController extends BaseController {
   final _storageService = Get.find<IStorageService>();
-  // final _authRepository = Get.find<IAuthRepository>();
+  final _authRepository = Get.find<IAuthRepository>();
 
   void navigateToEditProfile() async {
     await Get.to(() => EditProfile());
@@ -14,7 +14,7 @@ class ProfileController extends BaseController {
   Future<void> signOut() async {
     try {
       // setBusy(true);
-      // await _authRepository.logOut();
+      await _authRepository.logOut();
       await _storageService.clearData(StorageKeys.userData);
       await _storageService.clearData(StorageKeys.authToken);
       // setBusy(false);

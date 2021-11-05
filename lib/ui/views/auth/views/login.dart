@@ -2,6 +2,7 @@ import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
 import '../controllers/login_controller.dart';
+import 'forgot_password.dart';
 
 enum LoginStatus { notSignIn, signIn }
 
@@ -138,7 +139,9 @@ class Login extends StatelessWidget with Validator {
                         SizedBox(height: 20),
                         Center(
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => ForgotPassword());
+                            },
                             child: Text(
                               'Forgot Password?',
                               style: TextStyle(

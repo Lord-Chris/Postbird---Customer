@@ -37,7 +37,7 @@ class StartupController extends GetxController {
         Get.offAll(() => NavBar());
       }
     } catch (e) {
-      MySnackBar.failure("Authentication Failed");
+      MySnackBar.failure(e.toString());
     }
   }
 

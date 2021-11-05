@@ -15,11 +15,15 @@ class BiometricsService extends IBiometricsService {
 
   @override
   Future<bool> scanFinger() async {
-    return await _localAuth.authenticate(
-      localizedReason: "Authenticate to Sign in",
-      biometricOnly: true,
-      stickyAuth: true,
-    );
+    try {
+      return await _localAuth.authenticate(
+        localizedReason: "Authenticate to Sign in",
+        biometricOnly: true,
+        stickyAuth: true,
+      );
+    } on PlatformException catch (e) {
+      throw Failure(e.toString());
+    }
   }
 
   @override

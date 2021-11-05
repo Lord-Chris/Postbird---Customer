@@ -3,6 +3,7 @@ export 'dart:io';
 export 'dart:async';
 
 export 'package:flutter/material.dart';
+export 'package:flutter/services.dart';
 export 'package:get/get_state_manager/get_state_manager.dart';
 export 'package:get/instance_manager.dart';
 export 'package:get/route_manager.dart';
@@ -21,7 +22,8 @@ export 'package:postbird/Screens/provider/google_map_service.dart';
 export 'package:flutter_slidable/flutter_slidable.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-export 'package:flutter_secure_storage/flutter_secure_storage.dart' hide Options;
+export 'package:flutter_secure_storage/flutter_secure_storage.dart'
+    hide Options;
 export 'package:local_auth/local_auth.dart';
 
 // core
