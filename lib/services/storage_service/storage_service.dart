@@ -4,6 +4,7 @@ import 'i_storage_service.dart';
 
 class StorageService extends IStorageService {
   late final _storage;
+  final _securedStorage = FlutterSecureStorage();
 
   @override
   Future<void> init() async {
@@ -69,5 +70,25 @@ class StorageService extends IStorageService {
   @override
   Future<void> clearData(String key) async {
     await _storage.remove(key);
+  }
+
+  @override
+  Future<String?> secureGet(String key) async {
+    return await _securedStorage.read(key: key);
+  }
+
+  @override
+  Future<void> secureSave(String key, String val) async {
+    await _securedStorage.write(key: key, value: val);
+  }
+
+  @override
+  Future<void> clearAllSecured() async {
+    await _securedStorage.deleteAll();
+  }
+
+  @override
+  Future<void> clearSecuredData(String key) async {
+    await _securedStorage.delete(key: key);
   }
 }

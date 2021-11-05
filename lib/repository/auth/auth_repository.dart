@@ -7,9 +7,13 @@ class AuthRepository extends IAuthRepository {
   final _storageService = Get.find<IStorageService>();
 
   @override
-  Future<void> forgotPassword(String email) {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<void> forgotPassword(String email) async {
+    try {
+      final body = {"email": email};
+      await _networkService.post(ApiStrings.forgotPassword, body: body);
+    } catch (e) {
+      throw Failure(e.toString());
+    }
   }
 
   @override

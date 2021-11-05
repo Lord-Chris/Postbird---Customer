@@ -12,4 +12,10 @@ abstract class IStorageService {
   Map<String, dynamic>? getMap(String key);
   Future<void> clearData(String key);
   Future<void> clearAll();
+
+  // Secured Storage
+  Future<void> secureSave(String key, String val);
+  Future<String?> secureGet(String key);
+  Future<void> clearSecuredData(String key);
+  Future<void> clearAllSecured();
 }

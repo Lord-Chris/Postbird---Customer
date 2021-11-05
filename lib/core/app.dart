@@ -8,6 +8,7 @@ Future<void> setUpServices() async {
   Get.lazyPut<IMediaService>(() => MediaService(), fenix: true);
   Get.lazyPut<IMapService>(() => MapService(), fenix: true);
   Get.lazyPut<ICallService>(() => CallService(), fenix: true);
+  Get.lazyPut<IBiometricsService>(() => BiometricsService(), fenix: true);
 
   // repositories
   Get.lazyPut<IAuthRepository>(() => AuthRepository(), fenix: true);

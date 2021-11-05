@@ -21,6 +21,8 @@ export 'package:postbird/Screens/provider/google_map_service.dart';
 export 'package:flutter_slidable/flutter_slidable.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+export 'package:flutter_secure_storage/flutter_secure_storage.dart' hide Options;
+export 'package:local_auth/local_auth.dart';
 
 // core
 export 'package:postbird/core/api_strings.dart';
@@ -61,6 +63,8 @@ export 'package:postbird/services/map_service/i_map_service.dart';
 export 'package:postbird/services/map_service/map_service.dart';
 export 'package:postbird/services/call_service/i_call_service.dart';
 export 'package:postbird/services/call_service/call_service.dart';
+export 'package:postbird/services/biometrics_service/i_biometrics_service.dart';
+export 'package:postbird/services/biometrics_service/biometrics_service.dart';
 
 // shared
 export 'package:postbird/ui/shared/app_colors.dart';

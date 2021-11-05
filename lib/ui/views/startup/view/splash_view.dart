@@ -1,13 +1,13 @@
 import 'package:postbird/core/index.dart';
-import '../controller/splash_controller.dart';
+import '../controller/startup_controller.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SplashController>(
-      init: SplashController(),
+    return GetBuilder<StartupController>(
+      init: StartupController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.primaryColor,

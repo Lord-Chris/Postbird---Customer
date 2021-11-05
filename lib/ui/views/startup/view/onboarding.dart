@@ -2,15 +2,15 @@ import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/views/auth/views/login.dart';
 import 'package:postbird/ui/views/auth/views/verify_phone.dart';
 
-import '../controller/onboarding_controller.dart';
+import '../controller/startup_controller.dart';
 
 class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
-    return GetBuilder<OnboardingController>(
-      init: OnboardingController(),
+    return GetBuilder<StartupController>(
+      init: StartupController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -85,18 +85,15 @@ class Onboarding extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: screenHeight * 0.02),
-                        // MyButton(
-                        //   label: 'Continue with FingerPrint',
-                        //   buttonColor: AppColors.mediumGrey,
-                        //   hasShadow: true,
-                        //   onTap: () {
-                        //     print('LAST...');
-                        //     // Navigator.push(
-                        //     //     context,
-                        //     //     MaterialPageRoute(
-                        //     //         builder: (context) => NavBar()));
-                        //   },
-                        // ),
+                        Visibility(
+                          visible: controller.showFingerPrintButton,
+                          child: MyButton(
+                            label: 'Continue with FingerPrint',
+                            buttonColor: AppColors.mediumGrey,
+                            hasShadow: true,
+                            onTap: () => controller.fingerprintSignIn(),
+                          ),
+                        ),
                       ],
                     ),
                   ),
