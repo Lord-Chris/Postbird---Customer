@@ -8,30 +8,27 @@ class StartupController extends GetxController {
   final _authRepository = Get.find<IAuthRepository>();
 
   late String? _email, _password;
-  bool _showButton = false;
   @override
   void onInit() async {
     super.onInit();
     await checkforBiometrics();
-    Future.delayed(
-      Duration(seconds: 2),
-      () => Get.off(() => token == null ? Onboarding() : NavBar()),
-    );
+    if (Get.rawRoute != null)
+      Future.delayed(
+        Duration(seconds: 2),
+        () => Get.off(() => token == null ? Onboarding() : NavBar()),
+      );
   }
 
   Future checkforBiometrics() async {
-    bool _res = await _biometricsService.checkScannerAvailability();
-    _email = await _storageService.secureGet(StorageKeys.storedEmail);
-    _password = await _storageService.secureGet(StorageKeys.storedPassword);
-    if (_res && _email != null && _password != null) {
-      _showButton = true;
-    }
+    await _biometricsService.checkScannerAvailability();
   }
 
   Future<void> fingerprintSignIn() async {
     try {
       bool res = await _biometricsService.scanFinger();
       if (res) {
+        _email = await _storageService.secureGet(StorageKeys.storedEmail);
+        _password = await _storageService.secureGet(StorageKeys.storedPassword);
         final user = await _authRepository.loginUser(_email!, _password!);
         await _storageService.saveMap(StorageKeys.userData, user.toJson());
         Get.offAll(() => NavBar());
@@ -48,5 +45,5 @@ class StartupController extends GetxController {
   }
 
   String? get token => _storageService.getString(StorageKeys.authToken);
-  bool get showFingerPrintButton => _showButton;
+  bool get showFingerPrintButton => _biometricsService.scanisAvailable;
 }

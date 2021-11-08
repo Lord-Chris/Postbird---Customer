@@ -94,6 +94,7 @@ class HomeView extends StatelessWidget {
                   right: 30,
                   child: Container(
                     height: screenHeight * 0.14,
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.white,
@@ -106,83 +107,76 @@ class HomeView extends StatelessWidget {
                         )
                       ],
                     ),
-                    child: Stack(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(),
-                        Positioned(
-                          top: screenHeight * 0.03,
-                          left: screenWidth * 0.06,
-                          child: GestureDetector(
-                            onTap: () {
-                              // _modalBottomSheetMenu();
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.beenhere,
-                                  color: Colors.orangeAccent,
-                                ),
-                                Text(
-                                  ' TopUp Credit',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Manrope',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                // _modalBottomSheetMenu();
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.beenhere,
+                                    color: Colors.orangeAccent,
                                   ),
-                                ),
-                              ],
+                                  Text(
+                                    ' TopUp Credit',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Manrope',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Text(
+                              controller.user.credit! + '  Credits',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Manrope',
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(8),
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8),
+                            ),
+                            border: Border.all(
+                              color: Colors.black38,
+                              width: 1,
                             ),
                           ),
-                        ),
-                        Positioned(
-                          top: screenHeight * 0.09,
-                          left: screenWidth * 0.06,
-                          child: Text(
-                            controller.user.credit! + '  Credits',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Manrope',
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                          child: TextButton.icon(
+                            onPressed: () => Get.to(() => TrackPackage()),
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.orangeAccent,
+                              size: 20,
                             ),
-                          ),
-                        ),
-                        Positioned(
-                          top: screenHeight * 0.04,
-                          right: screenWidth * 0.1,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                              ),
-                              border: Border.all(
-                                color: Colors.black38,
-                                width: 1,
-                              ),
-                            ),
-                            child: TextButton.icon(
-                              onPressed: () => Get.to(() => TrackPackage()),
-                              icon: Icon(
-                                Icons.edit,
-                                color: Colors.orangeAccent,
-                                size: 20,
-                              ),
-                              label: Text(
-                                'Track Order',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Manrope',
-                                  fontSize: 20,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                            label: Text(
+                              'Track Order',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Manrope',
+                                fontSize: 20,
+                                letterSpacing: 0,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),

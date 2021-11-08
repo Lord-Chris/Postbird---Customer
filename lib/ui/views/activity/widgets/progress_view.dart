@@ -31,7 +31,6 @@ class InProgressActivityTwo extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 margin:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                height: 130,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -61,37 +60,35 @@ class InProgressActivityTwo extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Flexible(
-                      child: Row(
-                        children: [
-                          Text(
-                            activity.packageName,
-                            style: GoogleFonts.manrope(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              color: AppColors.blackColor,
-                            ),
+                    Row(
+                      children: [
+                        Text(
+                          activity.packageName,
+                          style: GoogleFonts.manrope(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: AppColors.blackColor,
                           ),
-                          SizedBox(width: 5),
-                          Text(
-                            '|',
-                            style: GoogleFonts.manrope(
-                              fontWeight: FontWeight.w200,
-                              fontSize: 14,
-                              color: AppColors.blackColor.withOpacity(0.5),
-                            ),
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          '|',
+                          style: GoogleFonts.manrope(
+                            fontWeight: FontWeight.w200,
+                            fontSize: 14,
+                            color: AppColors.blackColor.withOpacity(0.5),
                           ),
-                          SizedBox(width: 5),
-                          Text(
-                            activity.receiver.phone,
-                            style: GoogleFonts.manrope(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: AppColors.blackColor.withOpacity(0.6),
-                            ),
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          activity.receiver.phone,
+                          style: GoogleFonts.manrope(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: AppColors.blackColor.withOpacity(0.6),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 5),
                     Text(
