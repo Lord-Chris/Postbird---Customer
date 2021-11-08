@@ -4,6 +4,7 @@ import 'package:postbird/core/index.dart';
 import '../controllers/select_location_controller.dart';
 import '../widgets/location_picker.dart';
 import '../widgets/courier_search.dart';
+import '../widgets/map_onboarding.dart';
 
 class SelectLocation extends StatelessWidget {
   final Package? package;
@@ -84,6 +85,10 @@ class SelectLocation extends StatelessWidget {
                 ),
                 LocationPicker(),
                 CourierSearch(show: package == null ? null : true),
+                Visibility(
+                  visible: controller.showMapOnboarding && package == null,
+                  child: MapOnboarding(),
+                ),
               ],
             ),
           ),

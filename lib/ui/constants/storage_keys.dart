@@ -4,4 +4,5 @@ class StorageKeys {
   static const String packageCount = 'package_count';
   static const String storedPassword = 'stored_password';
   static const String storedEmail = 'stored_email';
+  static const String mapOnboard = 'show_map_onboarding';
 }

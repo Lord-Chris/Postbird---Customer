@@ -17,6 +17,7 @@ class SelectLocationController extends BaseController with Validator {
   final toLocation = TextEditingController();
   final dateController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  int onboardIndex = 0;
 
   StreamSubscription? _streamSub;
   Timer? _timer;
@@ -36,7 +37,7 @@ class SelectLocationController extends BaseController with Validator {
     if (searchOnOpen) {
       startSearch();
     }
-    initMap();
+    // initMap();
   }
 
   void initMap() async {
@@ -86,6 +87,17 @@ class SelectLocationController extends BaseController with Validator {
       }
       _timer = timer;
     });
+  }
+
+  void endOnboarding() {
+    _storageService.saveBool(StorageKeys.mapOnboard, false);
+    update();
+  }
+
+  void nextOnboarding() {
+    if (onboardIndex == 3) return endOnboarding();
+    onboardIndex++;
+    update(['map-onboard']);
   }
 
   void _handlePackageStream(bool packageExists) {
@@ -146,4 +158,6 @@ class SelectLocationController extends BaseController with Validator {
   GoogleMapController? get mapController => _mapService.mapController;
   PlaceDetail? get _fromPlaceDetail => _mapService.fromPlaceDetail;
   PlaceDetail? get _toPlaceDetail => _mapService.toPlaceDetail;
+  bool get showMapOnboarding =>
+      _storageService.getBool(StorageKeys.mapOnboard) ?? true;
 }
