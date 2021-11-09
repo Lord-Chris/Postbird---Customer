@@ -5,14 +5,31 @@ import 'package:postbird/ui/constants/storage_keys.dart';
 class LoginController extends BaseController {
   final _authRepository = Get.find<IAuthRepository>();
   final _storageService = Get.find<IStorageService>();
+  final _biometricsService = Get.find<IBiometricsService>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController forgotPasswordCont = TextEditingController();
   bool obsureText = true;
+  late String? _email, _password;
 
   void toggleObscurity() {
     obsureText = !obsureText;
     update();
+  }
+
+  Future<void> fingerprintSignIn() async {
+    try {
+      bool res = await _biometricsService.scanFinger();
+      if (res) {
+        _email = await _storageService.secureGet(StorageKeys.storedEmail);
+        _password = await _storageService.secureGet(StorageKeys.storedPassword);
+        final user = await _authRepository.loginUser(_email!, _password!);
+        await _storageService.saveMap(StorageKeys.userData, user.toJson());
+        Get.offAll(() => NavBar());
+      }
+    } catch (e) {
+      MySnackBar.failure(e.toString());
+    }
   }
 
   Future<void> onLoginTap() async {
@@ -47,4 +64,6 @@ class LoginController extends BaseController {
       MySnackBar.failure("Password Reset Failed. ${e.toString()}");
     }
   }
+
+  bool get showFingerPrintButton => _biometricsService.scanisAvailable;
 }

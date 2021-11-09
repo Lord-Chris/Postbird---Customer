@@ -20,24 +20,23 @@ class Onboarding extends StatelessWidget {
               // height: screenHeight,
               child: Column(
                 children: <Widget>[
-                  Spacer(flex: 3),
+                  Spacer(flex: 4),
                   Container(
                     decoration: BoxDecoration(
                       color: AppColors.primaryColor,
                       borderRadius: BorderRadius.circular(22),
                     ),
-                    width: 131,
-                    height: 133,
+                    width: 100,
+                    height: 100,
+                    padding: EdgeInsets.all(10),
                     child: Image.asset(
                       'assets/Group.png',
-                      width: 100,
-                      height: 100,
                     ),
                   ),
-                  Spacer(flex: 3),
+                  Spacer(flex: 2),
                   Column(children: [
                     Text(
-                      'Welcome to Post Bird',
+                      'Welcome to PostBird',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         color: AppColors.blackColor,
@@ -47,14 +46,14 @@ class Onboarding extends StatelessWidget {
                         height: 1,
                       ),
                     ),
-                    SizedBox(height: screenHeight * 0.02),
+                    SizedBox(height: screenHeight * 0.01),
                     Text(
                       'Deliver your package nationwide \n without hesitation',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: AppColors.blackColor.withOpacity(0.6),
                         fontFamily: 'Manrope',
-                        fontSize: 18,
+                        fontSize: 17,
                         letterSpacing: 1,
                         fontWeight: FontWeight.normal,
                         height: 1.5,
@@ -74,7 +73,7 @@ class Onboarding extends StatelessWidget {
                             Get.to(() => Login());
                           },
                         ),
-                        SizedBox(height: screenHeight * 0.02),
+                        SizedBox(height: screenHeight * 0.03),
                         MyButton(
                           label: 'Register',
                           buttonColor: AppColors.whiteColor,
@@ -84,20 +83,11 @@ class Onboarding extends StatelessWidget {
                             Get.to(() => VerifyPhone());
                           },
                         ),
-                        SizedBox(height: screenHeight * 0.02),
-                        Visibility(
-                          visible: controller.showFingerPrintButton,
-                          child: MyButton(
-                            label: 'Continue with FingerPrint',
-                            buttonColor: AppColors.mediumGrey,
-                            hasShadow: true,
-                            onTap: () => controller.fingerprintSignIn(),
-                          ),
-                        ),
+                        SizedBox(height: screenHeight * 0.03),
                       ],
                     ),
                   ),
-                  Spacer(flex: 3),
+                  Spacer(flex: 4),
                 ],
               ),
             ),

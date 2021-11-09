@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
 import '../controllers/login_controller.dart';
 import 'forgot_password.dart';
+import 'verify_phone.dart';
 
 enum LoginStatus { notSignIn, signIn }
 
@@ -32,16 +34,29 @@ class Login extends StatelessWidget with Validator {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 100,
+                          height: 60,
                         ),
                         Text(
-                          'Welcome Back',
+                          'Welcome Back!',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontFamily: 'manrope',
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
                             color: AppColors.blackColor,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Sign in with your email to use your account',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontFamily: 'manrope',
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.blackColor.withOpacity(0.7),
                           ),
                         ),
                         SizedBox(
@@ -96,47 +111,19 @@ class Login extends StatelessWidget with Validator {
                           ),
                         ),
                         SizedBox(height: 50),
-                        GestureDetector(
-                          onTap: () {
-                            if (!_key.currentState!.validate()) return;
-                            FocusScope.of(context).unfocus();
-                            controller.onLoginTap();
-                          },
-                          child: Container(
-                            width: screenWidth * 0.94,
-                            height: screenHeight * 0.07,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.blackColor.withOpacity(0.2),
-                                  offset: Offset(0, 10),
-                                  blurRadius: 20,
-                                )
-                              ],
-                              color: AppColors.primaryColor,
-                            ),
-                            child: Center(
-                              child: Visibility(
-                                visible: !controller.isBusy,
-                                child: Text(
-                                  'Login',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(255, 255, 255, 1),
-                                    fontFamily: 'Manrope',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                                replacement: CircularProgressIndicator(
-                                  color: AppColors.whiteColor,
-                                ),
-                              ),
-                            ),
+                        Center(
+                          child: MyButton(
+                            onTap: () {
+                              if (!_key.currentState!.validate()) return;
+                              FocusScope.of(context).unfocus();
+                              controller.onLoginTap();
+                            },
+                            label: 'Login',
+                            isBusy: controller.isBusy,
+                            hasShadow: true,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 10),
                         Center(
                           child: TextButton(
                             onPressed: () {
@@ -148,10 +135,47 @@ class Login extends StatelessWidget with Validator {
                                 fontFamily: 'manrope',
                                 fontWeight: FontWeight.w700,
                                 fontSize: 14,
-                                color: Color(
-                                  0xFFFEBC52,
-                                ),
+                                color: AppColors.primaryColor,
                               ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Visibility(
+                          visible: controller.showFingerPrintButton,
+                          child: Center(
+                            child: IconButton(
+                              icon: Icon(Icons.fingerprint),
+                              iconSize: screenWidth * 0.15,
+                              onPressed: () => controller.fingerprintSignIn(),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.13),
+                        Center(
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Don't have an account? ",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: AppColors.blackColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "Sign Up",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: AppColors.primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Get.to(() => VerifyPhone());
+                                    },
+                                ),
+                              ],
                             ),
                           ),
                         ),

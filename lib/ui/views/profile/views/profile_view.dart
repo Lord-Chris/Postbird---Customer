@@ -185,7 +185,7 @@ class ProfileView extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        '4,212',
+                                        '0',
                                         style: GoogleFonts.manrope(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 24,

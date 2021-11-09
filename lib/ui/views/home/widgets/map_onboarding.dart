@@ -1,4 +1,3 @@
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/views/home/controllers/select_location_controller.dart';
 

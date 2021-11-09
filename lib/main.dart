@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:postbird/core/index.dart';
 
@@ -16,13 +17,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: SplashView(),
+      home: Banner(
+        location: BannerLocation.topEnd,
+        message: kDebugMode ? "DEBUG" : "RELEASE",
+        child: SplashView(),
+      ),
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         accentColor: AppColors.primaryColor,
         colorScheme: ColorScheme.light(primary: AppColors.primaryColor),
       ),
-      debugShowCheckedModeBanner: true,
     );
   }
 }

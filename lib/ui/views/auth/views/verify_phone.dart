@@ -72,6 +72,8 @@ class VerifyPhone extends StatelessWidget {
                     cursorColor: AppColors.primaryColor,
                     formatInput: true,
                     keyboardType: TextInputType.phone,
+                    initialValue: PhoneNumber(dialCode: '234'),
+                    locale: "NG",
                     textFieldController: controller.phoneController,
                     validator: controller.validatePhoneNumber,
                     onInputChanged: (PhoneNumber value) async {

@@ -37,7 +37,7 @@ class SelectLocationController extends BaseController with Validator {
     if (searchOnOpen) {
       startSearch();
     }
-    // initMap();
+    initMap();
   }
 
   void initMap() async {
