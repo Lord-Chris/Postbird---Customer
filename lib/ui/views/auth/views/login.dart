@@ -172,7 +172,7 @@ class Login extends StatelessWidget with Validator {
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Get.to(() => VerifyPhone());
+                                      Get.off(() => VerifyPhone());
                                     },
                                 ),
                               ],

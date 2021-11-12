@@ -1,5 +1,6 @@
 import 'package:postbird/core/index.dart';
 import 'select_location.dart';
+import 'top_up_credit.dart';
 import 'track_package.dart';
 import '../controllers/home_controller.dart';
 
@@ -115,7 +116,7 @@ class HomeView extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // _modalBottomSheetMenu();
+                                Get.to(() => TopUpCredit());
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,

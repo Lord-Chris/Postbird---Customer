@@ -10,4 +10,5 @@ abstract class IAuthRepository {
   Future<void> updateProfilePic(File pic);
   Future<void> forgotPassword(String email);
   Future<void> logOut();
+  Future<void> creditUser(File receipt, String creditAmount);
 }

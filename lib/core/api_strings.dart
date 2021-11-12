@@ -11,6 +11,7 @@ class ApiStrings {
   static const String updateProfile = base_url + 'profileupdate';
   static const String updateProfilePic = base_url + 'profilepicture';
   static const String forgotPassword = "forgot/password";
+  static const String fundWallet = base_url + "fundawallet";
 
   // Activity
   static const String priceCheck = base_url + 'metricpack';

@@ -8,6 +8,7 @@ class MyTextField extends StatelessWidget {
   bool obscureText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
   final TextInputType? keyboardType;
   final TextCapitalization textCapitalization;
   final Widget? suffix;
@@ -22,6 +23,7 @@ class MyTextField extends StatelessWidget {
     this.hint,
     this.controller,
     this.validator,
+    this.onChanged,
     this.keyboardType,
     this.textCapitalization = TextCapitalization.none,
     this.suffix,
@@ -51,6 +53,7 @@ class MyTextField extends StatelessWidget {
       maxLines: maxLines,
       minLines: minLines,
       maxLength: maxLength,
+      onChanged: onChanged,
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
       decoration: decoration().copyWith(
         hintText: hint,

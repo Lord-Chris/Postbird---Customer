@@ -93,9 +93,9 @@ class AuthRepository extends IAuthRepository {
   @override
   Future<void> updateProfilePic(File pic) async {
     try {
-      final body = FormData.fromMap(
-        {'picture': await MultipartFile.fromFile(pic.path)},
-      );
+      final body = FormData.fromMap({
+        'picture': await MultipartFile.fromFile(pic.path),
+      });
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "multipart/form-data"
@@ -150,6 +150,25 @@ class AuthRepository extends IAuthRepository {
           headers: headers, body: body);
     } on Failure catch (e) {
       throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
+  Future<void> creditUser(File receipt, String creditAmount) async {
+    try {
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "multipart/form-data"
+      };
+      final body = FormData.fromMap({
+        'amount': creditAmount,
+        'receipt': await MultipartFile.fromFile(receipt.path),
+      });
+      await _networkService.post(ApiStrings.fundWallet,
+          headers: headers, body: body);
     } catch (e) {
       print(e.toString());
       throw Failure(e.toString());

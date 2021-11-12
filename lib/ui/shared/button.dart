@@ -2,7 +2,7 @@ import 'package:postbird/core/index.dart';
 
 class MyButton extends StatelessWidget {
   final void Function()? onTap;
-  final double? width, height;
+  final double? width, height, borderRadius;
   final Color? buttonColor;
   final String label;
   final Color? labelColor, loaderColor;
@@ -23,6 +23,7 @@ class MyButton extends StatelessWidget {
     this.hasBorder = false,
     this.isBusy = false,
     this.fontWeight = FontWeight.w600,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -36,7 +37,7 @@ class MyButton extends StatelessWidget {
         height: height ?? screenHeight * 0.075,
         decoration: BoxDecoration(
           color: buttonColor,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(borderRadius ?? 15),
           border: hasBorder
               ? Border.all(
                   color: Colors.grey[400]!,
