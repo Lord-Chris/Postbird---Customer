@@ -124,9 +124,9 @@ class NetworkService extends INetworkService {
       case DioErrorType.receiveTimeout:
         throw Failure("Connection Timed Out");
       case DioErrorType.response:
-        throw Failure(e.response?.data['error']);
+        throw Failure(e.response?.data['message']);
       case DioErrorType.cancel:
-        throw Failure(e.response?.data['error']);
+        throw Failure(e.response?.data['message']);
       case DioErrorType.other:
         throw Failure("No Internet Connection");
     }

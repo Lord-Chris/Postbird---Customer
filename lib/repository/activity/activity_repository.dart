@@ -6,6 +6,7 @@ class ActivityRepository extends IActivityRepository {
   final _storageService = Get.find<IStorageService>();
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   String? _refId;
+  List<Package> _activities = [];
 
   @override
   Future<int> createOrder(Package package) async {
@@ -48,8 +49,6 @@ class ActivityRepository extends IActivityRepository {
   @override
   Future<List<Package>> fetchAllActivities() async {
     try {
-      List<Package> _actvities = [];
-
       final headers = {"Authorization": "Bearer $token"};
       final res = await _networkService.get(ApiStrings.fetchActivities,
           headers: headers);
@@ -59,11 +58,11 @@ class ActivityRepository extends IActivityRepository {
       List<Package> complete = (res.data['complete'] as List)
           .map((e) => Package.fromJson(e))
           .toList();
-      _actvities.addAll(inProgress);
-      _actvities.addAll(complete);
+      _activities.addAll(inProgress);
+      _activities.addAll(complete);
       _storageService.saveInt(
           StorageKeys.packageCount, complete.length + inProgress.length);
-      return _actvities;
+      return _activities;
     } on Failure catch (e) {
       throw e;
     } catch (e) {
@@ -136,6 +135,8 @@ class ActivityRepository extends IActivityRepository {
     }
   }
 
+  @override
+  List<Package> get activities => _activities;
   String? get token => _storageService.getString(StorageKeys.authToken);
   DatabaseReference get packagePath =>
       _database.reference().child("drivers/available_packages");

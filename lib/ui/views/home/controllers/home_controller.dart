@@ -8,6 +8,23 @@ class HomeController extends BaseController with Validator {
   final packageCont = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  @override
+  void onInit() {
+    fetchActivities();
+    super.onInit();
+  }
+
+  Future<void> fetchActivities() async {
+    try {
+      setBusy(true);
+      await _activityRepo.fetchAllActivities();
+      setBusy(false);
+    } on Failure catch (e) {
+      setBusy(false);
+      MySnackBar.failure(e.toString());
+    }
+  }
+
   void trackPackage() async {
     try {
       if (!formKey.currentState!.validate()) return;
@@ -30,4 +47,5 @@ class HomeController extends BaseController with Validator {
   }
 
   User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
+  List<Package> get activities => _activityRepo.activities;
 }

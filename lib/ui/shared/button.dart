@@ -5,7 +5,7 @@ class MyButton extends StatelessWidget {
   final double? width, height, borderRadius;
   final Color? buttonColor;
   final String label;
-  final Color? labelColor, loaderColor;
+  final Color? labelColor, loaderColor, borderColor;
   final bool hasShadow, hasBorder, isBusy;
   final FontWeight fontWeight;
   final Widget? icon;
@@ -19,6 +19,7 @@ class MyButton extends StatelessWidget {
     required this.label,
     this.labelColor = AppColors.whiteColor,
     this.loaderColor = AppColors.whiteColor,
+    this.borderColor,
     this.hasShadow = false,
     this.hasBorder = false,
     this.isBusy = false,
@@ -40,7 +41,7 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius ?? 15),
           border: hasBorder
               ? Border.all(
-                  color: Colors.grey[400]!,
+                  color: borderColor ?? Colors.grey[400]!,
                   width: 1,
                 )
               : null,
@@ -60,8 +61,11 @@ class MyButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(child: icon),
-                const SizedBox(width: 5),
+                if (icon != null)
+                  Container(
+                    padding: EdgeInsets.only(right: 5),
+                    child: icon,
+                  ),
                 Text(
                   label,
                   textAlign: TextAlign.center,

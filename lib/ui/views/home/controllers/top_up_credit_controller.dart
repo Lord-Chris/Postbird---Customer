@@ -10,9 +10,21 @@ class TopUpCreditController extends BaseController
   int chosenIndex = -1;
 
   List<PayPlan> paymentPlans = [
-    PayPlan(title: "Bag", credit: "1000", price: "1000", image: ""),
-    PayPlan(title: "Box", credit: "2500", price: "2500", image: ""),
-    PayPlan(title: "Chest", credit: "5000", price: "5000", image: ""),
+    PayPlan(
+        title: "Bag",
+        credit: "1000",
+        price: "1000",
+        image: "assets/money-bag (2) 1.png"),
+    PayPlan(
+        title: "Pot",
+        credit: "2500",
+        price: "2500",
+        image: "assets/gold-pot 1.png"),
+    PayPlan(
+        title: "Chest",
+        credit: "5000",
+        price: "5000",
+        image: "assets/treasure-chest 1.png"),
   ];
 
   @override

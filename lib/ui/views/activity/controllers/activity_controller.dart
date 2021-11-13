@@ -6,7 +6,6 @@ class ActivityController extends BaseController
   final _activityRepo = Get.find<IActivityRepository>();
   late final TabController tabController;
   String id = "";
-  List<Package> _activities = [];
 
   @override
   void onInit() {
@@ -24,7 +23,7 @@ class ActivityController extends BaseController
   Future<void> fetchActivities() async {
     try {
       setBusy(true);
-      _activities = await _activityRepo.fetchAllActivities();
+      await _activityRepo.fetchAllActivities();
       setBusy(false);
     } on Failure catch (e) {
       setBusy(false);
@@ -33,5 +32,5 @@ class ActivityController extends BaseController
   }
 
   int get tabIndex => tabController.index;
-  List<Package> get activities => _activities;
+  List<Package> get activities => _activityRepo.activities;
 }

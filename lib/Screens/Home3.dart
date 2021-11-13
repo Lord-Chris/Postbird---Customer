@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:postbird/Screens/Homemap.dart';
 // import 'package:postbird/Screens/Profile.dart';
-import 'package:postbird/Screens/inbox.dart';
+// import 'package:postbird/Screens/inbox.dart';
 // import 'package:postbird/Screens/My Activity.dart';
 // import 'package:postbird/Screens/ManualInputTrack.dart';
 // import 'package:postbird/Screens/strings.dart';

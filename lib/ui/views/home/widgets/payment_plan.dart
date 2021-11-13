@@ -9,7 +9,7 @@ class PaymentPlan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     return GetBuilder<TopUpCreditController>(
       builder: (controller) {
         return SingleChildScrollView(
@@ -135,10 +135,7 @@ class SelectedPlan extends StatelessWidget {
             ),
           ),
           SizedBox(height: height * 0.03),
-          Image.asset(
-            "assets/happy.png",
-            color: AppColors.whiteColor,
-          ),
+          Image.asset(plan.image),
           SizedBox(height: height * 0.03),
           MyButton(
             label: "N ${plan.price}",
@@ -199,7 +196,7 @@ class UnSelectedPlan extends StatelessWidget {
               ),
             ),
             SizedBox(height: height * 0.03),
-            Image.asset("assets/happy.png"),
+            Image.asset(plan.image),
             SizedBox(height: height * 0.03),
             MyButton(
               label: "N ${plan.price}",

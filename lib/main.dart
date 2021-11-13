@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
         message: kDebugMode ? "DEBUG" : "RELEASE",
         child: SplashView(),
       ),
+      scrollBehavior: ScrollBehavior().copyWith(
+        physics: BouncingScrollPhysics(),
+      ),
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         accentColor: AppColors.primaryColor,
