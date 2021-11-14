@@ -182,8 +182,8 @@ class Shipment extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: MyButton(
             label: 'Continue',
-            width: 343,
-            height: 48,
+            // width: 343,
+            // height: 48,
             onTap: () {
               if (!controller.formKey.currentState!.validate()) return;
               if (controller.packSizeIndex == null)

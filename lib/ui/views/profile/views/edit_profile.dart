@@ -1,3 +1,4 @@
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
@@ -227,46 +228,40 @@ class EditProfile extends StatelessWidget {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        MyTextField(
-                                          controller: controller.phone,
+                                        IntlPhoneField(
                                           keyboardType: TextInputType.phone,
-                                          hint: '56789',
+                                          controller: controller.phone,
+                                          initialCountryCode: "NG",
+                                          autoValidate: false,
                                           validator:
                                               controller.validatePhoneNumber,
-                                          readOnly: true,
-                                          // prefix: Column(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.center,
-                                          //   children: [
-                                          //     Text(
-                                          //       '+234  ',
-                                          //       style: GoogleFonts.manrope(
-                                          //         fontSize: 16,
-                                          //         fontWeight: FontWeight.w400,
-                                          //         color: Colors.grey[700],
-                                          //       ),
-                                          //     ),
-                                          //   ],
-                                          // ),
+                                          onChanged: (value) async {
+                                            print(controller.phone);
+                                            controller.phoneVal =
+                                                value.completeNumber;
+                                            print(controller.phone);
+                                          },
+                                          decoration: decoration().copyWith(
+                                              hintText: 'Phone Number'),
                                         ),
                                         SizedBox(height: 20),
-                                        Text(
-                                          'Address',
-                                          style: GoogleFonts.manrope(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                            color: AppColors.darkGrey,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        MyTextField(
-                                          controller: controller.address,
-                                          keyboardType: TextInputType.text,
-                                          hint:
-                                              '4270  Benson Park Drive. YOUNG AMERI',
-                                        ),
+                                        // Text(
+                                        //   'Address',
+                                        //   style: GoogleFonts.manrope(
+                                        //     fontWeight: FontWeight.w500,
+                                        //     fontSize: 16,
+                                        //     color: AppColors.darkGrey,
+                                        //   ),
+                                        // ),
+                                        // SizedBox(
+                                        //   height: 10,
+                                        // ),
+                                        // MyTextField(
+                                        //   controller: controller.address,
+                                        //   keyboardType: TextInputType.text,
+                                        //   hint:
+                                        //       '4270  Benson Park Drive. YOUNG AMERI',
+                                        // ),
                                       ],
                                     ),
                                   ),

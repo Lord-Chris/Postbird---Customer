@@ -120,7 +120,7 @@ class Notifications extends StatelessWidget {
                                           ListView.builder(
                                             shrinkWrap: true,
                                             controller: controller.scrollCont,
-                                            itemCount: snapshot.data!.length,
+                                            itemCount: _order.length,
                                             itemBuilder: (__, index) {
                                               final notification =
                                                   _order[index];
@@ -149,7 +149,7 @@ class Notifications extends StatelessWidget {
                                           ListView.builder(
                                             shrinkWrap: true,
                                             controller: controller.scrollCont,
-                                            itemCount: snapshot.data!.length,
+                                            itemCount: _personal.length,
                                             itemBuilder: (__, index) {
                                               final notification =
                                                   _personal[index];

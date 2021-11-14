@@ -48,9 +48,10 @@ dependencies:
   http: ^0.13.3
   image_picker: ^0.8.4+1
   intl: ^0.17.0
-  intl_phone_number_input: ^0.7.0+2
+  intl_phone_field: ^2.1.0
   local_auth: ^1.1.6
   location: ^4.3.0
+  new_version: ^0.2.3
   pin_code_fields: ^7.3.0
   place_picker: ^0.9.19-nullsafety
   provider: ^6.0.1

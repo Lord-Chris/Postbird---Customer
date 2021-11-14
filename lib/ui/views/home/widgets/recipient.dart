@@ -1,3 +1,4 @@
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:postbird/core/index.dart';
 import '../controllers/create_package_controller.dart';
 
@@ -71,12 +72,26 @@ class Recipient extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        MyTextField(
-          controller: controller.recipientPhone,
-          validator: controller.validatePhoneNumber,
+        IntlPhoneField(
           keyboardType: TextInputType.phone,
-          hint: '08012345678',
+          controller: controller.recipientPhone,
+          autoValidate: false,
+          initialCountryCode: "NG",
+          validator: controller.validatePhoneNumber,
+          onChanged: (value) async {
+            // print(controller.phone);
+            controller.recipientPhoneVal = value.completeNumber;
+            // print(controller.phone);
+          },
+          decoration: decoration().copyWith(hintText: 'Phone Number'),
         ),
+        // ),
+        // MyTextField(
+        //   controller: controller.recipientPhone,
+        //   validator: controller.validatePhoneNumber,
+        //   keyboardType: TextInputType.phone,
+        //   hint: '08012345678',
+        // ),
         SizedBox(height: 30),
         Text(
           'Aditional Notes',

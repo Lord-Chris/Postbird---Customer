@@ -4,26 +4,28 @@ class EditProfileController extends BaseController with Validator {
   final _storageService = Get.find<IStorageService>();
   final _mediaService = Get.find<IMediaService>();
   final _authRepository = Get.find<IAuthRepository>();
-  late final name;
-  late final email;
-  late final phone;
-  late final address;
-  late final newPassword;
-  late final confirmPassword;
-  late final currentPassword;
+  late final TextEditingController name;
+  late final TextEditingController email;
+  late final TextEditingController phone;
+  late final TextEditingController address;
+  late final TextEditingController newPassword;
+  late final TextEditingController confirmPassword;
+  late final TextEditingController currentPassword;
 
   File? tempImage;
+  String phoneVal = '';
 
   @override
   void onInit() {
     super.onInit();
     name = TextEditingController(text: user.fullName);
     email = TextEditingController(text: user.email);
-    phone = TextEditingController(text: user.phone);
+    phone = TextEditingController(text: user.phone.substring(4));
     address = TextEditingController(text: user.address);
     newPassword = TextEditingController();
     confirmPassword = TextEditingController();
     currentPassword = TextEditingController();
+    phoneVal = user.phone;
   }
 
   bool obsureText = true;
@@ -56,7 +58,7 @@ class EditProfileController extends BaseController with Validator {
     try {
       if (user.fullName == name.text &&
           user.email == email.text &&
-          user.phone == phone.text &&
+          user.phone == phoneVal &&
           user.address == address.text &&
           tempImage == null) {
         MySnackBar.failure('Profile has no changes');
@@ -70,9 +72,10 @@ class EditProfileController extends BaseController with Validator {
         User _user = User.update(
           fullName: name.text,
           email: email.text,
-          phone: phone.text,
+          phone: phoneVal,
           address: address.text,
         );
+        print(phoneVal);
         await _authRepository.updateProfile(_user);
       }
       if (tempImage != null) {

@@ -1,4 +1,4 @@
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/shared/app_colors.dart';
 
@@ -68,26 +68,18 @@ class VerifyPhone extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 30),
-                  InternationalPhoneNumberInput(
-                    cursorColor: AppColors.primaryColor,
-                    formatInput: true,
+                  IntlPhoneField(
                     keyboardType: TextInputType.phone,
-                    initialValue: PhoneNumber(dialCode: '234'),
-                    locale: "NG",
-                    textFieldController: controller.phoneController,
+                    controller: controller.phoneController,
+                    initialCountryCode: "NG",
+                    autoValidate: false,
                     validator: controller.validatePhoneNumber,
-                    onInputChanged: (PhoneNumber value) async {
+                    onChanged: (value) async {
                       print(controller.phone);
-                      controller.phone = value.phoneNumber!;
+                      controller.phone = value.completeNumber;
                       print(controller.phone);
                     },
-                    inputDecoration:
-                        decoration().copyWith(hintText: 'Phone Number'),
-                    selectorConfig: SelectorConfig(
-                      showFlags: true,
-                      useEmoji: true,
-                      selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                    ),
+                    decoration: decoration().copyWith(hintText: 'Phone Number'),
                   ),
                   SizedBox(height: 250),
                   Text(

@@ -127,87 +127,80 @@ class ProfileView extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  height: height / 6,
-                                  width: width / 2.3,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color:
-                                          AppColors.iconGrey.withOpacity(0.5),
-                                      width: 2,
+                            child: Container(
+                              height: height / 7,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: AppColors.iconGrey.withOpacity(0.5),
+                                  width: 2,
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    controller.sentPackages.toString(),
+                                    style: GoogleFonts.manrope(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 30,
+                                      color: AppColors.mediumGrey,
                                     ),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        controller.sentPackages.toString(),
-                                        style: GoogleFonts.manrope(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 24,
-                                          color: AppColors.mediumGrey,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Sent Packages',
-                                        style: GoogleFonts.manrope(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16,
-                                          color: AppColors.mediumGrey,
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(
+                                    height: 5,
                                   ),
-                                ),
-                                Container(
-                                  height: height / 6,
-                                  width: width / 2.3,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color:
-                                          AppColors.iconGrey.withOpacity(0.5),
-                                      width: 2,
+                                  Text(
+                                    'Sent Packages',
+                                    style: GoogleFonts.manrope(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 20,
+                                      color: AppColors.mediumGrey,
                                     ),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '0',
-                                        style: GoogleFonts.manrope(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 24,
-                                          color: AppColors.mediumGrey,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Points',
-                                        style: GoogleFonts.manrope(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16,
-                                          color: AppColors.mediumGrey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
+                            // Container(
+                            //   height: height / 6,
+                            //   width: width / 2.3,
+                            //   decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(8),
+                            //     border: Border.all(
+                            //       color:
+                            //           AppColors.iconGrey.withOpacity(0.5),
+                            //       width: 2,
+                            //     ),
+                            //   ),
+                            //   child: Column(
+                            //     crossAxisAlignment:
+                            //         CrossAxisAlignment.center,
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: [
+                            //       Text(
+                            //         '0',
+                            //         style: GoogleFonts.manrope(
+                            //           fontWeight: FontWeight.w400,
+                            //           fontSize: 24,
+                            //           color: AppColors.mediumGrey,
+                            //         ),
+                            //       ),
+                            //       SizedBox(
+                            //         height: 5,
+                            //       ),
+                            //       Text(
+                            //         'Points',
+                            //         style: GoogleFonts.manrope(
+                            //           fontWeight: FontWeight.w400,
+                            //           fontSize: 16,
+                            //           color: AppColors.mediumGrey,
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ),
                           InkWell(
                             onTap: () => controller.navigateToEditProfile(),

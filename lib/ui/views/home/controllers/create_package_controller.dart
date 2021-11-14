@@ -24,6 +24,7 @@ class CreatePackageController extends BaseController with Validator {
   bool checkBoxValue = false;
   int? price;
   int? itemType;
+  String? recipientPhoneVal = '';
 
   CreatePackageController(this.origin, this.destination, this.date);
 

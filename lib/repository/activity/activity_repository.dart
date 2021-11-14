@@ -36,7 +36,8 @@ class ActivityRepository extends IActivityRepository {
           body: body, headers: headers);
       package
         ..price = res!.data['price']
-        ..distance = res.data['data']['distance'];
+        ..distance = res.data['data']['distance']
+        ..totalDuration = res.data['data']['duration'];
       return package;
     } on Failure catch (e) {
       throw e;
