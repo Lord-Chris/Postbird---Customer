@@ -6,6 +6,10 @@ class NotificationsController extends BaseController {
 
   Stream<List> streamNotifications() => _notificationRepo.streamNotifications();
 
-  Future<List<NotificationItem>> fetchNotifications() =>
-      _notificationRepo.fetchNotifications();
+  Future<List<NotificationItem>> fetchNotifications() async {
+    final notifications = await _notificationRepo.fetchNotifications();
+    final notification = await _notificationRepo.checkForAppUpdate();
+    if (notification != null) notifications.add(notification);
+    return notifications;
+  }
 }

@@ -54,11 +54,14 @@ class ActivityRepository extends IActivityRepository {
       final res = await _networkService.get(ApiStrings.fetchActivities,
           headers: headers);
       List<Package> inProgress = (res!.data['progress'] as List)
+          .reversed
           .map((e) => Package.fromJson(e))
           .toList();
       List<Package> complete = (res.data['complete'] as List)
+          .reversed
           .map((e) => Package.fromJson(e))
           .toList();
+      _activities.clear();
       _activities.addAll(inProgress);
       _activities.addAll(complete);
       _storageService.saveInt(
@@ -128,6 +131,24 @@ class ActivityRepository extends IActivityRepository {
           await packagePath.child(element.key).remove();
         }
       }
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
+  Future<Package> fetchCourierLocation(Package package) async {
+    try {
+      final headers = {"Authorization": "Bearer $token"};
+      final res = await _networkService
+          .get(ApiStrings.driverLocation + "${package.id!}", headers: headers);
+      package.courier!
+        ..distance = res!.data['data']['distance']
+        ..duration = res.data['data']['duration'];
+      return package;
     } on Failure catch (e) {
       throw e;
     } catch (e) {

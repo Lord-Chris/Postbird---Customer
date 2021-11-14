@@ -47,6 +47,8 @@ class EditProfileController extends BaseController with Validator {
           currentPassword.text, newPassword.text);
       setBusy(false);
       clearTextControllers();
+      await _storageService.secureSave(
+          StorageKeys.storedPassword, newPassword.text);
       MySnackBar.success("Password update successful!");
     } catch (e) {
       setBusy(false);

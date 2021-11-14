@@ -4,6 +4,7 @@ class NotificationItem {
   final int id;
   final NotificationCategory category;
   final String userId, title, message;
+  final String? details;
 
   NotificationItem({
     required this.id,
@@ -11,6 +12,7 @@ class NotificationItem {
     required this.category,
     required this.title,
     required this.message,
+    this.details,
   });
 
   factory NotificationItem.fromJson(Map<String, dynamic> json) {

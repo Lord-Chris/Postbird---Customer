@@ -48,4 +48,19 @@ class HomeController extends BaseController with Validator {
 
   User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
   List<Package> get activities => _activityRepo.activities;
+
+  Future<double> getDeliveryProgress(Package package) async {
+    try {
+      package = await _activityRepo.fetchCourierLocation(package);
+      final totalDistance =
+          double.parse(package.distance?.replaceAll(r' km', '') ?? "0");
+      final driverDistance = double.parse(
+          package.courier?.distance?.replaceAll(r' km', '') ?? "0");
+      if (totalDistance < driverDistance) return 0;
+      return driverDistance / totalDistance;
+    } catch (e) {
+      print(e.toString());
+      return 0;
+    }
+  }
 }

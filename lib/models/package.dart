@@ -115,6 +115,7 @@ class Package {
 class Courier {
   final int id;
   final String name, email, username, phone, photo;
+  String? distance, duration;
 
   Courier({
     required this.id,
@@ -123,6 +124,8 @@ class Courier {
     required this.username,
     required this.phone,
     required this.photo,
+    this.distance,
+    this.duration,
   });
 
   factory Courier.fromJson(Map<String, dynamic> json) {

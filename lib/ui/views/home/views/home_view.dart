@@ -246,219 +246,106 @@ class HomeView extends StatelessWidget {
 }
 
 class HomeListItem extends StatelessWidget {
-  const HomeListItem({
+  HomeListItem({
     Key? key,
     required this.package,
   }) : super(key: key);
   final Package package;
 
+  final controller = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
-    return InkWell(
-      // onTap: () {
-      //   if (package.packageStatus == PackageStatus.notAssigined)
-      //     Get.to(() => SelectLocation(package: package));
-      //   else
-      //     Get.to(() => PackageDetailView(package: package));
-      // },
-      child: Container(
-        padding: EdgeInsets.all(15),
-        margin: EdgeInsets.symmetric(vertical: 10),
-        width: screenWidth * 0.96,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.blackColor.withOpacity(0.1),
-              offset: Offset(0, 18),
-              blurRadius: 40,
-            )
-          ],
-        ),
-        child: Row(
-          children: <Widget>[
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'PostBird is delivering your package',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.manrope(
-                      color: AppColors.blackColor.withOpacity(0.6),
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
+    return Container(
+      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: screenWidth * 0.96,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.blackColor.withOpacity(0.1),
+            offset: Offset(0, 18),
+            blurRadius: 40,
+          )
+        ],
+      ),
+      child: Row(
+        children: <Widget>[
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'PostBird is delivering your package',
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.manrope(
+                    color: AppColors.blackColor.withOpacity(0.6),
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.03),
+                FutureBuilder<double>(
+                  future: controller.getDeliveryProgress(package),
+                  builder: (context, snapshot) {
+                    print(snapshot.data);
+                    return LinearProgressIndicator(
+                      color: Color.fromRGBO(181, 176, 254, 0.87),
+                      value: snapshot.connectionState == ConnectionState.waiting
+                          ? null
+                          : snapshot.data,
+                    );
+                  },
+                ),
+                SizedBox(height: screenHeight * 0.015),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      package.receiver.name,
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.manrope(
+                        color: AppColors.blackColor.withOpacity(0.3),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: screenHeight * 0.03),
-                  LinearProgressIndicator(
-                    color: Color.fromRGBO(181, 176, 254, 0.87),
-                    value: 0.5,
-                  ),
-                  SizedBox(height: screenHeight * 0.015),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        package.receiver.name,
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.manrope(
-                          color: AppColors.blackColor.withOpacity(0.3),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
+                    Text(
+                      'ETA 02:12 PM',
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.manrope(
+                        color: AppColors.blackColor.withOpacity(0.3),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
                       ),
-                      Text(
-                        'ETA 02:12 PM',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.manrope(
-                          color: AppColors.blackColor.withOpacity(0.3),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            SizedBox(width: 20),
-            MyButton(
-              label: "Track",
-              labelColor: AppColors.primaryColor,
-              buttonColor: AppColors.whiteColor,
-              borderColor: AppColors.primaryColor,
-              borderRadius: 10,
-              hasBorder: true,
-              height: 40,
-              width: 80,
-              onTap: () {
-                if (package.packageStatus == PackageStatus.notAssigined)
-                  Get.to(() => SelectLocation(package: package));
-                else
-                  Get.to(() => PackageDetailView(package: package));
-              },
-            ),
-
-            // Positioned(
-            //   top: 44,
-            //   left: 14,
-            //   child: Container(
-            //     width: 205,
-            //     4,
-            //     decoration: BoxDecoration(
-            //       color: Color.fromRGBO(
-            //           255, 255, 255, 1),
-            //     ),
-            //     child: Stack(
-            //       children: <Widget>[
-            //         Positioned(
-            //             top: 5,
-            //             left: 0,
-            //             child: Container(
-            //                 width: 205,
-            //                 height: 6,
-            //                 decoration:
-            //                     BoxDecoration(
-            //                   borderRadius:
-            //                       BorderRadius.only(
-            //                     topLeft:
-            //                         Radius.circular(
-            //                             2.5),
-            //                     topRight:
-            //                         Radius.circular(
-            //                             2.5),
-            //                     bottomLeft:
-            //                         Radius.circular(
-            //                             2.5),
-            //                     bottomRight:
-            //                         Radius.circular(
-            //                             2.5),
-            //                   ),
-            //                   color: Color.fromRGBO(
-            //                       255,
-            //                       255,
-            //                       255,
-            //                       0.7599999904632568),
-            //                 ))),
-            //         Positioned(
-            //             top: 5,
-            //             left: 0,
-            //             child: Container(
-            //                 width: 100,
-            //                 height: 6,
-            //                 decoration:
-            //                     BoxDecoration(
-            //                   borderRadius:
-            //                       BorderRadius.only(
-            //                     topLeft:
-            //                         Radius.circular(
-            //                             2.5),
-            //                     topRight:
-            //                         Radius.circular(
-            //                             2.5),
-            //                     bottomLeft:
-            //                         Radius.circular(
-            //                             2.5),
-            //                     bottomRight:
-            //                         Radius.circular(
-            //                             2.5),
-            //                   ),
-            //                   gradient: LinearGradient(
-            //                       begin: Alignment(
-            //                           -2.1872713565826416,
-            //                           0),
-            //                       end: Alignment(0,
-            //                           -2.1872713565826416),
-            //                       colors: [
-            //                         Color.fromRGBO(
-            //                             180,
-            //                             176,
-            //                             254,
-            //                             0.6700000166893005),
-            //                         Color.fromRGBO(
-            //                             152,
-            //                             147,
-            //                             244,
-            //                             0.6700000166893005)
-            //                       ]),
-            //                 ))),
-            //         Positioned(
-            //           top: 0,
-            //           left: 93,
-            //           child: Container(
-            //               width: 14,
-            //               4,
-            //               decoration: BoxDecoration(
-            //                 color: Color.fromRGBO(
-            //                     255, 255, 255, 1),
-            //               ),
-            //               child: Stack(
-            //                   children: <Widget>[
-            //                     Positioned(
-            //                         top:
-            //                             1.3378305435180664,
-            //                         left:
-            //                             0.679410457611084,
-            //                         child: Image(
-            //                           width: 15,
-            //                           3,
-            //                           image:
-            //                               AssetImage(
-            //                             'assets/Path.png',
-            //                           ),
-            //                         )),
-            //                   ])),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-          ],
-        ),
+          ),
+          SizedBox(width: 20),
+          MyButton(
+            label: "Track",
+            labelColor: AppColors.primaryColor,
+            buttonColor: AppColors.whiteColor,
+            borderColor: AppColors.primaryColor,
+            borderRadius: 10,
+            hasBorder: true,
+            height: 40,
+            width: 80,
+            onTap: () {
+              if (package.packageStatus == PackageStatus.notAssigined)
+                Get.to(() => SelectLocation(package: package));
+              else
+                Get.to(() => PackageDetailView(package: package));
+            },
+          ),
+        ],
       ),
     );
   }

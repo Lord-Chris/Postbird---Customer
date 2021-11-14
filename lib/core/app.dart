@@ -14,6 +14,7 @@ Future<void> setUpServices() async {
   Get.lazyPut<IAuthRepository>(() => AuthRepository(), fenix: true);
   Get.lazyPut<IActivityRepository>(() => ActivityRepository(), fenix: true);
   Get.lazyPut<IInboxRepository>(() => InboxRepository(), fenix: true);
+  Get.lazyPut<INotificationRepository>(() => NotificationRepository(), fenix: true);
 }
 
 Future _setupStorageSevice() async {

@@ -25,6 +25,7 @@ export 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 export 'package:flutter_secure_storage/flutter_secure_storage.dart'
     hide Options;
 export 'package:local_auth/local_auth.dart';
+export 'package:new_version/new_version.dart';
 
 // core
 export 'package:postbird/core/api_strings.dart';
@@ -52,7 +53,8 @@ export 'package:postbird/repository/activity/activity_repository.dart';
 export 'package:postbird/repository/activity/i_activity_repository.dart';
 export 'package:postbird/repository/inbox/i_inbox_repository.dart';
 export 'package:postbird/repository/inbox/inbox_repository.dart';
-export 'package:postbird/repository/notifications/noification_repository.dart';
+export 'package:postbird/repository/notifications/i_notification_repository.dart';
+export 'package:postbird/repository/notifications/notification_repository.dart';
 
 // services
 export 'package:postbird/services/network_service/i_network_service.dart';
