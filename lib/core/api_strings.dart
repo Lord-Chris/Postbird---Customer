@@ -6,6 +6,7 @@ class ApiStrings {
   static const String verifyOtp = base_url + 'verify';
   static const String register = base_url + 'register';
   static const String login = base_url + 'login';
+  static const String userData = base_url + 'userProfile';
   static const String logout = base_url + 'logout';
   static const String updatePassword = base_url + 'updatepass';
   static const String updateProfile = base_url + 'profileupdate';

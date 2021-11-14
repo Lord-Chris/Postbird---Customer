@@ -1,4 +1,4 @@
-import 'package:postbird/Screens/Home3.dart';
+import 'package:postbird/ui/views/main_view/main_view.dart';
 import 'package:postbird/ui/views/startup/view/onboarding_one.dart';
 import 'package:postbird/ui/views/startup/view/onboarding_two.dart';
 import 'package:postbird/core/index.dart';
@@ -23,7 +23,7 @@ class StartupController extends GetxController {
           if (token == null) {
             return OnboardingTwo();
           } else {
-            return NavBar();
+            return MainView();
           }
         }),
       );

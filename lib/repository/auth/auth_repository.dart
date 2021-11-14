@@ -46,6 +46,21 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
+  Future<User> fetchUserData() async {
+    try {
+      final headers = {"Authorization": "Bearer $token"};
+      final res =
+          await _networkService.get(ApiStrings.userData, headers: headers);
+      return User.fromJson(res!.data['user']);
+    } on Failure catch (e) {
+      throw e;
+    } catch (e) {
+      print(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
   Future<void> updatePassword(String oldPass, String newPass) async {
     try {
       final body = {

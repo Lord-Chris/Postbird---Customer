@@ -1,6 +1,6 @@
-import 'package:postbird/Screens/Home3.dart';
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/constants/storage_keys.dart';
+import 'package:postbird/ui/views/main_view/main_view.dart';
 
 class LoginController extends BaseController {
   final _authRepository = Get.find<IAuthRepository>();
@@ -25,7 +25,7 @@ class LoginController extends BaseController {
         _password = await _storageService.secureGet(StorageKeys.storedPassword);
         final user = await _authRepository.loginUser(_email!, _password!);
         await _storageService.saveMap(StorageKeys.userData, user.toJson());
-        Get.offAll(() => NavBar());
+        Get.offAll(() => MainView());
       }
     } catch (e) {
       MySnackBar.failure(e.toString());
@@ -42,7 +42,7 @@ class LoginController extends BaseController {
           StorageKeys.storedEmail, emailController.text);
       await _storageService.secureSave(
           StorageKeys.storedPassword, passwordController.text);
-      Get.offAll(() => NavBar());
+      Get.offAll(() => MainView());
       setBusy(false);
     } on Failure catch (e) {
       setBusy(false);

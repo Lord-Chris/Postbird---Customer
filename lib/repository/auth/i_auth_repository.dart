@@ -5,6 +5,7 @@ abstract class IAuthRepository {
   Future<void> verifyOTP(String number, String otp);
   Future<void> registerUser(User user);
   Future<User> loginUser(String email, String password);
+  Future<User> fetchUserData();
   Future<void> updatePassword(String oldPass, String newPass);
   Future<void> updateProfile(User user);
   Future<void> updateProfilePic(File pic);
