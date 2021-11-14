@@ -5,4 +5,5 @@ class StorageKeys {
   static const String storedPassword = 'stored_password';
   static const String storedEmail = 'stored_email';
   static const String mapOnboard = 'show_map_onboarding';
+  static const String showOnboarding = 'show_onboarding';
 }

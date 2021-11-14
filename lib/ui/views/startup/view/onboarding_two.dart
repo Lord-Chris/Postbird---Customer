@@ -4,7 +4,7 @@ import 'package:postbird/ui/views/auth/views/verify_phone.dart';
 
 import '../controller/startup_controller.dart';
 
-class Onboarding extends StatelessWidget {
+class OnboardingTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;

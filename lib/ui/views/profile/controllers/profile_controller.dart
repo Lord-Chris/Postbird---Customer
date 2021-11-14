@@ -1,6 +1,6 @@
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/views/profile/views/edit_profile.dart';
-import 'package:postbird/ui/views/startup/view/onboarding.dart';
+import 'package:postbird/ui/views/startup/view/onboarding_two.dart';
 
 class ProfileController extends BaseController {
   final _storageService = Get.find<IStorageService>();
@@ -20,7 +20,7 @@ class ProfileController extends BaseController {
       await _storageService.clearData(StorageKeys.userData);
       await _storageService.clearData(StorageKeys.authToken);
       // setBusy(false);
-      Get.offAll(() => Onboarding());
+      Get.offAll(() => OnboardingTwo());
     } catch (e) {
       setBusy(false);
       MySnackBar.failure(e.toString());

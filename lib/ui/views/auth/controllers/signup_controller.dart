@@ -1,5 +1,5 @@
 import 'package:postbird/core/index.dart';
-import 'package:postbird/ui/views/startup/view/onboarding.dart';
+import 'package:postbird/ui/views/startup/view/onboarding_two.dart';
 import '../views/verify_otp.dart';
 import '../views/signup.dart';
 
@@ -73,7 +73,7 @@ class SignUpController extends BaseController with Validator {
           password: password.text);
       setBusy(true);
       await _authRepository.registerUser(user);
-      Get.offAll(() => Onboarding());
+      Get.offAll(() => OnboardingTwo());
       setBusy(false);
     } on Failure catch (e) {
       setBusy(false);
