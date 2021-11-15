@@ -303,37 +303,48 @@ class HomeListItem extends StatelessWidget {
                   future: controller.getDeliveryProgress(package),
                   builder: (context, snapshot) {
                     print(snapshot.data);
-                    return LinearProgressIndicator(
-                      color: Color.fromRGBO(181, 176, 254, 0.87),
-                      value: snapshot.connectionState == ConnectionState.waiting
-                          ? null
-                          : snapshot.data,
+                    return Column(
+                      children: [
+                        LinearProgressIndicator(
+                          color: Color.fromRGBO(181, 176, 254, 0.87),
+                          value: snapshot.connectionState ==
+                                  ConnectionState.waiting
+                              ? null
+                              : snapshot.data,
+                        ),
+                        SizedBox(height: screenHeight * 0.015),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              package.receiver.name,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.manrope(
+                                color: AppColors.blackColor.withOpacity(0.3),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Visibility(
+                              visible: snapshot.connectionState !=
+                                  ConnectionState.waiting,
+                              child: Text(
+                                snapshot.data == 0.01
+                                    ? "awaiting a courier"
+                                    : "${package.courier?.duration} left",
+                                textAlign: TextAlign.left,
+                                style: GoogleFonts.manrope(
+                                  color: AppColors.blackColor.withOpacity(0.3),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     );
                   },
-                ),
-                SizedBox(height: screenHeight * 0.015),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      package.receiver.name,
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.manrope(
-                        color: AppColors.blackColor.withOpacity(0.3),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Text(
-                      'ETA 02:12 PM',
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.manrope(
-                        color: AppColors.blackColor.withOpacity(0.3),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),

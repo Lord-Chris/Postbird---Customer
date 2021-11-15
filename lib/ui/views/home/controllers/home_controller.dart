@@ -1,6 +1,5 @@
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/views/activity/views/package_detail_view.dart';
-import 'package:postbird/ui/views/profile/views/notifications.dart';
 import '../views/select_location.dart';
 
 class HomeController extends BaseController with Validator {
@@ -56,11 +55,11 @@ class HomeController extends BaseController with Validator {
           double.parse(package.distance?.replaceAll(r' km', '') ?? "0");
       final driverDistance = double.parse(
           package.courier?.distance?.replaceAll(r' km', '') ?? "0");
-      if (totalDistance < driverDistance) return 0;
+      if (totalDistance < driverDistance) return 0.01;
       return driverDistance / totalDistance;
     } catch (e) {
       print(e.toString());
-      return 0;
+      return 0.01;
     }
   }
 
