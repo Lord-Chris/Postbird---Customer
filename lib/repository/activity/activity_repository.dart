@@ -54,11 +54,11 @@ class ActivityRepository extends IActivityRepository {
       final res = await _networkService.get(ApiStrings.fetchActivities,
           headers: headers);
       List<Package> inProgress = (res!.data['progress'] as List)
-          .reversed
+          // .reversed
           .map((e) => Package.fromJson(e))
           .toList();
       List<Package> complete = (res.data['complete'] as List)
-          .reversed
+          // .reversed
           .map((e) => Package.fromJson(e))
           .toList();
       _activities.clear();

@@ -1,9 +1,11 @@
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/views/activity/views/package_detail_view.dart';
+import 'package:postbird/ui/views/profile/views/notifications.dart';
 import 'select_location.dart';
 import 'top_up_credit.dart';
 import 'track_package.dart';
 import '../controllers/home_controller.dart';
+import '../widgets/notification_icon.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
@@ -46,6 +48,14 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: NotificationIcon(
+                    list: controller.notifications,
+                    onPressed: () => Get.to(() => Notifications()),
+                  ),
                 ),
                 Positioned(
                   top: screenHeight * 0.15,
@@ -284,7 +294,7 @@ class HomeListItem extends StatelessWidget {
                   textAlign: TextAlign.left,
                   style: GoogleFonts.manrope(
                     color: AppColors.blackColor.withOpacity(0.6),
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -310,7 +320,7 @@ class HomeListItem extends StatelessWidget {
                       textAlign: TextAlign.left,
                       style: GoogleFonts.manrope(
                         color: AppColors.blackColor.withOpacity(0.3),
-                        fontSize: 10,
+                        fontSize: 13,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -319,7 +329,7 @@ class HomeListItem extends StatelessWidget {
                       textAlign: TextAlign.left,
                       style: GoogleFonts.manrope(
                         color: AppColors.blackColor.withOpacity(0.3),
-                        fontSize: 10,
+                        fontSize: 13,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

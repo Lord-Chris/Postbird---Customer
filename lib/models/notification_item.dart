@@ -5,6 +5,7 @@ class NotificationItem {
   final NotificationCategory category;
   final String userId, title, message;
   final String? details;
+  bool hasBeenSeen;
 
   NotificationItem({
     required this.id,
@@ -13,6 +14,7 @@ class NotificationItem {
     required this.title,
     required this.message,
     this.details,
+    this.hasBeenSeen = true,
   });
 
   factory NotificationItem.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,8 @@ class NotificationItem {
       title: json['title'],
       message: json['message'],
       category: parseCategory(json['category']),
+      details: json['details'],
+      hasBeenSeen: json['hasBeenSeen'] ?? false,
     );
   }
   static dynamic parseCategory(dynamic data) {
@@ -43,5 +47,17 @@ class NotificationItem {
           return "personal";
       }
     }
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "user_id": userId,
+      "title": title,
+      "message": message,
+      "category": parseCategory(category),
+      "details": details,
+      "hasBeenSeen": hasBeenSeen,
+    };
   }
 }

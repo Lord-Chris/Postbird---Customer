@@ -20,7 +20,7 @@ class ApiStrings {
   static const String fetchActivities = base_url + 'activities';
   static const String packageDetails = base_url + 'package/';
   static const String findDriver = base_url + 'finddriver/';
-  static const String driverLocation = base_url + 'package/tracker/';
+  static const String driverLocation = base_url + 'package/location/';
 
   // notifications
   static const String notificationDetails = base_url + "notifications/";

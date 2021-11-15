@@ -1,16 +1,19 @@
 import 'package:postbird/core/index.dart';
 import 'package:postbird/ui/views/activity/views/package_detail_view.dart';
+import 'package:postbird/ui/views/profile/views/notifications.dart';
 import '../views/select_location.dart';
 
 class HomeController extends BaseController with Validator {
   final _storageService = Get.find<IStorageService>();
   final _activityRepo = Get.find<IActivityRepository>();
+  final _notificationRepo = Get.find<INotificationRepository>();
   final packageCont = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
     fetchActivities();
+    _notificationRepo.fetchNotifications();
     super.onInit();
   }
 
@@ -46,9 +49,6 @@ class HomeController extends BaseController with Validator {
     packageCont.clear();
   }
 
-  User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
-  List<Package> get activities => _activityRepo.activities;
-
   Future<double> getDeliveryProgress(Package package) async {
     try {
       package = await _activityRepo.fetchCourierLocation(package);
@@ -63,4 +63,8 @@ class HomeController extends BaseController with Validator {
       return 0;
     }
   }
+
+  User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
+  List<Package> get activities => _activityRepo.activities;
+  List<NotificationItem> get notifications => _notificationRepo.notifications;
 }

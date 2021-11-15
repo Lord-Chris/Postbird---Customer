@@ -11,8 +11,10 @@ class NotificationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    print(notification.hasBeenSeen);
     return Container(
-      color: Color(0xFFFAF7F2),
+      color:
+          notification.hasBeenSeen ? AppColors.whiteColor : Color(0xFFFAF7F2),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: width,
       child: Column(
@@ -30,14 +32,17 @@ class NotificationContainer extends StatelessWidget {
                   color: AppColors.blackColor,
                 ),
               ),
-              // Text(
-              //   'New',
-              //   style: GoogleFonts.manrope(
-              //     fontWeight: FontWeight.w800,
-              //     fontSize: 10,
-              //     color: AppColors.primaryColor,
-              //   ),
-              // ),
+              Visibility(
+                visible: !notification.hasBeenSeen,
+                child: Text(
+                  'New',
+                  style: GoogleFonts.manrope(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 10,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
             ],
           ),
           SizedBox(height: 10),
