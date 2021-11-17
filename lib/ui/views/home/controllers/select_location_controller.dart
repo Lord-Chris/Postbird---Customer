@@ -37,12 +37,31 @@ class SelectLocationController extends BaseController with Validator {
     if (searchOnOpen) {
       startSearch();
     }
-    initMap();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      initMap();
+    });
   }
 
   void initMap() async {
-    await _mapService.initMap(user.id.toString());
-    update();
+    try {
+      await _mapService.initMap(user.id.toString());
+      print(package?.origin.toString());
+
+      // if (searchOnOpen) {
+      // final _origin = package?.origin;
+      // final _dest = package!.destination;
+      // print(_origin);
+      // await _mapService.addToMarker("origin", "assets/Courier.png", 'Pick Up',
+      //     _origin!.toLatLng, _origin.address);
+      // await _mapService.addToMarker("destination", "assets/ReceipentMarker.png",
+      //     'Destination', _dest.toLatLng, _dest.address);
+      // await _mapService.setPolylines(_origin.toLatLng, _dest.toLatLng);
+      //   update();
+      // }
+      update();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   void onNextTap() async {

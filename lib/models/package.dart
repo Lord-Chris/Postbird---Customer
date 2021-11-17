@@ -63,6 +63,7 @@ class Package {
       origin: PackageLocation(
         long: double.parse(json['frmlg']),
         lat: double.parse(json['frmlt']),
+        address: json['address'],
       ),
       destination: PackageLocation(
         long: double.parse(json['tolg']),
@@ -161,4 +162,11 @@ class PackageLocation {
   final String? address;
 
   PackageLocation({required this.long, required this.lat, this.address});
+
+  LatLng get toLatLng => LatLng(lat, long);
+
+  @override
+  String toString() {
+    return '$address $lat $long';
+  }
 }

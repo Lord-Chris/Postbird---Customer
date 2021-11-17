@@ -56,13 +56,15 @@ class OnboardingOne extends StatelessWidget {
                         flex: 3,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               items[controller.onboardIndex].title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.whiteColor,
-                                fontSize: 30,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.whiteColor,
+                                  fontSize: 30,
                               ),
                             ),
                             SizedBox(height: 30),

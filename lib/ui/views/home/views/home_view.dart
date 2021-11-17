@@ -54,7 +54,10 @@ class HomeView extends StatelessWidget {
                   right: 10,
                   child: NotificationIcon(
                     list: controller.notifications,
-                    onPressed: () => Get.to(() => Notifications()),
+                    onPressed: () async {
+                      await Get.to(() => Notifications());
+                      controller.update();
+                    },
                   ),
                 ),
                 Positioned(

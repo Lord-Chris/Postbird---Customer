@@ -20,6 +20,7 @@ class MapService extends IMapService {
   @override
   Future<void> initMap(String id) async {
     _myLocation = await MapUtils.getMyLocation();
+    _markers.clear();
     await addToMarker(id, "assets/Group3.png", "Your Location", _myLocation!);
   }
 

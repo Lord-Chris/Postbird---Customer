@@ -13,6 +13,7 @@ class StartupController extends GetxController {
   void onInit() async {
     super.onInit();
     await checkforBiometrics();
+    if (Get.currentRoute is OnboardingTwo) return;
     if (Get.rawRoute != null)
       Future.delayed(
         Duration(seconds: 2),
@@ -34,8 +35,6 @@ class StartupController extends GetxController {
   }
 
   void onSkipTap() async {
-    // onboardIndex = 0;
-    // update();
     await _storageService.saveBool(StorageKeys.showOnboarding, false);
     Get.off(() => OnboardingTwo());
   }
@@ -44,8 +43,6 @@ class StartupController extends GetxController {
     if (onboardIndex == 2)
       onSkipTap();
     else {
-      // pageController.animateTo(onboardIndex.toDouble() + 1,
-      //     duration: Duration(microseconds: 500), curve: Curves.easeIn);
       onboardIndex++;
       update();
     }
