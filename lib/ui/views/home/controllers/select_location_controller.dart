@@ -46,6 +46,7 @@ class SelectLocationController extends BaseController with Validator {
     try {
       await _mapService.initMap(user.id.toString());
       print(package?.origin.toString());
+      fromLocation.text = myLocation!.address!;
 
       // if (searchOnOpen) {
       // final _origin = package?.origin;
@@ -158,6 +159,11 @@ class SelectLocationController extends BaseController with Validator {
 
   Future<void> selectSuggestion(bool isFrom, Place suggestion) async {
     await _mapService.selectSuggestion(isFrom, suggestion);
+    LatLng from = _fromPlaceDetail!.toLatLng;
+    LatLng to = _toPlaceDetail!.toLatLng;
+
+    if (_fromPlaceDetail != null && _toPlaceDetail != null)
+      await _mapService.setPolylines(from, to);
     update();
   }
 
@@ -173,10 +179,12 @@ class SelectLocationController extends BaseController with Validator {
   User get user => User.fromJson(_storageService.getMap(StorageKeys.userData)!);
   Set<Marker> get markers => _mapService.markers;
   Set<Polyline> get polylines => _mapService.polylines;
-  LatLng? get myLocation => _mapService.myLocation;
+  PackageLocation? get myLocation => _mapService.myLocation;
   GoogleMapController? get mapController => _mapService.mapController;
-  PlaceDetail? get _fromPlaceDetail => _mapService.fromPlaceDetail;
-  PlaceDetail? get _toPlaceDetail => _mapService.toPlaceDetail;
+  PackageLocation? get _fromPlaceDetail =>
+      _mapService.fromPlaceDetail?.toPackageLocation ?? myLocation!;
+  PackageLocation? get _toPlaceDetail =>
+      _mapService.toPlaceDetail!.toPackageLocation;
   bool get showMapOnboarding =>
       _storageService.getBool(StorageKeys.mapOnboard) ?? true;
 }

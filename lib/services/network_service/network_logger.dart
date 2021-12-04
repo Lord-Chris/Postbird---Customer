@@ -24,7 +24,7 @@ class NetworkInterceptor implements Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     log('<<<ENDPOINT: ' + response.requestOptions.uri.toString());
     log('<<<STATUSCODE: ' + response.statusCode.toString());
-    log('<<<DATA: ' + response.data.toString());
+    // log('<<<DATA: ' + response.data.toString());
     handler.next(response);
   }
 }

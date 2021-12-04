@@ -40,7 +40,7 @@ class Shipment extends StatelessWidget {
         ),
         SizedBox(height: 10),
         MyTextField(
-          initialValue: controller.origin.formattedAddress,
+          initialValue: controller.origin.address,
           keyboardType: TextInputType.text,
           hint: 'Shipping Destination',
           readOnly: true,

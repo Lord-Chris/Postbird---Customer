@@ -8,7 +8,7 @@ class MapService extends IMapService {
   GoogleMapServices? _googleMapServices;
   Set<Marker> _markers = {};
   Set<Polyline> _polylines = {};
-  LatLng? _myLocation;
+  PackageLocation? _myLocation;
   GoogleMapController? _mapController;
   // String? mapStyle;
   String? _sessionToken;
@@ -21,7 +21,7 @@ class MapService extends IMapService {
   Future<void> initMap(String id) async {
     _myLocation = await MapUtils.getMyLocation();
     _markers.clear();
-    await addToMarker(id, "assets/Group3.png", "Your Location", _myLocation!);
+    await addToMarker(id, "assets/Group3.png", "Your Location", _myLocation!.toLatLng);
   }
 
   @override
@@ -82,12 +82,6 @@ class MapService extends IMapService {
       await addToMarker(destination.placeId, "assets/ReceipentMarker.png",
           'Destination', to, destination.formattedAddress);
     }
-
-    LatLng from = LatLng(_fromPlaceDetail!.lat, _fromPlaceDetail!.lng);
-    LatLng to = LatLng(_toPlaceDetail!.lat, _toPlaceDetail!.lng);
-
-    if (_fromPlaceDetail != null && _toPlaceDetail != null)
-      await setPolylines(from, to);
   }
 
   @override
@@ -135,7 +129,7 @@ class MapService extends IMapService {
   @override
   Set<Polyline> get polylines => _polylines;
   @override
-  LatLng? get myLocation => _myLocation;
+  PackageLocation? get myLocation => _myLocation;
   @override
   GoogleMapController? get mapController => _mapController;
   @override

@@ -82,7 +82,7 @@ class ReviewOrder extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      controller.origin.formattedAddress,
+                      controller.origin.address!,
                       textAlign: TextAlign.left,
                       style: GoogleFonts.manrope(
                         color: AppColors.mediumGrey,
@@ -164,7 +164,7 @@ class ReviewOrder extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      controller.destination.formattedAddress,
+                      controller.destination.address!,
                       textAlign: TextAlign.left,
                       style: GoogleFonts.manrope(
                         color: AppColors.mediumGrey,

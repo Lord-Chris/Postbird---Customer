@@ -4,8 +4,7 @@ import '../controllers/select_location_controller.dart';
 import 'date_picker.dart';
 
 class LocationPicker extends StatelessWidget {
-
-  final  controller = Get.find<SelectLocationController>();
+  final controller = Get.find<SelectLocationController>();
   @override
   Widget build(BuildContext context) {
     return Builder(

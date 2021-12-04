@@ -12,7 +12,7 @@ abstract class IMapService {
 
   Set<Marker> get markers;
   Set<Polyline> get polylines;
-  LatLng? get myLocation;
+  PackageLocation? get myLocation;
   GoogleMapController? get mapController;
   PlaceDetail? get fromPlaceDetail;
   PlaceDetail? get toPlaceDetail;

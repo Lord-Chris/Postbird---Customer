@@ -39,6 +39,7 @@ dependencies:
   flutter_typeahead: ^3.2.1
   fluttertoast: ^8.0.8
   font_awesome_flutter: ^9.1.0
+  geocoder: ^0.2.1
   geocoding: ^2.0.1
   geolocator: any
   get: ^4.3.8
@@ -60,7 +61,7 @@ dependencies:
   url_launcher: ^6.0.10
   uuid: ^3.0.5
 dependency_overrides:
-  google_fonts:
+  ? google_fonts
 
 dev_dependencies:
   flutter_test:

@@ -60,14 +60,16 @@ class ForgotPassword extends StatelessWidget with Validator {
                           keyboardType: TextInputType.emailAddress,
                         ),
                         SizedBox(height: 50),
-                        MyButton(
-                          label: 'Continue',
-                          hasShadow: true,
-                          isBusy: controller.isBusy,
-                          onTap: () {
-                            if (!_key.currentState!.validate()) return;
-                            controller.resetPassword();
-                          },
+                        Center(
+                          child: MyButton(
+                            label: 'Continue',
+                            hasShadow: true,
+                            isBusy: controller.isBusy,
+                            onTap: () {
+                              if (!_key.currentState!.validate()) return;
+                              controller.resetPassword();
+                            },
+                          ),
                         ),
                       ],
                     ),

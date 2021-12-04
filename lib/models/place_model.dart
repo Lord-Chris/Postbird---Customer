@@ -1,3 +1,5 @@
+import 'package:postbird/core/index.dart';
+
 class Place {
   final String description;
   final String placeId;
@@ -63,4 +65,7 @@ class PlaceDetail {
       'lng': this.lng,
     };
   }
+
+  PackageLocation get toPackageLocation =>
+      PackageLocation(lat: lat, long: lng, address: formattedAddress);
 }

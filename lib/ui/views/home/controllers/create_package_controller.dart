@@ -1,11 +1,9 @@
-import 'package:postbird/models/place_model.dart';
 import 'package:postbird/core/index.dart';
 
 class CreatePackageController extends BaseController with Validator {
   final _storageService = Get.find<IStorageService>();
   final _activityRepo = Get.find<IActivityRepository>();
-  final PlaceDetail origin;
-  final PlaceDetail destination;
+  final PackageLocation origin, destination;
   final DateTime date;
   final pageController = PageController();
   final packageName = TextEditingController();
@@ -82,24 +80,24 @@ class CreatePackageController extends BaseController with Validator {
         type: itemType.toString(),
         sender: PackageUser(
           name: user.fullName,
-          address: origin.formattedAddress,
+          address: origin.address!,
           phone: user.phone,
         ),
         receiver: PackageUser(
           name: recipientName.text,
-          address: destination.formattedAddress,
+          address: destination.address!,
           phone: recipientPhone.text,
           postCode: postCode.text,
         ),
         origin: PackageLocation(
-          long: origin.lng,
+          long: origin.long,
           lat: origin.lat,
-          address: origin.formattedAddress,
+          address: origin.address,
         ),
         destination: PackageLocation(
-          long: destination.lng,
+          long: destination.long,
           lat: destination.lat,
-          address: destination.formattedAddress,
+          address: destination.address,
         ),
       );
       price = null;

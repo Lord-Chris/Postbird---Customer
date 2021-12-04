@@ -29,12 +29,16 @@ class SelectLocation extends StatelessWidget {
                       : GoogleMap(
                           key: controller.mapKey,
                           mapType: MapType.normal,
-                          zoomGesturesEnabled: true,
+                          // myLocationEnabled: true,
+                          compassEnabled: true,
+                          // myLocationButtonEnabled: true,
+                          // zoomGesturesEnabled: true,
                           // myLocationEnabled: true,
                           markers: controller.markers,
                           polylines: controller.polylines,
                           initialCameraPosition: CameraPosition(
-                              target: controller.myLocation!, zoom: 15),
+                              target: controller.myLocation!.toLatLng,
+                              zoom: 15),
                           onMapCreated: (GoogleMapController _controller) {
                             // _controller.setMapStyle(controller.mapStyle);
                             controller.mapController = _controller;

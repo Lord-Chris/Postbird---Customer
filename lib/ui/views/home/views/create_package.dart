@@ -7,7 +7,7 @@ import '../widgets/review_order.dart';
 import '../widgets/shipment.dart';
 
 class CreatePackage extends StatelessWidget {
-  final PlaceDetail origin, destination;
+  final PackageLocation origin, destination;
   final DateTime date;
   const CreatePackage(
       {Key? key,
