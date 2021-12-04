@@ -13,6 +13,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(DateTime(2022, 04, 1).millisecondsSinceEpoch);
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
     return GetBuilder<HomeController>(
@@ -110,12 +111,11 @@ class HomeView extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              controller.user.credit! + '  Credits',
+                              controller.user.parseBalance!,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 color: Colors.black,
-                                fontFamily: 'Manrope',
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

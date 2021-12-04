@@ -119,7 +119,7 @@ class SelectedPlan extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "${plan.title} of Credits",
+            "${plan.title} of Cash",
             style: TextStyle(
               color: AppColors.whiteColor,
               fontWeight: FontWeight.w700,
@@ -128,7 +128,7 @@ class SelectedPlan extends StatelessWidget {
           ),
           SizedBox(height: height * 0.03),
           Text(
-            "${plan.credit} Credits",
+            "₦ ${plan.credit}",
             style: TextStyle(
               color: AppColors.whiteColor,
               fontWeight: FontWeight.w600,
@@ -138,7 +138,7 @@ class SelectedPlan extends StatelessWidget {
           Image.asset(plan.image),
           SizedBox(height: height * 0.03),
           MyButton(
-            label: "N ${plan.price}",
+            label: "₦ ${plan.price}",
             labelColor: AppColors.whiteColor,
             fontWeight: FontWeight.normal,
             buttonColor: Color.fromRGBO(58, 27, 4, 0.63),
@@ -180,7 +180,7 @@ class UnSelectedPlan extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${plan.title} of Credits",
+              "${plan.title} of Cash",
               style: TextStyle(
                 color: AppColors.blackColor,
                 fontWeight: FontWeight.w700,
@@ -189,7 +189,7 @@ class UnSelectedPlan extends StatelessWidget {
             ),
             SizedBox(height: height * 0.03),
             Text(
-              "${plan.credit} Credits",
+              "₦ ${plan.credit}",
               style: TextStyle(
                 color: AppColors.blackColor,
                 fontWeight: FontWeight.w600,
@@ -199,7 +199,7 @@ class UnSelectedPlan extends StatelessWidget {
             Image.asset(plan.image),
             SizedBox(height: height * 0.03),
             MyButton(
-              label: "N ${plan.price}",
+              label: "₦ ${plan.price}",
               fontWeight: FontWeight.normal,
               height: height * 0.05,
               width: width * 0.3,

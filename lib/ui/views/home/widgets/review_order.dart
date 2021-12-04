@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:postbird/core/index.dart';
 import '../controllers/create_package_controller.dart';
 
@@ -320,9 +322,9 @@ class ReviewOrder extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${controller.price}' + ' Credits',
+                    '₦ ${controller.price}',
                     textAlign: TextAlign.right,
-                    style: GoogleFonts.manrope(
+                    style: TextStyle(
                       color: Color.fromRGBO(0, 0, 0, 1),
                       fontSize: 24,
                       fontWeight: FontWeight.w700,

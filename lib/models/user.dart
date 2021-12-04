@@ -1,3 +1,5 @@
+import 'package:postbird/core/index.dart';
+
 class User {
   int? id;
   String fullName;
@@ -7,7 +9,7 @@ class User {
   String? password;
   String? address;
   String? profilePic;
-  String? credit;
+  String? balance;
 
   User({
     required this.id,
@@ -17,7 +19,7 @@ class User {
     required this.phone,
     required this.address,
     required this.profilePic,
-    required this.credit,
+    required this.balance,
   });
 
   User.register({
@@ -36,6 +38,12 @@ class User {
     required this.address,
   });
 
+  String? get parseBalance {
+    var format =
+        NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
+    return "${format.currencySymbol} ${balance?.substring(0, balance?.indexOf("."))}";
+  }
+
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
@@ -45,7 +53,7 @@ class User {
       phone: json['mobile'],
       address: json['address'] ?? '',
       profilePic: json['profilepic'] ?? json['p'],
-      credit: json['credit_balance'],
+      balance: json['credit_balance'],
     );
   }
 
@@ -57,7 +65,7 @@ class User {
         'mobile': phone,
         'address': address ?? '',
         'profilepic': profilePic,
-        'credit_balance': credit,
+        'credit_balance': balance,
       };
 
   Map<String, dynamic> toRegisterJson() => {
