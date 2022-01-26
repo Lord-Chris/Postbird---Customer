@@ -85,6 +85,7 @@ class HomeView extends StatelessWidget {
                       children: [
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             GestureDetector(
                               onTap: () {
