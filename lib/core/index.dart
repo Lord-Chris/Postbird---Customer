@@ -19,7 +19,6 @@ export 'package:firebase_core/firebase_core.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:flutter_polyline_points/flutter_polyline_points.dart';
 export 'package:place_picker/uuid.dart';
-export 'package:postbird/Screens/provider/google_map_service.dart';
 export 'package:flutter_slidable/flutter_slidable.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -64,6 +63,7 @@ export 'package:postbird/services/storage_service/i_storage_service.dart';
 export 'package:postbird/services/storage_service/storage_service.dart';
 export 'package:postbird/services/media_service/i_media_service.dart';
 export 'package:postbird/services/media_service/media_service.dart';
+export 'package:postbird/services/map_service/google_map_service.dart';
 export 'package:postbird/services/map_service/i_map_service.dart';
 export 'package:postbird/services/map_service/map_service.dart';
 export 'package:postbird/services/call_service/i_call_service.dart';
@@ -79,11 +79,11 @@ export 'package:postbird/ui/shared/text_field.dart';
 export 'package:postbird/ui/shared/button.dart';
 
 // utilities
-export 'package:postbird/utilities/map_utils.dart';
-export 'package:postbird/utilities/general_utils.dart';
-export 'package:postbird/utilities/repo_utils.dart';
-export 'package:postbird/utilities/enums/driver_status.dart';
-export 'package:postbird/utilities/enums/notification_category.dart';
+export 'package:postbird/core/utilities/map_utils.dart';
+export 'package:postbird/core/utilities/general_utils.dart';
+export 'package:postbird/core/utilities/repo_utils.dart';
+export 'package:postbird/core/enums/driver_status.dart';
+export 'package:postbird/core/enums/notification_category.dart';
 
 // widgets
 export 'package:postbird/ui/views/home/widgets/create_package_indicator.dart';
